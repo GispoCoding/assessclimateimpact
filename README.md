@@ -13,6 +13,11 @@ It takes into account several information from the cities:
 - Land use plans
 - Scenario information
 
+## Software requirements
+- QGIS 3.6
+- PostgreSQL 9.6
+- POstGIS 2.2
+
 ## Use cases
 
 The tool can be used by city developers (land use planners) for
@@ -52,15 +57,28 @@ The tool can be used by city developers (land use planners) for
 - Advanced: add emmittion allocation methods
 - Advanced: add used electricity emmittion sources
 
-## The datasets needed
+## The datasets needed (structures available soon)
 
-- Population (YKR)
-- Jobs (YKR)
-- Buildings (YKR)
+- Basic grid for whole country (250*250 m) - in the database
+- Population (YKR) - user adds
+- Jobs (YKR) - user adds
+- Buildings (YKR, based on building and housing registre called RHR) - user adds
+- Urban zones (yhdyskuntarakenteen vyöhykkeet, YKR 2015) - this dataset has been premodified and ready in the database
+- Centres and commercial areas (KeskustaAlueet) - this dataset is ready in the database
+- Land use planning Zoning elements (Käyttötarkoitusalueet) - user adds
+- Centre network (Keskusverkko) - user adds
+- Public transport plan (metro, train, tram) - user adds
+- Regions (municipality borderds)
+- Carbon sinks - ready made dataset in the database
+- Energyinformation  - ready made dataset in the database
+- Scenarios - PITKO (long term emmittion development) - ready made dataset in the database
+- etc.
+
 
 ## Documentation
 
 - Technical documentation (in Finnish) coming up
 - Schema model
+- SQL (coming up)
 
 
