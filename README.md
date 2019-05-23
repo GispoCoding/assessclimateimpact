@@ -79,7 +79,8 @@ The tool can be used by city developers (land use planners) for
 ## Documentation
 
 - Technical documentation (in Finnish) coming up
-- Schema model
+- Conceptual model of the datasets
+- Schema model (coming up)
 - SQL (coming up)
 
 
