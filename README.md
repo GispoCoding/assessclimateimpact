@@ -14,6 +14,7 @@ It takes into account several information from the cities:
 - Scenario information
 
 ## Software requirements
+
 - QGIS 3.6
 - PostgreSQL 9.6
 - POstGIS 2.2
