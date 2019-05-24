@@ -1,6 +1,6 @@
 # Climate Tool
 
-Climate Tool is a QGIS plugin for assessing climate impacts in cities. The plugin is under development and will be released here in June 2019. The plugin will need a PostGIS connection in order to work. The datasets needed will be listed here. The tool is provided by the joint cooperation of City of Tampere, Ubigu Ltd, TietoTakomo & Gispo Ltd. Many thanks to the project team!
+Climate Tool is a QGIS plugin for assessing climate impacts in cities. The plugin is under development and will be released here in June 2019. The plugin will need a PostGIS connection in order to work. The datasets needed will be listed here. The tool is provided by the joint cooperation of [City of Tampere](https://www.tampere.fi/), [Ubigu Ltd](https://www.ubigu.fi/en/), [Tietotakomo](https://www.tietotakomo.fi/) & [Gispo Ltd](https://www.gispo.fi/en/home/). Many thanks to the project team!
 
 The tool is modelling the climate impacts in the cities. It provides  information about the current situation in the cities by calculating the  energyefficiency of the city. It also provides scenarios for the future. In the inital phace only datasets from the City of Tampere are used. 
 
@@ -8,10 +8,12 @@ It takes into account several information from the cities:
 
 - Building
 - Traffic
+- Public transportation
 - Elecricity consumption
+- Heating
 - Carbon sinks
 - Land use plans
-- Scenario information
+- Scenario information for the future
 
 ## Software requirements
 
@@ -54,25 +56,26 @@ The tool can be used by city developers (land use planners) for
 - Set target Year
 - Optional: add Keskusverkkotiedot (centers in the city by network information)
 - Optional: add intensive public transportation stations (train, metro, tram)
-- Advanced: add PITKO scenario (heating and electrivity scenarios) or use default parameters
-- Advanced: add emmittion allocation methods
-- Advanced: add used electricity emmittion sources
+- Advanced: add PITKO scenario (heating and electricity scenarios) or use default parameters
+- Advanced: add emission allocation methods
+- Advanced: add used electricity emission sources
 
 ## The datasets needed (structures available soon)
 
-- Basic grid for whole country (250*250 m) - in the database, includes ground surface (in hectars) from YKR CLC2018 data
+- Basic grid for whole country (250*250 m) - in the database, includes also ground surface (in hectars) from YKR CLC2018 data
 - Population (YKR) - user adds
 - Jobs (YKR) - user adds
 - Buildings (YKR, based on building and housing registre called RHR) - user adds
+- Buildings (current situation from the municipality, if available use instead of YKR building information)
 - Urban zones (yhdyskuntarakenteen vyöhykkeet, YKR 2015) - this dataset has been premodified and ready in the database
 - Centres and commercial areas (KeskustaAlueet) - this dataset is ready in the database
 - Land use planning Zoning elements (Käyttötarkoitusalueet) - user adds
 - Centre network (Keskusverkko) - user adds
 - Public transport plan (metro, train, tram) - user adds
-- Regions (municipality borderds)
+- Regions (municipality borderds, now only City of Tampere as test area)
 - Carbon sinks - ready made dataset in the database
-- Energyinformation  - ready made dataset in the database
-- Scenarios - PITKO (long term emmittion development) - ready made dataset in the database
+- Energy information  - ready made dataset in the database
+- Scenarios - PITKO (long term emission development) - ready made dataset in the database
 - etc.
 
 
@@ -80,7 +83,9 @@ The tool can be used by city developers (land use planners) for
 
 - Technical documentation (in Finnish) coming up
 - Conceptual model of the datasets
-- Schema model (coming up)
+- Schema model (available in the repo)
+- Database model (coming up)
 - SQL (coming up)
+- Plugin documentation (coming up)
 
 
