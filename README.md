@@ -15,9 +15,9 @@ It takes into account several information from the cities:
 
 ## Software requirements
 
-- QGIS 3.6
-- PostgreSQL 9.6
-- POstGIS 2.2
+- QGIS 3.4.6
+- PostgreSQL 9.4
+- PostGIS 2.1.8
 
 ## Use cases
 
@@ -60,7 +60,7 @@ The tool can be used by city developers (land use planners) for
 
 ## The datasets needed (structures available soon)
 
-- Basic grid for whole country (250*250 m) - in the database
+- Basic grid for whole country (250*250 m) - in the database, includes ground surface (in hectars) from YKR CLC2018 data
 - Population (YKR) - user adds
 - Jobs (YKR) - user adds
 - Buildings (YKR, based on building and housing registre called RHR) - user adds
