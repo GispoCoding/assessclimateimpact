@@ -9,7 +9,7 @@ It takes into account several information from the cities:
 - Building
 - Traffic
 - Public transportation
-- Elecricity consumption
+- Electricity consumption
 - Heating
 - Carbon sinks
 - Land use plans
@@ -18,8 +18,8 @@ It takes into account several information from the cities:
 ## Software requirements
 
 - QGIS 3.4.6
-- PostgreSQL 9.4
-- PostGIS 2.1.8
+- PostgreSQL 9.4 (tested on PostgreSQL 9.6+)
+- PostGIS 2.1.8 (tested on 2.2+)
 
 ## Use cases
 
