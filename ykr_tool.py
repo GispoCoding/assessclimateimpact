@@ -71,6 +71,7 @@ class YKRTool:
         self.first_start = None
 
         self.mainDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_main.ui'))
+        self.settingsDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_db_settings.ui'))
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -194,6 +195,8 @@ class YKRTool:
             self.first_start = False
             # self.dlg = YKRToolDialog()
 
+        self.mainDialog.settingsButton.clicked.connect(self.showSettingsDialog)
+
         # show the dialog
         self.mainDialog.show()
         # self.dlg.show()
@@ -203,4 +206,12 @@ class YKRTool:
         if result:
             # Do something useful here - delete the line containing pass and
             # substitute with your code.
+            pass
+
+    def showSettingsDialog(self):
+        self.settingsDialog.show()
+        result = self.settingsDialog.exec_()
+        if result:
+            pass
+        else:
             pass

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>420</width>
-    <height>610</height>
+    <width>422</width>
+    <height>708</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -366,7 +366,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="settingsButton">
          <property name="text">
           <string>Asetukset...</string>
          </property>
