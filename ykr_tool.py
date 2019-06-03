@@ -21,6 +21,7 @@
  *                                                                         *
  ***************************************************************************/
 """
+from PyQt5 import uic
 from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
@@ -28,8 +29,8 @@ from PyQt5.QtWidgets import QAction
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
-from .ykr_tool_dialog import YKRToolDialog
 import os.path
+
 
 
 class YKRTool:
@@ -68,6 +69,8 @@ class YKRTool:
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
+
+        self.mainDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_main.ui'))
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -187,14 +190,15 @@ class YKRTool:
 
         # Create the dialog with elements (after translation) and keep reference
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
-        if self.first_start == True:
+        if self.first_start:
             self.first_start = False
-            self.dlg = YKRToolDialog()
+            # self.dlg = YKRToolDialog()
 
         # show the dialog
-        self.dlg.show()
+        self.mainDialog.show()
+        # self.dlg.show()
         # Run the dialog event loop
-        result = self.dlg.exec_()
+        result = self.mainDialog.exec_()
         # See if OK was pressed
         if result:
             # Do something useful here - delete the line containing pass and
