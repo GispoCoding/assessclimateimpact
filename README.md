@@ -62,29 +62,33 @@ The tool can be used by city developers (land use planners) for
 
 ## The datasets needed (structures available soon)
 
-- Basic grid for whole country (250*250 m) - in the database, includes also ground surface (in hectars) from YKR CLC2018 data
-- Population (YKR) - user adds
-- Jobs (YKR) - user adds
-- Buildings (YKR, based on building and housing registre called RHR) - user adds
+Present - user adds:
+- Population (YKR) 
+- Jobs (YKR)
+- Buildings (YKR, based on building and housing registre called RHR) 
+
+More accurate model for the present situation can be gained with:
 - Buildings (current situation from the municipality, if available use instead of YKR building information)
+
+Ready in the database:
+- Basic grid for whole country (250*250 m) - in the database, includes also ground surface (in hectars) from YKR CLC2018 data
 - Urban zones (yhdyskuntarakenteen vyöhykkeet, YKR 2015) - this dataset has been premodified and ready in the database
 - Centres and commercial areas (KeskustaAlueet) - this dataset is ready in the database
-- Land use planning Zoning elements (Käyttötarkoitusalueet) - user adds
-- Centre network (Keskusverkko) - user adds
-- Public transport plan (metro, train, tram) - user adds
 - Regions (municipality borderds, now only City of Tampere as test area)
 - Carbon sinks - ready made dataset in the database
 - Energy information  - ready made dataset in the database
 - Scenarios - PITKO (long term emission development) - ready made dataset in the database
-- etc.
 
+Future scenarios - user adds:
+- Land use planning Zoning elements (Käyttötarkoitusalueet)
+- Centre network (Keskusverkko)
+- Public transport plan (metro, train, tram)
 
 ## Documentation
 
 - Technical documentation (in Finnish) coming up
-- Conceptual model of the datasets
-- Schema model (available in the repo)
-- Database model (coming up)
+- [https://github.com/GispoCoding/assesclimateimpact/blob/master/Ilmastoty%C3%B6kalu_k%C3%A4sitemalli_gispo.png](Conceptual model)
+- [https://github.com/GispoCoding/assesclimateimpact/blob/master/DatabaseModel.md](Schema model)
 - SQL (coming up)
 - Plugin documentation (coming up)
 
