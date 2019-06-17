@@ -5,13 +5,13 @@ Jobs in urban zoning grid dataset (YKR-työpaikat)
 - Kuntanumero / municipalityid
 - tp_yht / jobs_all
 
-Population 
+Population (YKR-population)
 
 - xyind
 - kunta
 - v_yht / total_pop
 
-Buildings
+Buildings (YKR-buildings, with different building type information (area, count, energy type))
 
 - xyind
 - kunta
