@@ -228,6 +228,7 @@ class YKRTool:
 
     def showSettingsDialog(self):
         self.settingsDialog.show()
+        self.settingsDialog.configFileInput.setStorageMode(QgsFileWidget.GetFile)
         self.settingsDialog.loadFileButton.clicked.connect(self.setConnectionParamsFromFile)
 
         result = self.settingsDialog.exec_()
@@ -240,7 +241,7 @@ class YKRTool:
                     user=connParams['user'], password=connParams['password'])
                 conn.close()
             except Exception as e:
-                self.iface.messageBar().pushMessage('Error connecting to database',\
+                self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
                     str(e), Qgis.Critical, duration=10)
 
     def setConnectionParamsFromFile(self):
@@ -249,13 +250,13 @@ class YKRTool:
 
     def readConnectionParamsFromInput(self):
         '''Reads connection parameters from user input and returns a dictionary'''
-        result = {}
-        result['host'] = self.settingsDialog.dbHost.value()
-        result['port'] = self.settingsDialog.dbPort.value()
-        result['database'] = self.settingsDialog.dbName.value()
-        result['user'] = self.settingsDialog.dbUser.value()
-        result['password'] = self.settingsDialog.dbPass.text()
-        return result
+        params = {}
+        params['host'] = self.settingsDialog.dbHost.value()
+        params['port'] = self.settingsDialog.dbPort.value()
+        params['database'] = self.settingsDialog.dbName.value()
+        params['user'] = self.settingsDialog.dbUser.value()
+        params['password'] = self.settingsDialog.dbPass.text()
+        return params
 
     def handleLayerToggle(self):
         if self.mainDialog.ykrPopLoadLayer.isChecked():
