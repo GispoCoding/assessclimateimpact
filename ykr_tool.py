@@ -208,9 +208,13 @@ class YKRTool:
         result = self.mainDialog.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            pass
+            if not self.conn:
+                configFilePath = QSettings().value("/YKRTool/configFilePath",\
+                    "", type=str)
+                connParams = self.parseConfigFile(configFilePath)
+                self.connectToDb(connParams)
+
+            self.conn.close()
 
     def setupMainDialog(self):
         '''Sets up the main dialog'''
