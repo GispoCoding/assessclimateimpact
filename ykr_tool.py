@@ -71,6 +71,8 @@ class YKRTool:
         self.actions = []
         self.menu = self.tr(u'&Ilmastovaikutusten arviointityökalu')
 
+        self.conn = None
+
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
         self.first_start = None
@@ -231,24 +233,32 @@ class YKRTool:
     def showSettingsDialog(self):
         self.settingsDialog.show()
         self.settingsDialog.configFileInput.setStorageMode(QgsFileWidget.GetFile)
+        self.settingsDialog.configFileInput.setFilePath(QSettings().value\
+            ("/YKRTool/configFilePath", "", type=str))
         self.settingsDialog.loadFileButton.clicked.connect(self.setConnectionParamsFromFile)
 
         result = self.settingsDialog.exec_()
         if result:
             connParams = self.readConnectionParamsFromInput()
-            try:
-                QgsMessageLog.logMessage(str(connParams), "YKRTool", Qgis.Info)
-                conn = psycopg2.connect(host=connParams['host'],\
-                    port=connParams['port'], database=connParams['database'],\
-                    user=connParams['user'], password=connParams['password'])
-                conn.close()
-            except Exception as e:
-                self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
-                    str(e), Qgis.Critical, duration=10)
+            QgsMessageLog.logMessage(str(connParams), "YKRTool", Qgis.Info)
+            self.connectToDb(connParams)
+
+    def connectToDb(self, connParams):
+        '''Creates a database connection and cursor based on connection params'''
+        try:
+            self.conn = psycopg2.connect(host=connParams['host'],\
+                port=connParams['port'], database=connParams['database'],\
+                user=connParams['user'], password=connParams['password'])
+            self.cur = self.conn.cursor()
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
+                str(e), Qgis.Critical, duration=10)
 
     def setConnectionParamsFromFile(self):
         '''Reads connection parameters from file and sets them to the input fields'''
         filePath = self.settingsDialog.configFileInput.filePath()
+        QSettings().setValue("/YKRTool/configFilePath", filePath)
+
         if not os.path.exists(filePath):
             self.iface.messageBar().pushMessage('Virhe', 'Tiedostoa ei voitu lukea',\
                 Qgis.Warning)
