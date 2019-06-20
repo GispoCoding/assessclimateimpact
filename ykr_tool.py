@@ -26,10 +26,13 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
+from qgis.core import Qgis, QgsMessageLog
+
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
 import os.path
+import psycopg2
 
 
 
@@ -205,14 +208,6 @@ class YKRTool:
             # substitute with your code.
             pass
 
-    def showSettingsDialog(self):
-        self.settingsDialog.show()
-        result = self.settingsDialog.exec_()
-        if result:
-            pass
-        else:
-            pass
-
     def setupMainDialog(self):
         '''Sets up the main dialog'''
         self.mainDialog.settingsButton.clicked.connect(self.showSettingsDialog)
@@ -230,6 +225,37 @@ class YKRTool:
         self.mainDialog.futureAreasLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
+
+    def showSettingsDialog(self):
+        self.settingsDialog.show()
+        self.settingsDialog.loadFileButton.clicked.connect(self.setConnectionParamsFromFile)
+
+        result = self.settingsDialog.exec_()
+        if result:
+            connParams = self.readConnectionParamsFromInput()
+            try:
+                QgsMessageLog.logMessage(str(connParams), "YKRTool", Qgis.Info)
+                conn = psycopg2.connect(host=connParams['host'],\
+                    port=connParams['port'], database=connParams['database'],\
+                    user=connParams['user'], password=connParams['password'])
+                conn.close()
+            except Exception as e:
+                self.iface.messageBar().pushMessage('Error connecting to database',\
+                    str(e), Qgis.Critical, duration=10)
+
+    def setConnectionParamsFromFile(self):
+        '''Reads connection parameters from file and sets them to the input fields'''
+        pass
+
+    def readConnectionParamsFromInput(self):
+        '''Reads connection parameters from user input and returns a dictionary'''
+        result = {}
+        result['host'] = self.settingsDialog.dbHost.value()
+        result['port'] = self.settingsDialog.dbPort.value()
+        result['database'] = self.settingsDialog.dbName.value()
+        result['user'] = self.settingsDialog.dbUser.value()
+        result['password'] = self.settingsDialog.dbPass.text()
+        return result
 
     def handleLayerToggle(self):
         if self.mainDialog.ykrPopLoadLayer.isChecked():
