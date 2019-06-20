@@ -193,13 +193,10 @@ class YKRTool:
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start:
             self.first_start = False
-            # self.dlg = YKRToolDialog()
 
-        self.mainDialog.settingsButton.clicked.connect(self.showSettingsDialog)
-
-        # show the dialog
+        self.setupMainDialog()
         self.mainDialog.show()
-        # self.dlg.show()
+
         # Run the dialog event loop
         result = self.mainDialog.exec_()
         # See if OK was pressed
@@ -215,3 +212,59 @@ class YKRTool:
             pass
         else:
             pass
+
+    def setupMainDialog(self):
+        '''Sets up the main dialog'''
+        self.mainDialog.settingsButton.clicked.connect(self.showSettingsDialog)
+
+        self.mainDialog.ykrPopLayer.hide()
+        self.mainDialog.ykrJobsLayer.hide()
+        self.mainDialog.ykrBuildingsLayer.hide()
+        self.mainDialog.futureAreasLayer.hide()
+        self.mainDialog.futureNetworkLayer.hide()
+        self.mainDialog.futureStopsLayer.hide()
+
+        self.mainDialog.ykrPopLoadLayer.clicked.connect(self.handleLayerToggle)
+        self.mainDialog.ykrJobsLoadLayer.clicked.connect(self.handleLayerToggle)
+        self.mainDialog.ykrBuildingsLoadLayer.clicked.connect(self.handleLayerToggle)
+        self.mainDialog.futureAreasLoadLayer.clicked.connect(self.handleLayerToggle)
+        self.mainDialog.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
+        self.mainDialog.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
+
+    def handleLayerToggle(self):
+        if self.mainDialog.ykrPopLoadLayer.isChecked():
+            self.mainDialog.ykrPopLayer.show()
+            self.mainDialog.ykrPopFile.hide()
+        else:
+            self.mainDialog.ykrPopLayer.hide()
+            self.mainDialog.ykrPopFile.show()
+        if self.mainDialog.ykrJobsLoadLayer.isChecked():
+            self.mainDialog.ykrJobsLayer.show()
+            self.mainDialog.ykrJobsFile.hide()
+        else:
+            self.mainDialog.ykrJobsLayer.hide()
+            self.mainDialog.ykrJobsFile.show()
+        if self.mainDialog.ykrBuildingsLoadLayer.isChecked():
+            self.mainDialog.ykrBuildingsLayer.show()
+            self.mainDialog.ykrBuildingsFile.hide()
+        else:
+            self.mainDialog.ykrBuildingsLayer.hide()
+            self.mainDialog.ykrBuildingsFile.show()
+        if self.mainDialog.futureAreasLoadLayer.isChecked():
+            self.mainDialog.futureAreasLayer.show()
+            self.mainDialog.futureAreasFile.hide()
+        else:
+            self.mainDialog.futureAreasLayer.hide()
+            self.mainDialog.futureAreasFile.show()
+        if self.mainDialog.futureNetworkLoadLayer.isChecked():
+            self.mainDialog.futureNetworkLayer.show()
+            self.mainDialog.futureNetworkFile.hide()
+        else:
+            self.mainDialog.futureNetworkLayer.hide()
+            self.mainDialog.futureNetworkFile.show()
+        if self.mainDialog.futureStopsLoadLayer.isChecked():
+            self.mainDialog.futureStopsLayer.show()
+            self.mainDialog.futureStopsFile.hide()
+        else:
+            self.mainDialog.futureStopsLayer.hide()
+            self.mainDialog.futureStopsFile.show()
