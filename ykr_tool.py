@@ -263,10 +263,6 @@ class YKRTool:
         filePath = self.settingsDialog.configFileInput.filePath()
         QSettings().setValue("/YKRTool/configFilePath", filePath)
 
-        if not os.path.exists(filePath):
-            self.iface.messageBar().pushMessage('Virhe', 'Tiedostoa ei voitu lukea',\
-                Qgis.Warning)
-            return
         try:
             dbParams = self.parseConfigFile(filePath)
         except Exception as e:
@@ -277,8 +273,6 @@ class YKRTool:
 
     def parseConfigFile(self, filePath):
         '''Reads configuration file and returns parameters as a dict'''
-        parser = ConfigParser()
-        parser.read(filePath)
         # Setup an empty dict with correct keys to avoid keyerrors
         dbParams = {
             'host': '',
@@ -287,6 +281,13 @@ class YKRTool:
             'user': '',
             'password': ''
         }
+        if not os.path.exists(filePath):
+            self.iface.messageBar().pushMessage('Virhe', 'Tiedostoa ei voitu lukea',\
+                Qgis.Warning)
+            return dbParams
+
+        parser = ConfigParser()
+        parser.read(filePath)
         if parser.has_section('postgresql'):
             params = parser.items('postgresql')
             for param in params:
