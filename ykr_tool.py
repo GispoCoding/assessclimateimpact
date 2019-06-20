@@ -27,12 +27,14 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
 from qgis.core import Qgis, QgsMessageLog
+from qgis.gui import QgsFileWidget
 
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
 import os.path
 import psycopg2
+from configparser import ConfigParser
 
 
 
@@ -246,7 +248,48 @@ class YKRTool:
 
     def setConnectionParamsFromFile(self):
         '''Reads connection parameters from file and sets them to the input fields'''
-        pass
+        filePath = self.settingsDialog.configFileInput.filePath()
+        if not os.path.exists(filePath):
+            self.iface.messageBar().pushMessage('Virhe', 'Tiedostoa ei voitu lukea',\
+                Qgis.Warning)
+            return
+        try:
+            dbParams = self.parseConfigFile(filePath)
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe luettaessa tiedostoa',\
+                str(e), Qgis.Warning, duration=10)
+
+        self.setConnectionParams(dbParams)
+
+    def parseConfigFile(self, filePath):
+        '''Reads configuration file and returns parameters as a dict'''
+        parser = ConfigParser()
+        parser.read(filePath)
+        # Setup an empty dict with correct keys to avoid keyerrors
+        dbParams = {
+            'host': '',
+            'port': '',
+            'database': '',
+            'user': '',
+            'password': ''
+        }
+        if parser.has_section('postgresql'):
+            params = parser.items('postgresql')
+            for param in params:
+                dbParams[param[0]] = param[1]
+        else:
+            self.iface.messageBar().pushMessage('Virhe', 'Tiedosto ei sisällä\
+                tietokannan yhteystietoja', Qgis.Warning)
+
+        return dbParams
+
+    def setConnectionParams(self, params):
+        '''Sets connection parameters to input fields'''
+        self.settingsDialog.dbHost.setValue(params['host'])
+        self.settingsDialog.dbPort.setValue(params['port'])
+        self.settingsDialog.dbName.setValue(params['database'])
+        self.settingsDialog.dbUser.setValue(params['user'])
+        self.settingsDialog.dbPass.setText(params['password'])
 
     def readConnectionParamsFromInput(self):
         '''Reads connection parameters from user input and returns a dictionary'''

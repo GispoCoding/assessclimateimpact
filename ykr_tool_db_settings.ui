@@ -106,7 +106,7 @@
              </size>
             </property>
             <property name="text">
-             <string>postgres</string>
+             <string/>
             </property>
             <property name="qgisRelation" stdset="0">
              <string notr="true"/>
@@ -153,12 +153,15 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QgsFileWidget" name="configFile">
+             <widget class="QgsFileWidget" name="configFileInput">
               <property name="minimumSize">
                <size>
                 <width>200</width>
                 <height>23</height>
                </size>
+              </property>
+              <property name="filter">
+               <string>ini-tiedosto (*.ini)</string>
               </property>
              </widget>
             </item>
