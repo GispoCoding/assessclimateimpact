@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>396</width>
-    <height>343</height>
+    <height>314</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QgsFilterLineEdit" name="mLineEdit_6">
+           <widget class="QgsFilterLineEdit" name="dbHost">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -52,12 +52,18 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QgsFilterLineEdit" name="mLineEdit_5">
+           <widget class="QgsFilterLineEdit" name="dbPort">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>23</height>
              </size>
+            </property>
+            <property name="text">
+             <string>5432</string>
+            </property>
+            <property name="defaultValue">
+             <string/>
             </property>
             <property name="qgisRelation" stdset="0">
              <string notr="true"/>
@@ -72,7 +78,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QgsFilterLineEdit" name="mLineEdit_4">
+           <widget class="QgsFilterLineEdit" name="dbName">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -85,19 +91,22 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>Skeema:</string>
+             <string>Käyttäjänimi:</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QgsFilterLineEdit" name="mLineEdit_3">
+           <widget class="QgsFilterLineEdit" name="dbUser">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>23</height>
              </size>
+            </property>
+            <property name="text">
+             <string>postgres</string>
             </property>
             <property name="qgisRelation" stdset="0">
              <string notr="true"/>
@@ -105,34 +114,14 @@
            </widget>
           </item>
           <item row="4" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Käyttäjänimi:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QgsFilterLineEdit" name="mLineEdit_2">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>23</height>
-             </size>
-            </property>
-            <property name="qgisRelation" stdset="0">
-             <string notr="true"/>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
            <widget class="QLabel" name="label_5">
             <property name="text">
              <string>Salasana:</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
-           <widget class="QgsPasswordLineEdit" name="mLineEdit">
+          <item row="4" column="1">
+           <widget class="QgsPasswordLineEdit" name="dbPass">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -164,7 +153,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QgsFileWidget" name="mQgsFileWidget">
+             <widget class="QgsFileWidget" name="configFile">
               <property name="minimumSize">
                <size>
                 <width>200</width>
@@ -176,7 +165,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="loadFileButton">
             <property name="text">
              <string>Lataa</string>
             </property>
