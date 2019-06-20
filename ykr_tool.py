@@ -72,6 +72,7 @@ class YKRTool:
         self.menu = self.tr(u'&Ilmastovaikutusten arviointityökalu')
 
         self.conn = None
+        self.connParams = None
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
@@ -208,13 +209,14 @@ class YKRTool:
         result = self.mainDialog.exec_()
         # See if OK was pressed
         if result:
-            if not self.conn:
+            if not self.connParams:
                 configFilePath = QSettings().value("/YKRTool/configFilePath",\
                     "", type=str)
-                connParams = self.parseConfigFile(configFilePath)
-                self.connectToDb(connParams)
+                self.connParams = self.parseConfigFile(configFilePath)
+            self.createDbConnection(self.connParams)
 
-            self.conn.close()
+            if self.conn:
+                self.conn.close()
 
     def setupMainDialog(self):
         '''Sets up the main dialog'''
@@ -243,20 +245,25 @@ class YKRTool:
 
         result = self.settingsDialog.exec_()
         if result:
-            connParams = self.readConnectionParamsFromInput()
-            QgsMessageLog.logMessage(str(connParams), "YKRTool", Qgis.Info)
-            self.connectToDb(connParams)
+            self.connParams = self.readConnectionParamsFromInput()
 
-    def connectToDb(self, connParams):
+    def createDbConnection(self, connParams):
         '''Creates a database connection and cursor based on connection params'''
+        QgsMessageLog.logMessage(str(self.connParams), "YKRTool", Qgis.Info)
+        if '' in list(connParams.values()):
+            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
+                'Täytä puuttuvat yhteystiedot', Qgis.Critical)
+            return False
         try:
             self.conn = psycopg2.connect(host=connParams['host'],\
                 port=connParams['port'], database=connParams['database'],\
-                user=connParams['user'], password=connParams['password'])
+                user=connParams['user'], password=connParams['password'],\
+                connect_timeout=3)
             self.cur = self.conn.cursor()
         except Exception as e:
             self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
                 str(e), Qgis.Critical, duration=10)
+            return False
 
     def setConnectionParamsFromFile(self):
         '''Reads connection parameters from file and sets them to the input fields'''
