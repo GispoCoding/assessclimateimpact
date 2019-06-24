@@ -202,8 +202,9 @@ class YKRTool:
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start:
             self.first_start = False
+            self.setupMainDialog()
 
-        self.displayMainDialog()
+        self.mainDialog.show()
 
         # Run the dialog event loop
         result = self.mainDialog.exec_()
@@ -222,8 +223,14 @@ class YKRTool:
             self.runCalculations()
             self.cleanUp()
 
-    def displayMainDialog(self):
-        '''Sets up and displays the main dialog'''
+    def setupMainDialog(self):
+        '''Sets up and the main dialog'''
+        self.mainDialog.geomArea.addItem("Tampere")
+        self.mainDialog.adminArea.addItem("Pirkanmaa")
+        self.mainDialog.pitkoScenario.addItems(["wem", "eu80", "kasvu", "muutos", "saasto", "static"])
+        self.mainDialog.emissionsAllocation.addItems(["hjm", "em"])
+        self.mainDialog.elecEmissionType.addItems(["hankinta", "tuotanto"])
+
         self.mainDialog.settingsButton.clicked.connect(self.displaySettingsDialog)
 
         self.mainDialog.ykrPopLayer.hide()
@@ -239,7 +246,6 @@ class YKRTool:
         self.mainDialog.futureAreasLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
-        self.mainDialog.show()
 
     def displaySettingsDialog(self):
         '''Sets up and displays the settings dialog'''
