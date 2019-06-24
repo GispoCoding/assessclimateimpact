@@ -215,8 +215,11 @@ class YKRTool:
 
             self.createDbConnection(self.connParams)
 
-            if self.conn:
-                self.conn.close()
+            self.setupProcessing()
+            self.readProcessingInput
+            self.uploadData()
+            self.runCalculations()
+            self.cleanUp()
 
     def displayMainDialog(self):
         '''Sets up and displays the main dialog'''
@@ -363,3 +366,24 @@ class YKRTool:
             self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
                 str(e), Qgis.Critical, duration=10)
             return False
+
+    def setupProcessing(self):
+        '''Set up necessary values for processing session'''
+        pass
+
+    def readProcessingInput(self):
+        '''Read user input from main dialog'''
+        pass
+
+    def uploadData(self):
+        '''Load data as layers and write to database'''
+        pass
+
+    def runCalculations(self):
+        '''Call necessary processing functions in database'''
+        pass
+
+    def cleanUp(self):
+        '''Delete temporary data and close db connection'''
+        if self.conn:
+            self.conn.close()
