@@ -26,7 +26,7 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
-from qgis.core import Qgis, QgsMessageLog
+from qgis.core import Qgis, QgsMessageLog, QgsVectorLayer
 from qgis.gui import QgsFileWidget
 
 # Initialize Qt resources from file resources.py
@@ -218,7 +218,7 @@ class YKRTool:
             self.createDbConnection(self.connParams)
 
             self.sessionParams = self.generateSessionParameters()
-            self.readProcessingInput
+            self.readProcessingInput()
             self.uploadData()
             self.runCalculations()
             self.cleanUp()
@@ -233,12 +233,12 @@ class YKRTool:
 
         self.mainDialog.settingsButton.clicked.connect(self.displaySettingsDialog)
 
-        self.mainDialog.ykrPopLayer.hide()
-        self.mainDialog.ykrJobsLayer.hide()
-        self.mainDialog.ykrBuildingsLayer.hide()
-        self.mainDialog.futureAreasLayer.hide()
-        self.mainDialog.futureNetworkLayer.hide()
-        self.mainDialog.futureStopsLayer.hide()
+        self.mainDialog.ykrPopLayerList.hide()
+        self.mainDialog.ykrJobsLayerList.hide()
+        self.mainDialog.ykrBuildingsLayerList.hide()
+        self.mainDialog.futureAreasLayerList.hide()
+        self.mainDialog.futureNetworkLayerList.hide()
+        self.mainDialog.futureStopsLayerList.hide()
 
         self.mainDialog.ykrPopLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.ykrJobsLoadLayer.clicked.connect(self.handleLayerToggle)
@@ -320,40 +320,40 @@ class YKRTool:
     def handleLayerToggle(self):
         '''Toggle UI components visibility based on selection'''
         if self.mainDialog.ykrPopLoadLayer.isChecked():
-            self.mainDialog.ykrPopLayer.show()
+            self.mainDialog.ykrPopLayerList.show()
             self.mainDialog.ykrPopFile.hide()
         else:
-            self.mainDialog.ykrPopLayer.hide()
+            self.mainDialog.ykrPopLayerList.hide()
             self.mainDialog.ykrPopFile.show()
         if self.mainDialog.ykrJobsLoadLayer.isChecked():
-            self.mainDialog.ykrJobsLayer.show()
+            self.mainDialog.ykrJobsLayerList.show()
             self.mainDialog.ykrJobsFile.hide()
         else:
-            self.mainDialog.ykrJobsLayer.hide()
+            self.mainDialog.ykrJobsLayerList.hide()
             self.mainDialog.ykrJobsFile.show()
         if self.mainDialog.ykrBuildingsLoadLayer.isChecked():
-            self.mainDialog.ykrBuildingsLayer.show()
+            self.mainDialog.ykrBuildingsLayerList.show()
             self.mainDialog.ykrBuildingsFile.hide()
         else:
-            self.mainDialog.ykrBuildingsLayer.hide()
+            self.mainDialog.ykrBuildingsLayerList.hide()
             self.mainDialog.ykrBuildingsFile.show()
         if self.mainDialog.futureAreasLoadLayer.isChecked():
-            self.mainDialog.futureAreasLayer.show()
+            self.mainDialog.futureAreasLayerList.show()
             self.mainDialog.futureAreasFile.hide()
         else:
-            self.mainDialog.futureAreasLayer.hide()
+            self.mainDialog.futureAreasLayerList.hide()
             self.mainDialog.futureAreasFile.show()
         if self.mainDialog.futureNetworkLoadLayer.isChecked():
-            self.mainDialog.futureNetworkLayer.show()
+            self.mainDialog.futureNetworkLayerList.show()
             self.mainDialog.futureNetworkFile.hide()
         else:
-            self.mainDialog.futureNetworkLayer.hide()
+            self.mainDialog.futureNetworkLayerList.hide()
             self.mainDialog.futureNetworkFile.show()
         if self.mainDialog.futureStopsLoadLayer.isChecked():
-            self.mainDialog.futureStopsLayer.show()
+            self.mainDialog.futureStopsLayerList.show()
             self.mainDialog.futureStopsFile.hide()
         else:
-            self.mainDialog.futureStopsLayer.hide()
+            self.mainDialog.futureStopsLayerList.hide()
             self.mainDialog.futureStopsFile.show()
 
     def createDbConnection(self, connParams):
@@ -388,7 +388,21 @@ class YKRTool:
 
     def readProcessingInput(self):
         '''Read user input from main dialog'''
-        pass
+        if self.mainDialog.ykrPopLoadLayer.isChecked():
+            self.ykrPopLayer = self.mainDialog.ykrPopLayerList.currentLayer()
+        else:
+            self.ykrPopLayer = QgsVectorLayer(self.mainDialog.\
+                ykrPopFile.filePath(), "ykrPopLayer", "ogr")
+        if self.mainDialog.ykrBuildingsLoadLayer.isChecked():
+            self.ykrBuildingsLayer = self.mainDialog.ykrBuildingsLayerList.currentLayer()
+        else:
+            self.ykrBuildingsLayer = QgsVectorLayer(self.mainDialog.\
+                ykrBuildingsFile.filePath(), "ykrBuildingsLayer", "ogr")
+        if self.mainDialog.ykrJobsLoadLayer.isChecked():
+            self.ykrJobsLayer = self.ykrJobsLayerList.currentLayer()
+        else:
+            self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
+                ykrJobsFile.filePath(), "ykrJobsLayer", "ogr")
 
     def uploadData(self):
         '''Load data as layers and write to database'''
