@@ -219,12 +219,12 @@ class YKRTool:
 
             self.sessionParams = self.generateSessionParameters()
             self.readProcessingInput()
-            self.uploadData()
+            if not self.uploadData(): return
             self.runCalculations()
             self.cleanUp()
 
     def setupMainDialog(self):
-        '''Sets up and the main dialog'''
+        '''Sets up the main dialog'''
         self.mainDialog.geomArea.addItem("Tampere")
         self.mainDialog.adminArea.addItem("Pirkanmaa")
         self.mainDialog.pitkoScenario.addItems(["wem", "eu80", "kasvu", "muutos", "saasto", "static"])
@@ -392,21 +392,47 @@ class YKRTool:
             self.ykrPopLayer = self.mainDialog.ykrPopLayerList.currentLayer()
         else:
             self.ykrPopLayer = QgsVectorLayer(self.mainDialog.\
-                ykrPopFile.filePath(), "ykrPopLayer", "ogr")
+                ykrPopFile.filePath(), "ykr_vaesto_2017", "ogr")
         if self.mainDialog.ykrBuildingsLoadLayer.isChecked():
             self.ykrBuildingsLayer = self.mainDialog.ykrBuildingsLayerList.currentLayer()
         else:
             self.ykrBuildingsLayer = QgsVectorLayer(self.mainDialog.\
-                ykrBuildingsFile.filePath(), "ykrBuildingsLayer", "ogr")
+                ykrBuildingsFile.filePath(), "pir_rakennukset_2017_piste", "ogr")
         if self.mainDialog.ykrJobsLoadLayer.isChecked():
             self.ykrJobsLayer = self.ykrJobsLayerList.currentLayer()
         else:
             self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
-                ykrJobsFile.filePath(), "ykrJobsLayer", "ogr")
+                ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
 
     def uploadData(self):
         '''Load data as layers and write to database'''
-        pass
+        if not self.checkLayerValidity(): return False
+
+        return True
+
+    def checkLayerValidity(self):
+        '''Checks that the layers are valid and raises an exception if necessary'''
+        try:
+            if not self.ykrPopLayer.isValid():
+                raise Exception("Virhe ladattaessa nykytilanteen YKR-väestötasoa")
+            if not self.ykrBuildingsLayer.isValid():
+                raise Exception("Virhe ladattaessa nykytilanteen YKR-rakennustasoa")
+            if not self.ykrJobsLayer.isValid():
+                print(abcdeft)
+                raise Exception("Virhe ladattaessa nykytilanteen YKR-työpaikkatasoa")
+            if self.mainDialog.calculateFuture.isChecked():
+                if not self.futureAreasLayer.isValid():
+                    raise Exception("Virhe ladattaessa tulevaisuuden aluevaraustietoja")
+                if self.futureNetworkLayer:
+                    if not self.futureNetworkLayer.isValid():
+                        raise Exception("Virhe ladattaessa keskusverkkotietoja")
+                if self.futureStopsLayer:
+                    if not self.futureStopsLayer.isValid():
+                        raise Exception("Virhe ladattaessa joukkoliikennepysäkkitietoja")
+            return True
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe ladattaessa tasoja', str(e), Qgis.Critical)
+            return False
 
     def runCalculations(self):
         '''Call necessary processing functions in database'''
