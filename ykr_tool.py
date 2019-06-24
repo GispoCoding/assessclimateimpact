@@ -98,16 +98,16 @@ class YKRTool:
 
 
     def add_action(
-        self,
-        icon_path,
-        text,
-        callback,
-        enabled_flag=True,
-        add_to_menu=True,
-        add_to_toolbar=True,
-        status_tip=None,
-        whats_this=None,
-        parent=None):
+            self,
+            icon_path,
+            text,
+            callback,
+            enabled_flag=True,
+            add_to_menu=True,
+            add_to_toolbar=True,
+            status_tip=None,
+            whats_this=None,
+            parent=None):
         """Add a toolbar icon to the toolbar.
 
         :param icon_path: Path to the icon for this action. Can be a resource
@@ -202,8 +202,7 @@ class YKRTool:
         if self.first_start:
             self.first_start = False
 
-        self.setupMainDialog()
-        self.mainDialog.show()
+        self.displayMainDialog()
 
         # Run the dialog event loop
         result = self.mainDialog.exec_()
@@ -213,14 +212,15 @@ class YKRTool:
                 configFilePath = QSettings().value("/YKRTool/configFilePath",\
                     "", type=str)
                 self.connParams = self.parseConfigFile(configFilePath)
+
             self.createDbConnection(self.connParams)
 
             if self.conn:
                 self.conn.close()
 
-    def setupMainDialog(self):
-        '''Sets up the main dialog'''
-        self.mainDialog.settingsButton.clicked.connect(self.showSettingsDialog)
+    def displayMainDialog(self):
+        '''Sets up and displays the main dialog'''
+        self.mainDialog.settingsButton.clicked.connect(self.displaySettingsDialog)
 
         self.mainDialog.ykrPopLayer.hide()
         self.mainDialog.ykrJobsLayer.hide()
@@ -235,8 +235,10 @@ class YKRTool:
         self.mainDialog.futureAreasLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
+        self.mainDialog.show()
 
-    def showSettingsDialog(self):
+    def displaySettingsDialog(self):
+        '''Sets up and displays the settings dialog'''
         self.settingsDialog.show()
         self.settingsDialog.configFileInput.setStorageMode(QgsFileWidget.GetFile)
         self.settingsDialog.configFileInput.setFilePath(QSettings().value\
@@ -246,24 +248,6 @@ class YKRTool:
         result = self.settingsDialog.exec_()
         if result:
             self.connParams = self.readConnectionParamsFromInput()
-
-    def createDbConnection(self, connParams):
-        '''Creates a database connection and cursor based on connection params'''
-        QgsMessageLog.logMessage(str(self.connParams), "YKRTool", Qgis.Info)
-        if '' in list(connParams.values()):
-            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
-                'Täytä puuttuvat yhteystiedot', Qgis.Critical)
-            return False
-        try:
-            self.conn = psycopg2.connect(host=connParams['host'],\
-                port=connParams['port'], database=connParams['database'],\
-                user=connParams['user'], password=connParams['password'],\
-                connect_timeout=3)
-            self.cur = self.conn.cursor()
-        except Exception as e:
-            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
-                str(e), Qgis.Critical, duration=10)
-            return False
 
     def setConnectionParamsFromFile(self):
         '''Reads connection parameters from file and sets them to the input fields'''
@@ -276,7 +260,7 @@ class YKRTool:
             self.iface.messageBar().pushMessage('Virhe luettaessa tiedostoa',\
                 str(e), Qgis.Warning, duration=10)
 
-        self.setConnectionParams(dbParams)
+        self.setConnectionParamsFromInput(dbParams)
 
     def parseConfigFile(self, filePath):
         '''Reads configuration file and returns parameters as a dict'''
@@ -305,7 +289,7 @@ class YKRTool:
 
         return dbParams
 
-    def setConnectionParams(self, params):
+    def setConnectionParamsFromInput(self, params):
         '''Sets connection parameters to input fields'''
         self.settingsDialog.dbHost.setValue(params['host'])
         self.settingsDialog.dbPort.setValue(params['port'])
@@ -324,6 +308,7 @@ class YKRTool:
         return params
 
     def handleLayerToggle(self):
+        '''Toggle UI components visibility based on selection'''
         if self.mainDialog.ykrPopLoadLayer.isChecked():
             self.mainDialog.ykrPopLayer.show()
             self.mainDialog.ykrPopFile.hide()
@@ -360,3 +345,21 @@ class YKRTool:
         else:
             self.mainDialog.futureStopsLayer.hide()
             self.mainDialog.futureStopsFile.show()
+
+    def createDbConnection(self, connParams):
+        '''Creates a database connection and cursor based on connection params'''
+        QgsMessageLog.logMessage(str(self.connParams), "YKRTool", Qgis.Info)
+        if '' in list(connParams.values()):
+            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
+                'Täytä puuttuvat yhteystiedot', Qgis.Critical)
+            return False
+        try:
+            self.conn = psycopg2.connect(host=connParams['host'],\
+                port=connParams['port'], database=connParams['database'],\
+                user=connParams['user'], password=connParams['password'],\
+                connect_timeout=3)
+            self.cur = self.conn.cursor()
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
+                str(e), Qgis.Critical, duration=10)
+            return False
