@@ -34,6 +34,7 @@ from .resources import *
 # Import the code for the dialog
 import os.path
 import psycopg2
+import datetime, getpass
 from configparser import ConfigParser
 
 
@@ -215,7 +216,7 @@ class YKRTool:
 
             self.createDbConnection(self.connParams)
 
-            self.setupProcessing()
+            self.sessionParams = self.generateSessionParameters()
             self.readProcessingInput
             self.uploadData()
             self.runCalculations()
@@ -367,9 +368,17 @@ class YKRTool:
                 str(e), Qgis.Critical, duration=10)
             return False
 
-    def setupProcessing(self):
-        '''Set up necessary values for processing session'''
-        pass
+    def generateSessionParameters(self):
+        '''Get necessary values for processing session'''
+        sessionParams = {}
+
+        usr = getpass.getuser()
+        sessionParams["user"] = usr.replace(" ", "_")
+        now = datetime.datetime.now()
+        sessionParams["startTime"] = now.strftime("%Y%m%d_%H%M%S")
+        sessionParams["baseYear"] = now.year
+
+        return sessionParams
 
     def readProcessingInput(self):
         '''Read user input from main dialog'''
