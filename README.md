@@ -92,7 +92,7 @@ Future scenarios - user adds:
 
 - Technical documentation (in Finnish) coming up
 - [Conceptual model](Ilmastoty%C3%B6kalu_k%C3%A4sitemalli_gispo.png)
-- [Schema model](docs/Database.md)
+- [Schema model](docs/database.md)
 - SQL (coming up)
 - Plugin documentation (coming up)
 
