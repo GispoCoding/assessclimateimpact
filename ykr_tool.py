@@ -418,7 +418,7 @@ class YKRTool:
                 ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
 
     def uploadData(self):
-        '''Load data as layers and write to database'''
+        '''Check if layers are valid and write to database'''
         if not self.checkLayerValidity(): return False
 
         params = {
@@ -441,21 +441,24 @@ class YKRTool:
             'DIM': 0,
             'FIELDS': [],
             'LAUNDER': False,
-            'INDEX': True, # Skip index creation to avoid relation already exists errors
+            'INDEX': False,
             'SKIPFAILURES': False,
             'PROMOTETOMULTI': False,
             'PRECISION': True
         }
 
-        for i in [self.ykrBuildingsLayer, self.ykrJobsLayer, self.ykrPopLayer]:
-            params['INPUT'] = i
-            params['TABLE'] = i.name() + '_' + self.sessionParams['uuid']
-            geomType = i.geometryType()
-            if i.geometryType() == 0: # point
+        for layer in [self.ykrBuildingsLayer, self.ykrJobsLayer, self.ykrPopLayer]:
+            params['INPUT'] = layer
+            tableName = self.sessionParams['uuid'] + '_' + layer.name()
+            params['TABLE'] = tableName [:49] # Truncate tablename to avoid hitting postgres 63char cap
+
+            if layer.geometryType() == 0: # point
                 params['GTYPE'] = 3
-            elif i.geometryType() == 2: # polygon
+            elif layer.geometryType() == 2: # polygon
                 params['GTYPE'] = 5
+
             processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
+
         return True
 
     def checkLayerValidity(self):
