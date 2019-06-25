@@ -489,7 +489,21 @@ class YKRTool:
 
     def runCalculations(self):
         '''Call necessary processing functions in database'''
-        pass
+        vals = {
+            'uuid': self.sessionParams['uuid'],
+            'popLayer': self.tableNames[self.ykrPopLayer],
+            'jobLayer': self.tableNames[self.ykrJobsLayer]
+        }
+
+        query = '''CREATE TABLE user_input."ykr_{uuid}" AS SELECT * FROM
+        il_preprocess('user_input.tutkimusalue_uuid','{popLayer}','{jobLayer}')'''.format(**vals)
+        self.cur.execute(query)
+
+        query = 'ALTER TABLE user_input."ykr_{uuid}" ADD PRIMARY KEY (xyind)'.format(**vals)
+        self.cur.execute(query)
+
+        query = 'CREATE INDEX "ykr_{uuid}_gidx" ON user_input."ykr_{uuid}" USING GIST(geom)'.format(**vals)
+        self.cur.execute(query)
 
     def cleanUp(self):
         '''Delete temporary data and close db connection'''
