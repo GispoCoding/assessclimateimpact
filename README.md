@@ -62,7 +62,9 @@ The tool can be used by city developers (land use planners) for
 - Advanced: add emission allocation methods
 - Advanced: add used electricity emission sources
 
-## The datasets needed (structures available soon)
+## The datasets needed
+
+[Dataset structure requirements](docs/dataset_requirements.md). See also [database model](docs/database.md). 
 
 Present - user adds:
 - Population (YKR) 
