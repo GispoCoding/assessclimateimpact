@@ -4,6 +4,8 @@ Climate Tool is a QGIS plugin for assessing climate impacts in cities. The plugi
 
 The tool is modelling the climate impacts in the cities. It provides  information about the current situation in the cities by calculating the  energyefficiency of the city. It also provides scenarios for the future. In the inital phace only datasets from the City of Tampere are used. 
 
+![alt text](Climate_tool_UI_v1.png)
+
 It takes into account several information from the cities:
 
 - Building
