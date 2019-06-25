@@ -1,9 +1,32 @@
 # Climate Tool
 
-Climate Tool is a QGIS plugin for assessing climate impacts in cities. The plugin is under development and will be released here in June 2019. The plugin will need a PostGIS connection in order to work. The datasets needed will be listed here. The tool is provided by the joint cooperation of [City of Tampere](https://www.tampere.fi/), [Ubigu Ltd](https://www.ubigu.fi/en/), [Tietotakomo](https://www.tietotakomo.fi/) & [Gispo Ltd](https://www.gispo.fi/en/home/). Many thanks to the project team!
+Climate Tool is a QGIS plugin for assessing climate impacts in cities. The plugin is under development and will be released here in June 2019. The tool is modelling the climate impacts in the cities. It provides  information about the current situation in the cities by calculating the  energyefficiency of the city. It also provides scenarios for the future. In the inital phace only datasets from the City of Tampere are used. The plugin will need a PostGIS connection in order to work. 
 
-The tool is modelling the climate impacts in the cities. It provides  information about the current situation in the cities by calculating the  energyefficiency of the city. It also provides scenarios for the future. In the inital phace only datasets from the City of Tampere are used. 
+## Team
 
+**Developed by the joint cooperation of [City of Tampere](https://www.tampere.fi/), [Ubigu Ltd](https://www.ubigu.fi/en/), [Tietotakomo](https://www.tietotakomo.fi/) & [Gispo Ltd](https://www.gispo.fi/en/home/).**
+
+The plugin is still in beta-development. Please report issues to mikael@gispo.fi.
+
+Many thanks to the project team!*
+
+## Licences
+
+This plugin utilizes data proviced by Statistics Finaland and Finland's environmental administration **Please read [https://www.stat.fi/tup/ykraineistot/index.html](https://www.stat.fi/tup/ykraineistot/index.html) for more information.**
+
+**Read also [data/LICENCE.txt](data/LICENCE.txt) for more information.**
+
+## Installation instructions
+
+Coming up
+
+## Software requirements
+
+- QGIS 3.4.6
+- PostgreSQL 9.4 (tested on PostgreSQL 9.6+)
+- PostGIS 2.1.8 (tested on 2.2+)
+
+## Climate Tool description
 ![alt text](Climate_tool_UI_v1.png)
 
 It takes into account several information from the cities:
@@ -16,12 +39,6 @@ It takes into account several information from the cities:
 - Carbon sinks
 - Land use plans
 - Scenario information for the future
-
-## Software requirements
-
-- QGIS 3.4.6
-- PostgreSQL 9.4 (tested on PostgreSQL 9.6+)
-- PostGIS 2.1.8 (tested on 2.2+)
 
 ## Use cases
 
