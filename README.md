@@ -14,7 +14,7 @@ Many thanks to the project team!*
 
 This plugin utilizes data proviced by Statistics Finaland and Finland's environmental administration **Please read [https://www.stat.fi/tup/ykraineistot/index.html](https://www.stat.fi/tup/ykraineistot/index.html) for more information.**
 
-**Read also [data/LICENCE.txt](data/LICENCE.txt) for more information.**
+**Read also [data/lisence.txt](data/LICENCE.txt) for more information.**
 
 ## Installation instructions
 
