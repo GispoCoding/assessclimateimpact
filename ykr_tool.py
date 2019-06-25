@@ -32,6 +32,7 @@ from qgis.gui import QgsFileWidget
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
+import uuid
 import os.path
 import psycopg2
 import datetime, getpass
@@ -393,6 +394,7 @@ class YKRTool:
         now = datetime.datetime.now()
         sessionParams["startTime"] = now.strftime("%Y%m%d_%H%M%S")
         sessionParams["baseYear"] = now.year
+        sessionParams["uuid"] = str(uuid.uuid4())
 
         return sessionParams
 
@@ -409,7 +411,7 @@ class YKRTool:
             self.ykrBuildingsLayer = QgsVectorLayer(self.mainDialog.\
                 ykrBuildingsFile.filePath(), "pir_rakennukset_2017_piste", "ogr")
         if self.mainDialog.ykrJobsLoadLayer.isChecked():
-            self.ykrJobsLayer = self.ykrJobsLayerList.currentLayer()
+            self.ykrJobsLayer = self.mainDialog.ykrJobsLayerList.currentLayer()
         else:
             self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
                 ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
