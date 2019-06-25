@@ -1,3 +1,33 @@
+## The datasets needed
+
+See also [database model](docs/database.md) and [lisences](data/lisence.md). 
+
+### Present - user adds:
+- Population (YKR) 
+- Jobs (YKR)
+- Buildings (YKR, based on building and housing registre called RHR) 
+
+**The use of YKR datasets needs a contract with Liiteri service https://www.ymparisto.fi/fi-FI/Elinympariston_tietopalvelu_Liiteri/Liiterikayttajaksi**
+
+- OR more accurate model for the present situation can be gained with current building information from the municipality, if available use instead of YKR building information
+
+### Future scenarios - user adds:
+- Land use planning Zoning elements (Käyttötarkoitusalueet) (Municipality)
+- Centre network (Keskusverkko) (Municipality)
+- Public transport plan (metro, train, tram) (Municipality)
+
+### Ready in the database:
+- Basic grid for whole country (250*250 m), includes also ground surface (in hectars) from CLC2018 data (SYKE)
+- Urban zoning areas from 2015 (yhdyskuntarakenteen vyöhykkeet, YKR 2015) (SYKE)
+- Centres and business districts (KeskustaAlueet) (SYKE)
+- Regions (municipality borderds and region, now only City of Tampere as test area) (NLS-FI)
+- Carbon sinks (Council of Tampere region)
+- Research on personal transport (Traficom)
+- Energy information (?)
+- Traffic consumption (?)
+- Energy production (?)
+- Scenarios - PITKO (long term emission development)
+
 ## Dataset structure requirements (User input, current situation)
 
 ### Jobs in urban zoning grid dataset (YKR-työpaikat)
