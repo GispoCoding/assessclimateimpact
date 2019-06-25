@@ -12,13 +12,22 @@ Many thanks to the project team!
 
 ## Licences
 
-This plugin utilizes data proviced by Statistics Finaland and Finland's environmental administration **Please read [https://www.stat.fi/tup/ykraineistot/index.html](https://www.stat.fi/tup/ykraineistot/index.html) for more information.**
+This plugin relies on urban zone data provided by Statistics Finaland and Finland's environmental administration **Please read [https://www.stat.fi/tup/ykraineistot/index.html](https://www.stat.fi/tup/ykraineistot/index.html) for more information.**
 
 **Read also [data/lisence.txt](data/lisence.txt) for more information.**
 
 ## Installation instructions
 
 Coming up
+
+## Documentation
+
+- [Database and database model](docs/database.md)
+- [Descriptions for visualizations](docs/visualization.md)
+- [Dataset requirements](docs/dataset_requirements.md)
+- [Data lisences](data/lisence.md)
+
+- Plugin documentation (coming up)
 
 ## Software requirements
 
@@ -29,7 +38,12 @@ Coming up
 ## Climate Tool description
 ![alt text](Climate_tool_UI_v1.png)
 
-It takes into account several information from the cities:
+The tool can be used by city developers (land use planners) for
+- Understanding the current situation of CO2 emissions in the community
+- Detect the effects of land use planning (planned building, use and maintanence) in CO2 emission levels
+- See trends in of CO2 emission changes in the future
+
+Climate Tool takes into account several information from the cities:
 
 - Building
 - Traffic
@@ -40,36 +54,21 @@ It takes into account several information from the cities:
 - Land use plans
 - Scenario information for the future
 
-## Use cases
-
-The tool can be used by city developers (land use planners) for
-- Seeing the current situation for climate impacts in the community
-- Detect the effects of land use planning (planned building, use and maintanence) in climate impacts
-- See trends in climate impact changes in the future
-
 ## End results:
 
 - 250*250 m grid, vector layers in PostGIS database
-- different parameters attached to the grid (current situation and also future)
-- visualisations (SLD) for different parameters and layer possibilities
-- Map layers: current situation and optionally target year
-- Tables: yearly scenarios
+- CO2 emissions of different emission sources in the cities. Current situation as map layer.
+- Predictions on CO2 emissions in the future (using scenarios from land use planning). Target year as map layer, yearly scenarios as tables
+- Ready made visualizations for the map layers including grids and top emission source/grid cell
 
 ## Process
 - Open QGIS
-- Add QGIS Climate Tool plugin
-- Check the PostGIS database connection
-- Check that the grid data exists in the database (YKR = Urban Zone Grid by Finnish Environment Institute) 
+- Install QGIS Climate Tool plugin
+- Check the PostGIS database connection (hosted at the moment by Ubigu Ltd)
 - Open QGIS Climate Tool plugin
-
-### Choosing reseach area
 - Choose the area for your calculations (in this stage only City of Tampere)
 - Choose a governmental area (it provides certain parameters to the calculations)
-
-### Calculate current situation
-- Add information about the current situation (Population, Jobs, Buildings)
-
-### Calculate future information
+- Add information about the current situation (Population, Jobs, Buildings) in requested format
 - Choose if you want to calculate also future scenarios 
 - Add land use planning zoning elements
 - Set target Year
@@ -92,25 +91,19 @@ More accurate model for the present situation can be gained with:
 - Buildings (current situation from the municipality, if available use instead of YKR building information)
 
 Ready in the database:
-- Basic grid for whole country (250*250 m) - in the database, includes also ground surface (in hectars) from YKR CLC2018 data
-- Urban zones (yhdyskuntarakenteen vyöhykkeet, YKR 2015) - this dataset has been premodified and ready in the database
-- Centres and commercial areas (KeskustaAlueet) - this dataset is ready in the database
+- Basic grid for whole country (250*250 m), includes also ground surface (in hectars) from CLC2018 data
+- Urban zones (yhdyskuntarakenteen vyöhykkeet, YKR 2015)
+- Centres and commercial areas (KeskustaAlueet)
 - Regions (municipality borderds, now only City of Tampere as test area)
-- Carbon sinks - ready made dataset in the database
-- Energy information  - ready made dataset in the database
-- Scenarios - PITKO (long term emission development) - ready made dataset in the database
+- Carbon sinks
+- Energy information
+- Scenarios - PITKO (long term emission development)
 
 Future scenarios - user adds:
 - Land use planning Zoning elements (Käyttötarkoitusalueet)
 - Centre network (Keskusverkko)
 - Public transport plan (metro, train, tram)
 
-## Documentation
 
-- Technical documentation (in Finnish) coming up
-- [Conceptual model](Ilmastoty%C3%B6kalu_k%C3%A4sitemalli_gispo.png)
-- [Schema model](docs/database.md)
-- SQL (coming up)
-- Plugin documentation (coming up)
 
 
