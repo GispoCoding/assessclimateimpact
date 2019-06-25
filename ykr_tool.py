@@ -247,6 +247,11 @@ class YKRTool:
         self.mainDialog.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
         self.mainDialog.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
 
+        self.mainDialog.calculateFuture.clicked.connect(self.handleLayerToggle)
+        # Future calculations currently not supported
+        self.mainDialog.calculateFuture.setEnabled(False)
+        self.mainDialog.futureBox.setEnabled(False)
+
     def displaySettingsDialog(self):
         '''Sets up and displays the settings dialog'''
         self.settingsDialog.show()
@@ -355,6 +360,11 @@ class YKRTool:
         else:
             self.mainDialog.futureStopsLayerList.hide()
             self.mainDialog.futureStopsFile.show()
+
+        if self.mainDialog.calculateFuture.isChecked():
+            self.mainDialog.futureBox.setEnabled(True)
+        else:
+            self.mainDialog.futureBox.setEnabled(False)
 
     def createDbConnection(self, connParams):
         '''Creates a database connection and cursor based on connection params'''

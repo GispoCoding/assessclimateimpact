@@ -122,6 +122,9 @@
                 <height>23</height>
                </size>
               </property>
+              <property name="filter">
+               <string>Shape-tiedosto (*.shp)</string>
+              </property>
              </widget>
             </item>
             <item>
@@ -173,6 +176,9 @@
                 <height>23</height>
                </size>
               </property>
+              <property name="filter">
+               <string>Shape-tiedosto (*.shp)</string>
+              </property>
              </widget>
             </item>
             <item>
@@ -210,6 +216,9 @@
                 <height>23</height>
                </size>
               </property>
+              <property name="filter">
+               <string>Shape-tiedosto (*.shp)</string>
+              </property>
              </widget>
             </item>
             <item>
@@ -241,16 +250,25 @@
      </item>
      <item>
       <widget class="QCheckBox" name="calculateFuture">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="text">
         <string>Laske tulevaisuustiedot</string>
        </property>
-       <property name="checked">
+       <property name="checkable">
         <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QgsCollapsibleGroupBox" name="mGroupBox_3">
+      <widget class="QgsCollapsibleGroupBox" name="futureBox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="title">
         <string>Tulevaisuustiedot</string>
        </property>
@@ -308,6 +326,9 @@
                    <width>0</width>
                    <height>23</height>
                   </size>
+                 </property>
+                 <property name="filter">
+                  <string>Shape-tiedosto (*.shp)</string>
                  </property>
                 </widget>
                </item>
@@ -376,6 +397,9 @@
                    <height>23</height>
                   </size>
                  </property>
+                 <property name="filter">
+                  <string>Shape-tiedosto (*.shp)</string>
+                 </property>
                 </widget>
                </item>
                <item>
@@ -412,6 +436,9 @@
                    <width>0</width>
                    <height>23</height>
                   </size>
+                 </property>
+                 <property name="filter">
+                  <string>Shape-tiedosto (*.shp)</string>
                  </property>
                 </widget>
                </item>
