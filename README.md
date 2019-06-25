@@ -8,7 +8,7 @@ Climate Tool is a QGIS plugin for assessing climate impacts in cities. The plugi
 
 The plugin is still in beta-development. Please report issues to mikael@gispo.fi.
 
-Many thanks to the project team!*
+Many thanks to the project team!
 
 ## Licences
 
