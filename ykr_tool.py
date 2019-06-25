@@ -26,12 +26,13 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
-from qgis.core import Qgis, QgsMessageLog, QgsVectorLayer
+from qgis.core import Qgis, QgsMessageLog, QgsVectorLayer, QgsCoordinateReferenceSystem
 from qgis.gui import QgsFileWidget
 
 # Initialize Qt resources from file resources.py
 from .resources import *
 # Import the code for the dialog
+import processing
 import uuid
 import os.path
 import psycopg2
@@ -420,6 +421,41 @@ class YKRTool:
         '''Load data as layers and write to database'''
         if not self.checkLayerValidity(): return False
 
+        params = {
+            'INPUT': '',
+            'SHAPE_ENCODING': '',
+            'GTYPE': 5, # 3 for point, 5 for polygon
+            'A_SRS': QgsCoordinateReferenceSystem('EPSG:3067'),
+            'T_SRS': None,
+            'S_SRS': None,
+            'HOST': self.connParams['host'],
+            'PORT': self.connParams['port'],
+            'USER': self.connParams['user'],
+            'DBNAME': self.connParams['database'],
+            'PASSWORD': self.connParams['password'],
+            'SCHEMA': 'user_input',
+            'TABLE': '',
+            'PK': 'fid',
+            'PRIMARY_KEY': None,
+            'GEOCOLUMN': 'geom',
+            'DIM': 0,
+            'FIELDS': [],
+            'LAUNDER': False,
+            'INDEX': True, # Skip index creation to avoid relation already exists errors
+            'SKIPFAILURES': False,
+            'PROMOTETOMULTI': False,
+            'PRECISION': True
+        }
+
+        for i in [self.ykrBuildingsLayer, self.ykrJobsLayer, self.ykrPopLayer]:
+            params['INPUT'] = i
+            params['TABLE'] = i.name() + '_' + self.sessionParams['uuid']
+            geomType = i.geometryType()
+            if i.geometryType() == 0: # point
+                params['GTYPE'] = 3
+            elif i.geometryType() == 2: # polygon
+                params['GTYPE'] = 5
+            processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
         return True
 
     def checkLayerValidity(self):
