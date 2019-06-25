@@ -1,17 +1,19 @@
-Jobs in urban zoning grid dataset (YKR-työpaikat)
+## Dataset structure requirements (User input, current situation)
+
+### Jobs in urban zoning grid dataset (YKR-työpaikat)
 
 - xyind (unique identifier)
 - kunta / municipality_name
 - Kuntanumero / municipalityid
 - tp_yht / jobs_all
 
-Population (YKR-population)
+#### Population (YKR-population)
 
 - xyind
 - kunta
 - v_yht / total_pop
 
-Buildings (YKR-buildings, with different building type information (area, count, energy type))
+#### Buildings (YKR-buildings, with different building type information (area, count, energy type))
 
 - xyind
 - kunta
@@ -42,3 +44,6 @@ Buildings (YKR-buildings, with different building type information (area, count,
 - teoll_lkm
 - varast_lkm
  
+## Dataset structure requirements (User input, future scenarios)
+
+Coming up
