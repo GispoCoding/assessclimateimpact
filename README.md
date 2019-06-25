@@ -91,8 +91,8 @@ Future scenarios - user adds:
 ## Documentation
 
 - Technical documentation (in Finnish) coming up
-- [Conceptual model](https://github.com/GispoCoding/assesclimateimpact/blob/master/Ilmastoty%C3%B6kalu_k%C3%A4sitemalli_gispo.png)
-- [Schema model](https://github.com/GispoCoding/assesclimateimpact/blob/master/DatabaseModel.md)
+- [Conceptual model](Ilmastoty%C3%B6kalu_k%C3%A4sitemalli_gispo.png)
+- [Schema model](docs/Database.md)
 - SQL (coming up)
 - Plugin documentation (coming up)
 
