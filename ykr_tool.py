@@ -76,6 +76,7 @@ class YKRTool:
 
         self.conn = None
         self.connParams = None
+        self.tableNames = {}
 
         # Check if plugin was started the first time in current QGIS session
         # Must be set in initGui() to survive plugin reloads
@@ -458,6 +459,7 @@ class YKRTool:
                 params['GTYPE'] = 5
 
             processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
+            self.tableNames[layer] = tableName
 
         return True
 
