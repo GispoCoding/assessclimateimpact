@@ -418,6 +418,31 @@ class YKRTool:
             self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
                 ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
 
+        if self.mainDialog.calculateFuture.isChecked():
+            if self.mainDialog.futureAreasLoadLayer.isChecked():
+                self.futureAreasLayer = self.mainDialog.futureAreasLayerList.currentLayer()
+            else:
+                self.futureAreasLayer = QgsVectorLayer(self.mainDialog.\
+                    futureAreasFile.filePath(), "futureareas", "ogr")
+            if self.mainDialog.futureNetworkLoadLayer.isChecked():
+                self.futureNetworkLayer = self.mainDialog.futureNetworkLayerList.currentLayer()
+            else:
+                self.futureNetworkLayer = QgsVectorLayer(self.mainDialog.\
+                    futureNetworkFile.filePath(), "futurenetwork", "ogr")
+            if self.mainDialog.futureStopsLoadLayer.isChecked():
+                self.futureStopsLayer = self.mainDialog.futureStopsLayerList.currentLayer()
+            else:
+                self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
+                    futureStopsFile.filePath(), "futurestops", "ogr")
+
+        self.geomArea = self.mainDialog.geomArea.currentText()
+        self.adminArea = self.mainDialog.adminArea.currentText()
+        self.onlySelectedFeats = self.mainDialog.onlySelectedFeats.isChecked()
+        self.targetYear = self.mainDialog.targetYear.value()
+        self.pitkoScenario = self.mainDialog.pitkoScenario.currentText()
+        self.emissionsAllocation = self.mainDialog.emissionsAllocation.currentText()
+        self.elecEmissionType = self.mainDialog.elecEmissionType.currentText()
+
     def uploadData(self):
         '''Check if layers are valid and write to database'''
         if not self.checkLayerValidity(): return False

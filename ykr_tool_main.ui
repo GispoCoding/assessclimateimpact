@@ -79,7 +79,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="onlySelectedFeats">
           <property name="text">
            <string>Käytä vain valittuja kohteita</string>
           </property>
