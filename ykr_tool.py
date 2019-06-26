@@ -451,6 +451,7 @@ class YKRTool:
         for layer in [self.ykrBuildingsLayer, self.ykrJobsLayer, self.ykrPopLayer]:
             params['INPUT'] = layer
             tableName = self.sessionParams['uuid'] + '_' + layer.name()
+            tableName = tableName.replace('-', '_')
             params['TABLE'] = tableName [:49] # Truncate tablename to avoid hitting postgres 63char cap
 
             if layer.geometryType() == 0: # point
@@ -459,7 +460,7 @@ class YKRTool:
                 params['GTYPE'] = 5
 
             processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
-            self.tableNames[layer] = tableName
+            self.tableNames[layer] = params['TABLE']
 
         return True
 
