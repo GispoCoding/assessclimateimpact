@@ -508,5 +508,9 @@ class YKRTool:
 
     def cleanUp(self):
         '''Delete temporary data and close db connection'''
-        if self.conn:
-            self.conn.close()
+        for table in list(self.tableNames.values()):
+            self.cur.execute('DROP TABLE user_input."' + table + '"')
+        self.conn.commit()
+        self.conn.close()
+        self.iface.messageBar().pushMessage('Valmis', 'Laskentasessio ' +\
+            str(self.sessionParams['uuid']) + ' on valmis', Qgis.Success)
