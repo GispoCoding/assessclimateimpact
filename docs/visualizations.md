@@ -6,11 +6,17 @@ Automatic visualisation is created automatically from QGIS plugin. It uses Natur
 
 [SLD for CO2 emmissions per grid](co2%20emissions)
 
-### Additional SLD-files:
+### Additional SLD-files from grids:
 
 [SLD for population grids](visualizations_SLD/population)
 
 [SLD for top emission source per grid cell](visualizations_SLD/top%20emission%20source%20per%20grid%20cell)
+
+Example with all grid layers:
+
+![Example of SLD for grids](visualizations_SLD/sld_grids.png)
+
+### SLD-file for zoning elements (not part of the plugin, but if you want to join grid information for zoning)
 
 [SLD for top emission source per land use planning zones](visualizations_SLD/top%20emission%20source%20per%20land%20use%20planning%20zones), example:
 
