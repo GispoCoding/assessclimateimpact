@@ -519,13 +519,31 @@ class YKRTool:
         '''Call necessary processing functions in database'''
         vals = {
             'uuid': self.sessionParams['uuid'],
-            'popLayer': self.tableNames[self.ykrPopLayer],
-            'jobLayer': self.tableNames[self.ykrJobsLayer]
+            'areaGeomTable': 'tutkimusalue_uuid',
+            'geomArea': self.geomArea,
+            'popTable': self.tableNames[self.ykrPopLayer],
+            'jobTable': self.tableNames[self.ykrJobsLayer],
+            'buildingTable': self.tableNames[self.ykrBuildingsLayer],
+            'calcYear': self.sessionParams['baseYear'],
+            'baseYear': self.sessionParams['baseYear'],
+            'pitkoScenario': self.pitkoScenario,
+            'emissionsAllocation': self.emissionsAllocation,
+            'elecEmissionType': self.elecEmissionType
         }
 
-        query = '''CREATE TABLE user_input."ykr_{uuid}" AS SELECT * FROM
-        il_preprocess('user_input.tutkimusalue_uuid','{popLayer}','{jobLayer}')'''.format(**vals)
+        queries = []
+        queries.append('''CREATE TABLE user_input."ykr_{uuid}" AS SELECT * FROM
+        il_preprocess('{areaGeomTable}','{popTable}','{jobTable}')'''.format(**vals))
+        queries.append('ALTER TABLE user_input."ykr_{uuid}" ADD PRIMARY KEY (xyind)'.format(**vals))
+        queries.append('CREATE INDEX "ykr_{uuid}_gidx" ON user_input."ykr_{uuid}" USING GIST(geom)'.format(**vals))
+        queries.append('''CREATE TABLE user_output."output_{uuid}" AS
+        SELECT * FROM il_laske_co2paastot('ykr_{uuid}','{buildingTable}',
+        {calcYear},'{pitkoScenario}','{emissionsAllocation}',
+        '{elecEmissionType}','{geomArea}',{baseYear})'''.format(**vals))
+
+        for query in queries:
         self.cur.execute(query)
+            self.conn.commit()
 
         query = 'ALTER TABLE user_input."ykr_{uuid}" ADD PRIMARY KEY (xyind)'.format(**vals)
         self.cur.execute(query)
