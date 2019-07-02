@@ -417,7 +417,7 @@ class YKRTool:
                     futureStopsFile.filePath(), "futurestops", "ogr")
             self.targetYear = self.mainDialog.targetYear.value()
         else:
-            self.targetYear = 'NULL'
+            self.targetYear = None
 
         self.geomArea = self.mainDialog.geomArea.currentText()
         self.adminArea = self.mainDialog.adminArea.currentText()
@@ -548,22 +548,19 @@ class YKRTool:
 
     def writeSessionInfo(self):
         '''Writes session info to user_output.sessions table'''
-        vals = {
-            'uuid': self.sessionParams['uuid'],
-            'user': self.sessionParams['user'],
-            'geomArea': self.geomArea,
-            'baseYear': self.sessionParams['baseYear'],
-            'targetYear': self.targetYear,
-            'pitkoScenario': self.pitkoScenario,
-            'emissionsAllocation': self.emissionsAllocation,
-            'elecEmissionType': self.elecEmissionType
-        }
+        uuid = self.sessionParams['uuid']
+        user = self.sessionParams['user']
+        geomArea = self.geomArea
+        startTime = self.sessionParams['startTime']
+        baseYear = self.sessionParams['baseYear']
+        targetYear = self.targetYear
+        pitkoScenario = self.pitkoScenario
+        emissionsAllocation = self.emissionsAllocation
+        elecEmissionType = self.elecEmissionType
 
-        query = '''INSERT INTO user_output.sessions VALUES ('{uuid}','{user}',
-        '{startTime}','{baseYear}','{targetYear}','{pitkoScenario}','{emissionsAllocation}',
-        '{elecEmissionType}','{geomArea}')'''.format(**vals)
-
-        self.cur.execute(query)
+        self.cur.execute('''INSERT INTO user_output.sessions VALUES (%s, %s, %s, %s, %s,
+        %s, %s, %s, %s)''', (uuid, user, startTime, baseYear, targetYear,\
+            pitkoScenario, emissionsAllocation, elecEmissionType, geomArea))
         self.conn.commit()
 
     def cleanUp(self):
