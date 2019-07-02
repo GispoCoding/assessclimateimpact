@@ -434,11 +434,13 @@ class YKRTool:
             else:
                 self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
                     futureStopsFile.filePath(), "futurestops", "ogr")
+            self.targetYear = self.mainDialog.targetYear.value()
+        else:
+            self.targetYear = 'NULL'
 
         self.geomArea = self.mainDialog.geomArea.currentText()
         self.adminArea = self.mainDialog.adminArea.currentText()
         self.onlySelectedFeats = self.mainDialog.onlySelectedFeats.isChecked()
-        self.targetYear = self.mainDialog.targetYear.value()
         self.pitkoScenario = self.mainDialog.pitkoScenario.currentText()
         self.emissionsAllocation = self.mainDialog.emissionsAllocation.currentText()
         self.elecEmissionType = self.mainDialog.elecEmissionType.currentText()
