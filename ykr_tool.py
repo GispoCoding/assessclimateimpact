@@ -26,7 +26,7 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
-from qgis.core import Qgis, QgsMessageLog, QgsVectorLayer, QgsCoordinateReferenceSystem
+from qgis.core import Qgis, QgsMessageLog, QgsVectorLayer, QgsCoordinateReferenceSystem, QgsApplication
 from qgis.gui import QgsFileWidget
 
 # Initialize Qt resources from file resources.py
@@ -527,26 +527,20 @@ class YKRTool:
 
         return queries
 
-    def executeQueries(self, queries):
-        '''Executes a list of queries'''
-        if len(queries) == 0:
-            return
-
-        # Run query
-        # self.QueryRunner.runQuery(queries[0])
-
-        self.executeQueries(queries[1:])
-
-    def joinGeometryToResult(self):
-        '''Joins geometry from YKR table to resylt output'''
-        queries = []
-        queries.append('ALTER TABLE user_output."output_{uuid}" ADD COLUMN geom geometry(\'MultiPolygon\', 3067)')
-        queries.append('''UPDATE user_output."output_{uuid}" results
-        SET geom = ykr.geom FROM user_input."ykr_{uuid}" ykr WHERE ykr.xyind = results.xyind''')
-
-        for query in queries:
-            self.cur.execute(query)
-            self.conn.commit()
+    def postCalculation(self):
+        '''Called after QueryTask finishes. Writes session info to sessions table and closes session'''
+        try:
+            self.writeSessionInfo()
+            self.iface.messageBar().pushMessage('Valmis', 'Laskentasessio ' +\
+                str(self.sessionParams['uuid']) + ' on valmis', Qgis.Success, duration=0)
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe kirjoittaessa session tietoja:',\
+                str(e), Qgis.Warning, duration=0)
+            self.conn.rollback()
+        try:
+            self.cleanUpSession()
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe session sulkemisessa:', str(e), Qgis.Warning, duration=0)
 
     def writeSessionInfo(self):
         '''Writes session info to user_output.sessions table'''
