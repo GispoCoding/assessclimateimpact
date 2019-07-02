@@ -563,11 +563,9 @@ class YKRTool:
             pitkoScenario, emissionsAllocation, elecEmissionType, geomArea))
         self.conn.commit()
 
-    def cleanUp(self):
+    def cleanUpSession(self):
         '''Delete temporary data and close db connection'''
         for table in list(self.tableNames.values()):
-            self.cur.execute('DROP TABLE user_input."' + table + '"')
+            self.cur.execute('DROP TABLE IF EXISTS user_input."' + table + '"')
         self.conn.commit()
         self.conn.close()
-        self.iface.messageBar().pushMessage('Valmis', 'Laskentasessio ' +\
-            str(self.sessionParams['uuid']) + ' on valmis', Qgis.Success)
