@@ -38,8 +38,7 @@ import os.path
 import psycopg2
 import datetime, getpass
 from configparser import ConfigParser
-
-
+from .createdbconnection import createDbConnection
 
 class YKRTool:
     """QGIS Plugin Implementation."""
@@ -368,24 +367,6 @@ class YKRTool:
             self.mainDialog.futureBox.setEnabled(True)
         else:
             self.mainDialog.futureBox.setEnabled(False)
-
-    def createDbConnection(self, connParams):
-        '''Creates a database connection and cursor based on connection params'''
-        QgsMessageLog.logMessage(str(self.connParams), "YKRTool", Qgis.Info)
-        if '' in list(connParams.values()):
-            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
-                'Täytä puuttuvat yhteystiedot', Qgis.Critical)
-            return False
-        try:
-            self.conn = psycopg2.connect(host=connParams['host'],\
-                port=connParams['port'], database=connParams['database'],\
-                user=connParams['user'], password=connParams['password'],\
-                connect_timeout=3)
-            self.cur = self.conn.cursor()
-        except Exception as e:
-            self.iface.messageBar().pushMessage('Virhe yhdistäessä tietokantaan',\
-                str(e), Qgis.Critical, duration=10)
-            return False
 
     def generateSessionParameters(self):
         '''Get necessary values for processing session'''
