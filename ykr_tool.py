@@ -548,8 +548,25 @@ class YKRTool:
         query = 'ALTER TABLE user_input."ykr_{uuid}" ADD PRIMARY KEY (xyind)'.format(**vals)
         self.cur.execute(query)
 
-        query = 'CREATE INDEX "ykr_{uuid}_gidx" ON user_input."ykr_{uuid}" USING GIST(geom)'.format(**vals)
+    def writeSessionInfo(self):
+        '''Writes session info to user_output.sessions table'''
+        vals = {
+            'uuid': self.sessionParams['uuid'],
+            'user': self.sessionParams['user'],
+            'geomArea': self.geomArea,
+            'baseYear': self.sessionParams['baseYear'],
+            'targetYear': self.targetYear,
+            'pitkoScenario': self.pitkoScenario,
+            'emissionsAllocation': self.emissionsAllocation,
+            'elecEmissionType': self.elecEmissionType
+        }
+
+        query = '''INSERT INTO user_output.sessions VALUES ('{uuid}','{user}',
+        '{startTime}','{baseYear}','{targetYear}','{pitkoScenario}','{emissionsAllocation}',
+        '{elecEmissionType}','{geomArea}')'''.format(**vals)
+
         self.cur.execute(query)
+        self.conn.commit()
 
     def cleanUp(self):
         '''Delete temporary data and close db connection'''
