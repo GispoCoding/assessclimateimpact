@@ -38,6 +38,7 @@ import os.path
 import psycopg2
 import datetime, getpass
 from configparser import ConfigParser
+from .ykr_tool_tasks import QueryTask
 from .createdbconnection import createDbConnection
 
 class YKRTool:
@@ -212,18 +213,29 @@ class YKRTool:
         result = self.mainDialog.exec_()
         # See if OK was pressed
         if result:
-            if not self.connParams:
-                configFilePath = QSettings().value("/YKRTool/configFilePath",\
-                    "", type=str)
-                self.connParams = self.parseConfigFile(configFilePath)
+            try:
+                if not self.connParams:
+                    configFilePath = QSettings().value("/YKRTool/configFilePath",\
+                        "", type=str)
+                    self.connParams = self.parseConfigFile(configFilePath)
+                self.conn = createDbConnection(self.connParams)
+                self.cur = self.conn.cursor()
+                self.sessionParams = self.generateSessionParameters()
+                self.readProcessingInput()
+                self.uploadData()
 
-            self.createDbConnection(self.connParams)
+                queryTask = QueryTask('Suoritetaan laskentaa', self.connParams, self.getCalculationQueries())
+                queryTask.taskCompleted.connect(self.postCalculation)
+                QgsApplication.taskManager().addTask(queryTask)
+                self.iface.messageBar().pushMessage('Lasketaan', 'Laskenta käynnissä', Qgis.Info, duration=15)
 
-            self.sessionParams = self.generateSessionParameters()
-            self.readProcessingInput()
-            if not self.uploadData(): return
-            self.runCalculations()
-            self.cleanUp()
+            except Exception as e:
+                self.iface.messageBar().pushMessage('Virhe', str(e), Qgis.Critical, duration=0)
+                try:
+                    self.cleanUpSession()
+                except Exception as e:
+                    self.iface.messageBar().pushMessage('Virhe', str(e), Qgis.Warning, duration=0)
+                return False
 
     def setupMainDialog(self):
         '''Sets up the main dialog'''
