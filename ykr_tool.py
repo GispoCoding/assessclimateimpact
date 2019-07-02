@@ -554,7 +554,17 @@ class YKRTool:
         # self.QueryRunner.runQuery(queries[0])
 
         self.executeQueries(queries[1:])
-        self.cur.execute(query)
+
+    def joinGeometryToResult(self):
+        '''Joins geometry from YKR table to resylt output'''
+        queries = []
+        queries.append('ALTER TABLE user_output."output_{uuid}" ADD COLUMN geom geometry(\'MultiPolygon\', 3067)')
+        queries.append('''UPDATE user_output."output_{uuid}" results
+        SET geom = ykr.geom FROM user_input."ykr_{uuid}" ykr WHERE ykr.xyind = results.xyind''')
+
+        for query in queries:
+            self.cur.execute(query)
+            self.conn.commit()
 
     def writeSessionInfo(self):
         '''Writes session info to user_output.sessions table'''
