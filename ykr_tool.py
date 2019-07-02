@@ -495,7 +495,7 @@ class YKRTool:
         except Exception as e:
             raise e
 
-    def runCalculations(self):
+    def getCalculationQueries(self):
         '''Call necessary processing functions in database'''
         vals = {
             'uuid': self.sessionParams['uuid'],
@@ -520,10 +520,12 @@ class YKRTool:
         SELECT * FROM il_laske_co2paastot('ykr_{uuid}','{buildingTable}',
         {calcYear},'{pitkoScenario}','{emissionsAllocation}',
         '{elecEmissionType}','{geomArea}',{baseYear})'''.format(**vals))
+        queries.append('''ALTER TABLE user_output."output_{uuid}"
+        ADD COLUMN geom geometry('MultiPolygon', 3067)'''.format(**vals))
+        queries.append('''UPDATE user_output."output_{uuid}" results
+        SET geom = ykr.geom FROM user_input."ykr_{uuid}" ykr WHERE ykr.xyind = results.xyind'''.format(**vals))
 
-        for query in queries:
-            self.cur.execute(query)
-            self.conn.commit()
+        return queries
 
     def executeQueries(self, queries):
         '''Executes a list of queries'''
