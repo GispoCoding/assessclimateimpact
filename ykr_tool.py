@@ -542,10 +542,18 @@ class YKRTool:
         '{elecEmissionType}','{geomArea}',{baseYear})'''.format(**vals))
 
         for query in queries:
-        self.cur.execute(query)
+            self.cur.execute(query)
             self.conn.commit()
 
-        query = 'ALTER TABLE user_input."ykr_{uuid}" ADD PRIMARY KEY (xyind)'.format(**vals)
+    def executeQueries(self, queries):
+        '''Executes a list of queries'''
+        if len(queries) == 0:
+            return
+
+        # Run query
+        # self.QueryRunner.runQuery(queries[0])
+
+        self.executeQueries(queries[1:])
         self.cur.execute(query)
 
     def writeSessionInfo(self):
