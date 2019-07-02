@@ -428,7 +428,7 @@ class YKRTool:
 
     def uploadData(self):
         '''Check if layers are valid and write to database'''
-        if not self.checkLayerValidity(): return False
+        self.checkLayerValidity()
 
         params = {
             'INPUT': '',
@@ -493,8 +493,7 @@ class YKRTool:
                         raise Exception("Virhe ladattaessa joukkoliikennepysäkkitietoja")
             return True
         except Exception as e:
-            self.iface.messageBar().pushMessage('Virhe ladattaessa tasoja', str(e), Qgis.Critical)
-            return False
+            raise e
 
     def runCalculations(self):
         '''Call necessary processing functions in database'''
