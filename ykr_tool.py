@@ -26,7 +26,8 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
-from qgis.core import Qgis, QgsMessageLog, QgsVectorLayer, QgsCoordinateReferenceSystem, QgsApplication
+from qgis.core import (Qgis, QgsMessageLog, QgsVectorLayer,
+QgsCoordinateReferenceSystem, QgsApplication, QgsDataSourceUri, QgsProject)
 from qgis.gui import QgsFileWidget
 
 # Initialize Qt resources from file resources.py
@@ -550,6 +551,10 @@ class YKRTool:
                 str(e), Qgis.Warning, duration=0)
             self.conn.rollback()
         try:
+            self.addResultAsLayer()
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe lisättäessä tulostasoa:', str(e), Qgis.Warning, duration=0)
+        try:
             self.cleanUpSession()
         except Exception as e:
             self.iface.messageBar().pushMessage('Virhe session sulkemisessa:', str(e), Qgis.Warning, duration=0)
@@ -570,6 +575,14 @@ class YKRTool:
         %s, %s, %s, %s)''', (uuid, user, startTime, baseYear, targetYear,\
             pitkoScenario, emissionsAllocation, elecEmissionType, geomArea))
         self.conn.commit()
+
+    def addResultAsLayer(self):
+        uri = QgsDataSourceUri()
+        uri.setConnection(self.connParams['host'], self.connParams['port'],\
+            self.connParams['database'], self.connParams['user'], self.connParams['password'])
+        uri.setDataSource('user_output', 'output_' + self.sessionParams['uuid'], 'geom')
+        layer = QgsVectorLayer(uri.uri(False), 'Output ' + self.sessionParams['uuid'], 'postgres')
+        QgsProject.instance().addMapLayer(layer)
 
     def cleanUpSession(self):
         '''Delete temporary data and close db connection'''
