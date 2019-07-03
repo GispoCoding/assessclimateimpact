@@ -85,6 +85,7 @@ class YKRTool:
 
         self.mainDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_main.ui'))
         self.settingsDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_db_settings.ui'))
+        self.infoDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_info.ui'))
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -240,32 +241,36 @@ class YKRTool:
 
     def setupMainDialog(self):
         '''Sets up the main dialog'''
-        self.mainDialog.geomArea.addItem("Tampere")
-        self.mainDialog.adminArea.addItem("Pirkanmaa")
-        self.mainDialog.pitkoScenario.addItems(["wem", "eu80", "kasvu", "muutos", "saasto", "static"])
-        self.mainDialog.emissionsAllocation.addItems(["hjm", "em"])
-        self.mainDialog.elecEmissionType.addItems(["hankinta", "tuotanto"])
+        md = self.mainDialog
+        md.geomArea.addItem("Tampere")
+        md.adminArea.addItem("Pirkanmaa")
+        md.pitkoScenario.addItems(["wem", "eu80", "kasvu", "muutos", "saasto", "static"])
+        md.emissionsAllocation.addItems(["hjm", "em"])
+        md.elecEmissionType.addItems(["hankinta", "tuotanto"])
 
-        self.mainDialog.settingsButton.clicked.connect(self.displaySettingsDialog)
+        md.onlySelectedFeats.setEnabled(False)
 
-        self.mainDialog.ykrPopLayerList.hide()
-        self.mainDialog.ykrJobsLayerList.hide()
-        self.mainDialog.ykrBuildingsLayerList.hide()
-        self.mainDialog.futureAreasLayerList.hide()
-        self.mainDialog.futureNetworkLayerList.hide()
-        self.mainDialog.futureStopsLayerList.hide()
+        md.settingsButton.clicked.connect(self.displaySettingsDialog)
+        md.infoButton.clicked.connect(lambda: self.infoDialog.show())
 
-        self.mainDialog.ykrPopLoadLayer.clicked.connect(self.handleLayerToggle)
-        self.mainDialog.ykrJobsLoadLayer.clicked.connect(self.handleLayerToggle)
-        self.mainDialog.ykrBuildingsLoadLayer.clicked.connect(self.handleLayerToggle)
-        self.mainDialog.futureAreasLoadLayer.clicked.connect(self.handleLayerToggle)
-        self.mainDialog.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
-        self.mainDialog.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
+        md.ykrPopLayerList.hide()
+        md.ykrJobsLayerList.hide()
+        md.ykrBuildingsLayerList.hide()
+        md.futureAreasLayerList.hide()
+        md.futureNetworkLayerList.hide()
+        md.futureStopsLayerList.hide()
 
-        self.mainDialog.calculateFuture.clicked.connect(self.handleLayerToggle)
+        md.ykrPopLoadLayer.clicked.connect(self.handleLayerToggle)
+        md.ykrJobsLoadLayer.clicked.connect(self.handleLayerToggle)
+        md.ykrBuildingsLoadLayer.clicked.connect(self.handleLayerToggle)
+        md.futureAreasLoadLayer.clicked.connect(self.handleLayerToggle)
+        md.futureNetworkLoadLayer.clicked.connect(self.handleLayerToggle)
+        md.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
+
+        md.calculateFuture.clicked.connect(self.handleLayerToggle)
         # Future calculations currently not supported
-        self.mainDialog.calculateFuture.setEnabled(False)
-        self.mainDialog.futureBox.setEnabled(False)
+        md.calculateFuture.setEnabled(False)
+        md.futureBox.setEnabled(False)
 
     def displaySettingsDialog(self):
         '''Sets up and displays the settings dialog'''

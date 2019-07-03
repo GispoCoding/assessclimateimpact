@@ -46,7 +46,7 @@ PY_FILES = \
 	__init__.py \
 	ykr_tool.py ykr_tool_dialog.py ykr_tool_tasks.py createdbconnection.py
 
-UI_FILES = ykr_tool_dialog_base.ui ykr_tool_main.ui ykr_tool_db_settings.ui
+UI_FILES = ykr_tool_dialog_base.ui ykr_tool_main.ui ykr_tool_db_settings.ui ykr_tool_info.ui
 
 EXTRAS = metadata.txt icon.png
 
