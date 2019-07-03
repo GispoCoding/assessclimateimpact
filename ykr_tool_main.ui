@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>468</width>
-    <height>720</height>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Ilmastotyökalu</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_8">
    <item>
@@ -515,12 +515,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QgsCollapsibleGroupBox" name="mGroupBox">
+      <widget class="QgsCollapsibleGroupBox" name="advancedBox">
        <property name="title">
         <string>Advanced (valinnainen)</string>
        </property>
        <property name="collapsed">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="saveCollapsedState">
         <bool>false</bool>
