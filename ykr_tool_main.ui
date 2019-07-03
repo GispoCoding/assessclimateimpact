@@ -24,6 +24,9 @@
          <height>0</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Rajaa aluetta, jolla laskenta suoritetaan</string>
+       </property>
        <property name="title">
         <string>Tarkastelualueen rajaus</string>
        </property>
@@ -51,6 +54,9 @@
               <height>23</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>Aseta laskennan aluerajaus. Oletus: Tampere</string>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -74,6 +80,9 @@
               <height>23</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>Aseta hallinnollinen alue. Oletus: Pirkanmaa</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -89,12 +98,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QgsCollapsibleGroupBox" name="mGroupBox_2">
+      <widget class="QgsCollapsibleGroupBox" name="currentScenarioBox">
        <property name="minimumSize">
         <size>
          <width>0</width>
          <height>0</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Syötä nykytilan laskennassa käytetyt lähtötiedot</string>
        </property>
        <property name="title">
         <string>Nykytilanne (pakollinen)</string>
@@ -122,6 +134,9 @@
                 <height>23</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Valitse Shape-tiedosto joka sisältää YKR-väestötiedot</string>
+              </property>
               <property name="filter">
                <string>Shape-tiedosto (*.shp)</string>
               </property>
@@ -138,10 +153,16 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Valitse karttataso joka sisältää YKR-väestötiedot</string>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="ykrPopLoadLayer">
+              <property name="toolTip">
+               <string>Aineiston voi ladata joko Shape-tiedostosta tai QGIS-karttatasosta</string>
+              </property>
               <property name="text">
                <string>Lataa tasosta</string>
               </property>
@@ -176,6 +197,9 @@
                 <height>23</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Valitse Shape-tiedosto joka sisältää YKR-työpaikkatiedot</string>
+              </property>
               <property name="filter">
                <string>Shape-tiedosto (*.shp)</string>
               </property>
@@ -192,10 +216,16 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Valitse karttataso joka sisältää YKR-työpaikkatiedot</string>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="ykrJobsLoadLayer">
+              <property name="toolTip">
+               <string>Aineiston voi ladata joko Shape-tiedostosta tai QGIS-karttatasosta</string>
+              </property>
               <property name="text">
                <string>Lataa tasosta</string>
               </property>
@@ -216,6 +246,9 @@
                 <height>23</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Valitse Shape-tiedosto joka sisältää YKR-rakennustiedot</string>
+              </property>
               <property name="filter">
                <string>Shape-tiedosto (*.shp)</string>
               </property>
@@ -232,10 +265,16 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="toolTip">
+               <string>Valitse karttataso joka sisältää YKR-rakennustiedot</string>
+              </property>
              </widget>
             </item>
             <item>
              <widget class="QCheckBox" name="ykrBuildingsLoadLayer">
+              <property name="toolTip">
+               <string>Aineiston voi ladata joko Shape-tiedostosta tai QGIS-karttatasosta</string>
+              </property>
               <property name="text">
                <string>Lataa tasosta</string>
               </property>
@@ -252,6 +291,9 @@
       <widget class="QCheckBox" name="calculateFuture">
        <property name="enabled">
         <bool>true</bool>
+       </property>
+       <property name="toolTip">
+        <string>Laske tulevaisuusskenaario</string>
        </property>
        <property name="text">
         <string>Laske tulevaisuustiedot</string>
@@ -508,6 +550,9 @@
               <height>20</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>Valitse PITKO-skenaario. Oletus: wem</string>
+            </property>
            </widget>
           </item>
           <item row="1" column="1">
@@ -518,6 +563,9 @@
               <height>20</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>Valitse päästöjen allokointimenetelmä. Oletus: hjm</string>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
@@ -527,6 +575,9 @@
               <width>180</width>
               <height>20</height>
              </size>
+            </property>
+            <property name="toolTip">
+             <string>Valitse sähköpäästölaji, Oletus: hankinta</string>
             </property>
            </widget>
           </item>
@@ -565,7 +616,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="infoButton">
          <property name="text">
           <string>Info...</string>
          </property>
