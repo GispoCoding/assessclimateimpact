@@ -10,5 +10,5 @@ def createDbConnection(connParams):
             user=connParams['user'], password=connParams['password'],\
             connect_timeout=3)
         return conn
-    except psycopg2.Error as e:
+    except Exception as e:
         raise e

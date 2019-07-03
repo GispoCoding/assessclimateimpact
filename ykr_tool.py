@@ -226,8 +226,9 @@ class YKRTool:
                 self.readProcessingInput()
                 self.uploadData()
 
-                queryTask = QueryTask('Suoritetaan laskentaa', self.connParams, self.getCalculationQueries())
+                queryTask = QueryTask(self.connParams, self.getCalculationQueries())
                 queryTask.taskCompleted.connect(self.postCalculation)
+                queryTask.taskTerminated.connect(self.postError)
                 QgsApplication.taskManager().addTask(queryTask)
                 self.iface.messageBar().pushMessage('Lasketaan', 'Laskenta käynnissä', Qgis.Info, duration=15)
 
@@ -595,3 +596,10 @@ class YKRTool:
             self.cur.execute('DROP TABLE IF EXISTS user_input."' + table + '"')
         self.conn.commit()
         self.conn.close()
+
+    def postError(self):
+        '''Called after querytask is terminated. Closes session'''
+        self.cur.execute('DROP TABLE IF EXISTS user_input."ykr_{}"'.format(self.sessionParams['uuid']))
+        self.cleanUpSession()
+        self.iface.messageBar().pushMessage('Virhe laskentafunktiota suorittaessa',\
+            'Katso lisätiedot virhelokista', Qgis.Critical, duration=0)
