@@ -411,6 +411,7 @@ class YKRTool:
 
     def readProcessingInput(self):
         '''Read user input from main dialog'''
+        self.inputLayers = []
         if self.mainDialog.ykrPopLoadLayer.isChecked():
             self.ykrPopLayer = self.mainDialog.ykrPopLayerList.currentLayer()
         else:
@@ -426,6 +427,7 @@ class YKRTool:
         else:
             self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
                 ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
+        self.inputLayers.extend([self.ykrPopLayer, self.ykrJobsLayer, self.ykrBuildingsLayer])
 
         if not self.mainDialog.calculateFuture.isChecked():
             self.calculateFuture = False
@@ -446,6 +448,9 @@ class YKRTool:
                 self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
                     futureStopsFile.filePath(), "futurestops", "ogr")
             self.targetYear = self.mainDialog.targetYear.value()
+
+            self.inputLayers.extend([self.futureAreasLayer,
+            self.futureNetworkLayer, self.futureStopsLayer])
             self.calculateFuture = True
 
         self.geomArea = self.mainDialog.geomArea.currentText()
@@ -485,7 +490,7 @@ class YKRTool:
             'PRECISION': True
         }
 
-        for layer in [self.ykrBuildingsLayer, self.ykrJobsLayer, self.ykrPopLayer]:
+        for layer in self.inputLayers:
             params['INPUT'] = layer
             tableName = self.sessionParams['uuid'] + '_' + layer.name()
             tableName = tableName.replace('-', '_')
