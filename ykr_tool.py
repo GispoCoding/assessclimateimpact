@@ -87,6 +87,14 @@ class YKRTool:
         self.settingsDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_db_settings.ui'))
         self.infoDialog = uic.loadUi(os.path.join(self.plugin_dir, 'ykr_tool_info.ui'))
 
+        self.targetYear = None
+        self.ykrPopLayer = None
+        self.ykrBuildingsLayer = None
+        self.ykrJobsLayer = None
+        self.futureAreasLayer = None
+        self.futureNetworkLayer = None
+        self.futureStopsLayer = None
+
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
@@ -226,7 +234,8 @@ class YKRTool:
                 self.readProcessingInput()
                 self.uploadData()
 
-                queryTask = QueryTask(self.connParams, self.getCalculationQueries())
+                queries = self.getCalculationQueries()
+                queryTask = QueryTask(self.connParams, queries)
                 queryTask.taskCompleted.connect(self.postCalculation)
                 queryTask.taskTerminated.connect(self.postError)
                 QgsApplication.taskManager().addTask(queryTask)
@@ -418,7 +427,9 @@ class YKRTool:
             self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
                 ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
 
-        if self.mainDialog.calculateFuture.isChecked():
+        if not self.mainDialog.calculateFuture.isChecked():
+            self.calculateFuture = False
+        else:
             if self.mainDialog.futureAreasLoadLayer.isChecked():
                 self.futureAreasLayer = self.mainDialog.futureAreasLayerList.currentLayer()
             else:
@@ -435,8 +446,7 @@ class YKRTool:
                 self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
                     futureStopsFile.filePath(), "futurestops", "ogr")
             self.targetYear = self.mainDialog.targetYear.value()
-        else:
-            self.targetYear = None
+            self.calculateFuture = True
 
         self.geomArea = self.mainDialog.geomArea.currentText()
         self.adminArea = self.mainDialog.adminArea.currentText()
@@ -501,7 +511,7 @@ class YKRTool:
             if not self.ykrJobsLayer.isValid():
                 print(abcdeft)
                 raise Exception("Virhe ladattaessa nykytilanteen YKR-työpaikkatasoa")
-            if self.mainDialog.calculateFuture.isChecked():
+            if self.calculateFuture:
                 if not self.futureAreasLayer.isValid():
                     raise Exception("Virhe ladattaessa tulevaisuuden aluevaraustietoja")
                 if self.futureNetworkLayer:
@@ -515,10 +525,10 @@ class YKRTool:
             raise e
 
     def getCalculationQueries(self):
-        '''Call necessary processing functions in database'''
+        '''Generate queries to call processing functions in database'''
         vals = {
             'uuid': self.sessionParams['uuid'],
-            'areaGeomTable': 'tutkimusalue_uuid',
+            'aoi': 'tutkimusalue_uuid',
             'geomArea': self.geomArea,
             'popTable': self.tableNames[self.ykrPopLayer],
             'jobTable': self.tableNames[self.ykrJobsLayer],
@@ -529,16 +539,21 @@ class YKRTool:
             'emissionsAllocation': self.emissionsAllocation,
             'elecEmissionType': self.elecEmissionType
         }
-
         queries = []
-        queries.append('''CREATE TABLE user_output."output_{uuid}" AS
-        SELECT * FROM il_laske_co2paastot('ykr_{uuid}','{buildingTable}',
-        {calcYear},'{pitkoScenario}','{emissionsAllocation}',
-        '{elecEmissionType}','{geomArea}',{baseYear})'''.format(**vals))
-        queries.append('''ALTER TABLE user_output."output_{uuid}"
-        ADD COLUMN geom geometry('MultiPolygon', 3067)'''.format(**vals))
-        queries.append('''UPDATE user_output."output_{uuid}" results
-        SET geom = ykr.geom FROM user_input."ykr_{uuid}" ykr WHERE ykr.xyind = results.xyind'''.format(**vals))
+        if not self.calculateFuture:
+            queries.append('''CREATE TABLE user_output."output_{uuid}" AS
+            SELECT * FROM il_calculate_emissions('{popTable}', '{jobTable}',
+            '{buildingTable}', '{aoi}', '{calcYear}', '{pitkoScenario}',
+            '{emissionsAllocation}', '{elecEmissionType}', '{geomArea}',
+            '{baseYear}')'''.format(**vals))
+        else:
+            fVals = {
+                'fAreas': self.tableNames[self.futureAreasLayer],
+                'fNetwork': self.tableNames[self.futureNetworkLayer],
+                'fStops': self.tableNames[self.futureStopsLayer]
+            }
+            vals.update(fVals)
+            pass
 
         return queries
 
