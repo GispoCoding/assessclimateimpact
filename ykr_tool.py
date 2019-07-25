@@ -512,15 +512,19 @@ class YKRTool:
             'PRECISION': True
         }
         for layer in self.inputLayers:
+            if not layer:
+                self.tableNames[layer] = False
+                continue
             params['INPUT'] = layer
             tableName = self.sessionParams['uuid'] + '_' + layer.name()
             tableName = tableName.replace('-', '_')
-            params['TABLE'] = tableName [:49] # Truncate tablename to avoid hitting postgres 63char cap
+            params['TABLE'] = tableName [:49] # truncate tablename to under 63c
             if layer.geometryType() == 0: # point
                 params['GTYPE'] = 3
             elif layer.geometryType() == 2: # polygon
                 params['GTYPE'] = 5
-            processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
+            processing.run("gdal:importvectorintopostgisdatabasenewconnection",
+                params)
             self.tableNames[layer] = params['TABLE']
         return True
 
