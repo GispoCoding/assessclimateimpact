@@ -260,6 +260,7 @@ class YKRTool:
         md.elecEmissionType.addItems(["hankinta", "tuotanto"])
 
         md.onlySelectedFeats.setEnabled(False)
+        md.futureBox.setEnabled(False)
 
         md.settingsButton.clicked.connect(self.displaySettingsDialog)
         md.infoButton.clicked.connect(lambda: self.infoDialog.show())
@@ -279,9 +280,6 @@ class YKRTool:
         md.futureStopsLoadLayer.clicked.connect(self.handleLayerToggle)
 
         md.calculateFuture.clicked.connect(self.handleLayerToggle)
-        # Future calculations currently not supported
-        md.calculateFuture.setEnabled(False)
-        md.futureBox.setEnabled(False)
 
     def displaySettingsDialog(self):
         '''Sets up and displays the settings dialog'''
