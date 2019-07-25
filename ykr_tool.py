@@ -461,6 +461,28 @@ class YKRTool:
         self.emissionsAllocation = self.mainDialog.emissionsAllocation.currentText()
         self.elecEmissionType = self.mainDialog.elecEmissionType.currentText()
 
+    def checkLayerValidity(self):
+        '''Checks that necessary layers are valid and raise an exception if needed'''
+        if not self.ykrPopLayer.isValid():
+            raise Exception("Virhe ladattaessa nykytilanteen YKR-väestötasoa")
+        if not self.ykrBuildingsLayer.isValid():
+            raise Exception("Virhe ladattaessa nykytilanteen YKR-rakennustasoa")
+        if not self.ykrJobsLayer.isValid():
+            raise Exception("Virhe ladattaessa nykytilanteen YKR-työpaikkatasoa")
+        if self.calculateFuture:
+            self.checkFutureLayerValidity()
+
+    def checkFutureLayerValidity(self):
+        '''Checks if future calculation input layers are valid'''
+        if not self.futureAreasLayer.isValid():
+            raise Exception("Virhe ladattaessa tulevaisuuden aluevaraustietoja")
+        if self.futureNetworkLayer:
+            if not self.futureNetworkLayer.isValid():
+                raise Exception("Virhe ladattaessa keskusverkkotietoja")
+        if self.futureStopsLayer:
+            if not self.futureStopsLayer.isValid():
+                raise Exception("Virhe ladattaessa joukkoliikennepysäkkitietoja")
+
     def uploadData(self):
         '''Write layers to database'''
         params = {
@@ -500,29 +522,6 @@ class YKRTool:
             processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
             self.tableNames[layer] = params['TABLE']
         return True
-
-    def checkLayerValidity(self):
-        '''Checks that the layers are valid and raises an exception if necessary'''
-        try:
-            if not self.ykrPopLayer.isValid():
-                raise Exception("Virhe ladattaessa nykytilanteen YKR-väestötasoa")
-            if not self.ykrBuildingsLayer.isValid():
-                raise Exception("Virhe ladattaessa nykytilanteen YKR-rakennustasoa")
-            if not self.ykrJobsLayer.isValid():
-                print(abcdeft)
-                raise Exception("Virhe ladattaessa nykytilanteen YKR-työpaikkatasoa")
-            if self.calculateFuture:
-                if not self.futureAreasLayer.isValid():
-                    raise Exception("Virhe ladattaessa tulevaisuuden aluevaraustietoja")
-                if self.futureNetworkLayer:
-                    if not self.futureNetworkLayer.isValid():
-                        raise Exception("Virhe ladattaessa keskusverkkotietoja")
-                if self.futureStopsLayer:
-                    if not self.futureStopsLayer.isValid():
-                        raise Exception("Virhe ladattaessa joukkoliikennepysäkkitietoja")
-            return True
-        except Exception as e:
-            raise e
 
     def getCalculationQueries(self):
         '''Generate queries to call processing functions in database'''
