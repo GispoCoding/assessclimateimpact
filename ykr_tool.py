@@ -410,55 +410,64 @@ class YKRTool:
 
     def readProcessingInput(self):
         '''Read user input from main dialog'''
+        md = self.mainDialog
         self.inputLayers = []
-        if self.mainDialog.ykrPopLoadLayer.isChecked():
-            self.ykrPopLayer = self.mainDialog.ykrPopLayerList.currentLayer()
+        if md.ykrPopLoadLayer.isChecked():
+            self.ykrPopLayer = md.ykrPopLayerList.currentLayer()
         else:
-            self.ykrPopLayer = QgsVectorLayer(self.mainDialog.\
-                ykrPopFile.filePath(), "ykr_vaesto_2017", "ogr")
-        if self.mainDialog.ykrBuildingsLoadLayer.isChecked():
-            self.ykrBuildingsLayer = self.mainDialog.ykrBuildingsLayerList.currentLayer()
+            self.ykrPopLayer = QgsVectorLayer(md.ykrPopFile.filePath(),
+                "ykr_vaesto", "ogr")
+        if md.ykrBuildingsLoadLayer.isChecked():
+            self.ykrBuildingsLayer = md.ykrBuildingsLayerList.currentLayer()
         else:
-            self.ykrBuildingsLayer = QgsVectorLayer(self.mainDialog.\
-                ykrBuildingsFile.filePath(), "pir_rakennukset_2017_piste", "ogr")
-        if self.mainDialog.ykrJobsLoadLayer.isChecked():
-            self.ykrJobsLayer = self.mainDialog.ykrJobsLayerList.currentLayer()
+            self.ykrBuildingsLayer = QgsVectorLayer(
+                md.ykrBuildingsFile.filePath(), "rakennukset_piste", "ogr")
+        if md.ykrJobsLoadLayer.isChecked():
+            self.ykrJobsLayer = md.ykrJobsLayerList.currentLayer()
         else:
-            self.ykrJobsLayer = QgsVectorLayer(self.mainDialog.\
-                ykrJobsFile.filePath(), "ykr_tyopaikat_2015", "ogr")
-        self.inputLayers.extend([self.ykrPopLayer, self.ykrJobsLayer, self.ykrBuildingsLayer])
+            self.ykrJobsLayer = QgsVectorLayer(
+                md.ykrJobsFile.filePath(), "ykr_tyopaikat", "ogr")
+        self.inputLayers.extend([self.ykrPopLayer,
+            self.ykrJobsLayer, self.ykrBuildingsLayer])
 
-        if not self.mainDialog.calculateFuture.isChecked():
+        self.geomArea = md.geomArea.currentText()
+        self.adminArea = md.adminArea.currentText()
+        self.onlySelectedFeats = md.onlySelectedFeats.isChecked()
+        self.pitkoScenario = md.pitkoScenario.currentText()
+        self.emissionsAllocation = md.emissionsAllocation.currentText()
+        self.elecEmissionType = md.elecEmissionType.currentText()
+
+        if not md.calculateFuture.isChecked():
             self.calculateFuture = False
         else:
+            self.readFutureProcessingInput()
+
+    def readFutureProcessingInput(self):
+        '''Reads user input for future processing from main dialog'''
             self.calculateFuture = True
-            if self.mainDialog.futureAreasLoadLayer.isChecked():
-                self.futureAreasLayer = self.mainDialog.futureAreasLayerList.currentLayer()
+        md = self.mainDialog
+        if md.futureAreasLoadLayer.isChecked():
+            self.futureAreasLayer = md.futureAreasLayerList.currentLayer()
             else:
-                self.futureAreasLayer = QgsVectorLayer(self.mainDialog.\
-                    futureAreasFile.filePath(), "futureareas", "ogr")
-            if self.mainDialog.futureNetworkLoadLayer.isChecked():
-                self.futureNetworkLayer = self.mainDialog.futureNetworkLayerList.currentLayer()
+            self.futureAreasLayer = QgsVectorLayer(md.futureAreasFile.\
+                filePath(), "aluevaraus_tulevaisuus", "ogr")
+        if md.futureNetworkLoadLayer.isChecked():
+            self.futureNetworkLayer = md.futureNetworkLayerList.currentLayer()
             else:
-                if futureNetworkFile.filePath():
-                    self.futureNetworkLayer = QgsVectorLayer(self.mainDialog.\
-                        futureNetworkFile.filePath(), "futurenetwork", "ogr")
-            if self.mainDialog.futureStopsLoadLayer.isChecked():
-                self.futureStopsLayer = self.mainDialog.futureStopsLayerList.currentLayer()
+            if md.futureNetworkFile.filePath():
+                self.futureNetworkLayer = QgsVectorLayer(
+                    md.futureNetworkFile.filePath(),
+                    "keskusverkko_tulevaisuus", "ogr")
+        if md.futureStopsLoadLayer.isChecked():
+            self.futureStopsLayer = md.futureStopsLayerList.currentLayer()
             else:
-                if futureStopsFile.filePath():
-                    self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
-                        futureStopsFile.filePath(), "futurestops", "ogr")
-            self.targetYear = self.mainDialog.targetYear.value()
+            if md.futureStopsFile.filePath():
+                self.futureStopsLayer = QgsVectorLayer(
+                    md.futureStopsFile.filePath(),
+                    "joukkoliikenne_tulevaisuus", "ogr")
+        self.targetYear = md.targetYear.value()
             self.inputLayers.extend([self.futureAreasLayer,
             self.futureNetworkLayer, self.futureStopsLayer])
-
-        self.geomArea = self.mainDialog.geomArea.currentText()
-        self.adminArea = self.mainDialog.adminArea.currentText()
-        self.onlySelectedFeats = self.mainDialog.onlySelectedFeats.isChecked()
-        self.pitkoScenario = self.mainDialog.pitkoScenario.currentText()
-        self.emissionsAllocation = self.mainDialog.emissionsAllocation.currentText()
-        self.elecEmissionType = self.mainDialog.elecEmissionType.currentText()
 
     def checkLayerValidity(self):
         '''Checks that necessary layers are valid and raise an exception if needed'''
