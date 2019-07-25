@@ -232,6 +232,7 @@ class YKRTool:
                 self.cur = self.conn.cursor()
                 self.sessionParams = self.generateSessionParameters()
                 self.readProcessingInput()
+                self.checkLayerValidity()
                 self.uploadData()
 
                 queries = self.getCalculationQueries()
@@ -461,9 +462,7 @@ class YKRTool:
         self.elecEmissionType = self.mainDialog.elecEmissionType.currentText()
 
     def uploadData(self):
-        '''Check if layers are valid and write to database'''
-        self.checkLayerValidity()
-
+        '''Write layers to database'''
         params = {
             'INPUT': '',
             'SHAPE_ENCODING': '',
@@ -489,21 +488,17 @@ class YKRTool:
             'PROMOTETOMULTI': False,
             'PRECISION': True
         }
-
         for layer in self.inputLayers:
             params['INPUT'] = layer
             tableName = self.sessionParams['uuid'] + '_' + layer.name()
             tableName = tableName.replace('-', '_')
             params['TABLE'] = tableName [:49] # Truncate tablename to avoid hitting postgres 63char cap
-
             if layer.geometryType() == 0: # point
                 params['GTYPE'] = 3
             elif layer.geometryType() == 2: # polygon
                 params['GTYPE'] = 5
-
             processing.run("gdal:importvectorintopostgisdatabasenewconnection", params)
             self.tableNames[layer] = params['TABLE']
-
         return True
 
     def checkLayerValidity(self):
