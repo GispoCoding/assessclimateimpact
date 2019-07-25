@@ -444,29 +444,29 @@ class YKRTool:
 
     def readFutureProcessingInput(self):
         '''Reads user input for future processing from main dialog'''
-            self.calculateFuture = True
+        self.calculateFuture = True
         md = self.mainDialog
         if md.futureAreasLoadLayer.isChecked():
             self.futureAreasLayer = md.futureAreasLayerList.currentLayer()
-            else:
+        else:
             self.futureAreasLayer = QgsVectorLayer(md.futureAreasFile.\
                 filePath(), "aluevaraus_tulevaisuus", "ogr")
         if md.futureNetworkLoadLayer.isChecked():
             self.futureNetworkLayer = md.futureNetworkLayerList.currentLayer()
-            else:
+        else:
             if md.futureNetworkFile.filePath():
                 self.futureNetworkLayer = QgsVectorLayer(
                     md.futureNetworkFile.filePath(),
                     "keskusverkko_tulevaisuus", "ogr")
         if md.futureStopsLoadLayer.isChecked():
             self.futureStopsLayer = md.futureStopsLayerList.currentLayer()
-            else:
+        else:
             if md.futureStopsFile.filePath():
                 self.futureStopsLayer = QgsVectorLayer(
                     md.futureStopsFile.filePath(),
                     "joukkoliikenne_tulevaisuus", "ogr")
         self.targetYear = md.targetYear.value()
-            self.inputLayers.extend([self.futureAreasLayer,
+        self.inputLayers.extend([self.futureAreasLayer,
             self.futureNetworkLayer, self.futureStopsLayer])
 
     def checkLayerValidity(self):
@@ -558,15 +558,33 @@ class YKRTool:
             '{emissionsAllocation}', '{elecEmissionType}', '{geomArea}',
             '{baseYear}')'''.format(**vals))
         else:
-            fVals = {
-                'fAreas': self.tableNames[self.futureAreasLayer],
-                'fNetwork': self.tableNames[self.futureNetworkLayer],
-                'fStops': self.tableNames[self.futureStopsLayer]
-            }
-            vals.update(fVals)
-            pass
-
+            futureQuery = self.generateFutureQuery(vals)
+            queries.append(futureQuery)
         return queries
+
+    def generateFutureQuery(self, vals):
+        '''Constructs a query for future calculation'''
+        futureVals = {
+            'fAreas': self.tableNames[self.futureAreasLayer],
+            'targetYear': self.targetYear
+        }
+        vals.update(futureVals)
+        query = """CREATE TABLE user_output."output_{uuid}" AS
+        SELECT * FROM il_calculate_emissions_loop('{popTable}', '{jobTable}',
+        '{buildingTable}', '{aoi}', '{pitkoScenario}',
+        '{emissionsAllocation}', '{elecEmissionType}', '{geomArea}',
+        '{baseYear}', '{targetYear}', '{fAreas}'""".format(**vals)
+
+        futureNetworkTableName = self.tableNames[self.futureNetworkLayer]
+        if futureNetworkTableName:
+            query += ", '{}'".format(futureNetworkTableName)
+        else:
+            query += ", NULL"
+        futureStopsTableName = self.tableNames[self.futureStopsLayer]
+        if futureStopsTableName:
+            query += ", '{}'".format(futureStopsTableName)
+        query += ')'
+        return query
 
     def postCalculation(self):
         '''Called after QueryTask finishes. Writes session info to sessions table and closes session'''
