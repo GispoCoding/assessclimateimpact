@@ -433,6 +433,7 @@ class YKRTool:
         if not self.mainDialog.calculateFuture.isChecked():
             self.calculateFuture = False
         else:
+            self.calculateFuture = True
             if self.mainDialog.futureAreasLoadLayer.isChecked():
                 self.futureAreasLayer = self.mainDialog.futureAreasLayerList.currentLayer()
             else:
@@ -441,18 +442,18 @@ class YKRTool:
             if self.mainDialog.futureNetworkLoadLayer.isChecked():
                 self.futureNetworkLayer = self.mainDialog.futureNetworkLayerList.currentLayer()
             else:
-                self.futureNetworkLayer = QgsVectorLayer(self.mainDialog.\
-                    futureNetworkFile.filePath(), "futurenetwork", "ogr")
+                if futureNetworkFile.filePath():
+                    self.futureNetworkLayer = QgsVectorLayer(self.mainDialog.\
+                        futureNetworkFile.filePath(), "futurenetwork", "ogr")
             if self.mainDialog.futureStopsLoadLayer.isChecked():
                 self.futureStopsLayer = self.mainDialog.futureStopsLayerList.currentLayer()
             else:
-                self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
-                    futureStopsFile.filePath(), "futurestops", "ogr")
+                if futureStopsFile.filePath():
+                    self.futureStopsLayer = QgsVectorLayer(self.mainDialog.\
+                        futureStopsFile.filePath(), "futurestops", "ogr")
             self.targetYear = self.mainDialog.targetYear.value()
-
             self.inputLayers.extend([self.futureAreasLayer,
             self.futureNetworkLayer, self.futureStopsLayer])
-            self.calculateFuture = True
 
         self.geomArea = self.mainDialog.geomArea.currentText()
         self.adminArea = self.mainDialog.adminArea.currentText()
