@@ -529,7 +529,7 @@ class YKRTool:
             if layer.geometryType() == 0: # point
                 params['GTYPE'] = 3
             elif layer.geometryType() == 2: # polygon
-                params['GTYPE'] = 5
+                params['GTYPE'] = 8
             processing.run("gdal:importvectorintopostgisdatabasenewconnection",
                 params)
             self.tableNames[layer] = params['TABLE']
