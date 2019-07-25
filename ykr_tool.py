@@ -615,6 +615,7 @@ class YKRTool:
     def cleanUpSession(self):
         '''Delete temporary data and close db connection'''
         for table in list(self.tableNames.values()):
+            if not table: continue
             self.cur.execute('DROP TABLE IF EXISTS user_input."' + table + '"')
         self.conn.commit()
         self.conn.close()
