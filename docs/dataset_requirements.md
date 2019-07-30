@@ -1,6 +1,6 @@
 ## Datasets needed
 
-The asessclimateimpact tool needs several user input datasets. Check from the below what are the requirements for the data structure.
+The assessclimateimpact tool needs several user input datasets. Check from the below what are the requirements for the data structures.
 See also [database model](docs/database.md) and [lisences](data/lisence.md). 
 
 ### Present - user adds:
@@ -10,7 +10,7 @@ See also [database model](docs/database.md) and [lisences](data/lisence.md).
 
 **The use of YKR datasets needs a contract with Liiteri service https://www.ymparisto.fi/fi-FI/Elinympariston_tietopalvelu_Liiteri/Liiterikayttajaksi**
 
-- OR more accurate model for the present situation can be gained with current building information from the municipality, if available use instead of YKR building information
+- OR more accurate model for the present situation can be gained with current building information from the municipality, if available, use instead of YKR building information
 
 ### Future scenarios - user adds:
 - Land use planning Zoning elements (Käyttötarkoitusalueet) (Municipality)
@@ -19,20 +19,20 @@ See also [database model](docs/database.md) and [lisences](data/lisence.md).
 
 ## Dataset structure requirements (User input, current situation)
 
-### Jobs in urban zoning grid dataset (YKR-työpaikat)
+### Jobs in urban zoning grid dataset (YKR-työpaikat), polygon
 
 - xyind (unique identifier)
 - kunta / municipality_name
 - Kuntanumero / municipalityid
 - tp_yht / jobs_all
 
-#### Population (YKR-population)
+### Population (YKR-population), polygon
 
 - xyind (unique identifier)
 - kunta / municipality_name
 - v_yht / total_pop
 
-#### Buildings (YKR-buildings, with different building type information (area, count, energy type))
+### Buildings (YKR-buildings, with different building type information (area, count, energy type)), point
 
 - xyind (unique identifier)
 - kunta / municipality_name
@@ -65,7 +65,7 @@ See also [database model](docs/database.md) and [lisences](data/lisence.md).
  
 ## Dataset structure requirements (User input, future scenarios)
 
-#### Zoning elements
+### Zoning elements (polygon)
 
 - geom
 - id
@@ -78,7 +78,7 @@ See also [database model](docs/database.md) and [lisences](data/lisence.md).
 - k_aloitusv
 - k_valmisv
 
-#### Central network
+### Central network (point)
 
 - geom
 - id
@@ -87,7 +87,7 @@ See also [database model](docs/database.md) and [lisences](data/lisence.md).
 - k_kalkuv
 - k_kvalmv
 
-#### Public transport plan
+### Public transport plan (point)
 
 - geom
 - id
