@@ -13,7 +13,7 @@ Automatic visualisation is created automatically from QGIS plugin. It uses Natur
 
 [SLD's](visualizations_SLD) have been also created, they can be used e.g. with GeoServer.
 
-[SLD for CO2 emmissions per grid](co2_emissions.sld)
+[SLD for CO2 emmissions per grid](visualizations_SLD/co2_emissions.sld)
 
 ### Additional SLD-files from grids:
 
