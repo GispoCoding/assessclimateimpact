@@ -45,41 +45,44 @@ Python-requests may be replaced by the QGIS built-in [QgsFileDownloader](https:/
 
 Using the plugin is fairly straightforward:
 
-1. The tool can be found after installation under Plugins > Ilmastovaikutusten arviointityökalu
-2. Check the database connection from Setup / Asetukset (in the bottom of the plugin dialogue). If you do not have the access, contact info@ubigu.fi).
+**1. The tool can be found after installation under Plugins > Ilmastovaikutusten arviointityökalu**
+
+**2. Check the database connection from Setup / Asetukset (in the bottom of the plugin dialogue).** If you do not have the access, contact info@ubigu.fi).
 
 ![Plugin UI](climate_tool_UI_v2.PNG)
 
-3. Select the study area / Tarkastelualueen rajaus
+**3. Select the study area / Tarkastelualueen rajaus**
 - Area / Geometrinen alue (at the moment only City of Tampere is possible)
 - Select governmental area / Hallinnollinen alue (at the moment only region of Pirkanmaa)
-4.  Add at least these datasets from your own files (e.g. in shp. -format) in order to calculate current situation of the climate assessment [(check ot data requirements)](docs/dataset_requirements.md). You can add them from your files or from the layer list: 
+
+**4.  Add at least these datasets from your own files (e.g. in shp. -format)** in order to calculate current situation of the climate assessment [(check ot data requirements)](docs/dataset_requirements.md). You can add them from your files or from the layer list: 
 - YKR rakennukset (Urban grid buildings)
 - YKR väestö (Urban grid population)
 - YKR työpaikat (Urban grid jobs)
-5. Run the calculation.
 
-6. If you want to calculate future scenarios (Laske tulevaisuustiedot), add at least
+**5. Run the calculation.**
+
+**6. If you want to calculate future scenarios (Laske tulevaisuustiedot), add at least these datasets:**
 - Zoning elements (Aluevaraustiedot) [(check ot data requirements)](docs/dataset_requirements.md)
 - Target year
 
-7. Optional: add also central network information (keskusverkkotiedot) and public trafic stops (joukkoliikennepysäkit) [(check ot data requirements)](docs/dataset_requirements.md).
+**7. Optional: add also central network information (keskusverkkotiedot) and public trafic stops (joukkoliikennepysäkit) [(check ot data requirements)](docs/dataset_requirements.md).**
 
-8. Optional: choose suitable methods for calculation
-
-- Advanced: add PITKO scenario (heating and electricity scenarios) or use default parameters. Options are different scenarios accoriding of a Long term emission developement study [PITKO](https://tietokayttoon.fi/hankkeet/hanke-esittely/-/asset_publisher/pitkan-aikavalin-kokonaispaastokehitys-pitko-). Possible values are: ‘eu80’, ‘kasvu’, ‘muutos’, ‘saasto’, ‘wem’.
-
-- Advanced: add emission allocation methods. Possible values are ‘em’=[energiamenetelmä](http://www.ym.fi/download/noname/%7BA6ABCFF7-55FA-412C-A0C7-FEE5CC0A2F24%7D/30744) (energy method) and ‘hjm’=[hyödynjakomentelmä](https://www.motiva.fi/files/6820/Kuvaus_hyodynjakomenetelmasta.pdf) (method for calculating emissions).
-
-- Advanced: add used electricity emission types. Possible values are 'hankinta'=purchase and 'tuotanto'=provision. 
+**8. Advanced: choose suitable methods for calculation**
 
 ![PITKO](Pitko_ui.PNG)
+
+- Add PITKO scenario (heating and electricity scenarios) or use default parameters. Options are different scenarios accoriding of a Long term emission developement study [PITKO](https://tietokayttoon.fi/hankkeet/hanke-esittely/-/asset_publisher/pitkan-aikavalin-kokonaispaastokehitys-pitko-). Possible values are: ‘eu80’, ‘kasvu’, ‘muutos’, ‘saasto’, ‘wem’.
+
+- Add emission allocation methods. Possible values are ‘em’=[energiamenetelmä](http://www.ym.fi/download/noname/%7BA6ABCFF7-55FA-412C-A0C7-FEE5CC0A2F24%7D/30744) (energy method) and ‘hjm’=[hyödynjakomentelmä](https://www.motiva.fi/files/6820/Kuvaus_hyodynjakomenetelmasta.pdf) (method for calculating emissions).
+
+- Add used electricity emission types. Possible values are 'hankinta'=purchase and 'tuotanto'=provision. 
 
 ## End results:
 
 - 250*250 m grid, vector layers in PostGIS database
 - CO2 emissions of different emission sources in the cities. Current situation as map layer.
-- Predictions of CO2 emissions in the future (using scenarios from land use planning). Target year as map layer, yearly scenarios as tables
+- Predictions of CO2 emissions in the future (using scenarios from land use planning). One map layer with all target years. These can be sorted or visualized further.
 - Ready made visualizations for the map layers including grids and top emission source/grid cell
 
 ## Documentation
@@ -112,9 +115,5 @@ Climate Tool takes into account several data sources from the cities:
 - Carbon sinks
 - Land use plans
 - Scenario information for the future
-
-
-
-
 
 
