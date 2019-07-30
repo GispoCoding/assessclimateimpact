@@ -14,7 +14,7 @@ Many thanks to the project team!
 
 This plugin relies on urban zone data provided by Statistics Finland and Finland's environmental administration **Please read [https://www.stat.fi/tup/ykraineistot/index.html](https://www.stat.fi/tup/ykraineistot/index.html) for more information.**
 
-**Read also [data/lisence.txt](data/lisence.txt) for more information.**
+**Read also [Lisence description](data/lisence.md) for more information.**
 
 ## Installation instructions
 
@@ -64,7 +64,7 @@ Using the plugin is fairly straightforward:
 
 **6. If you want to calculate future scenarios (Laske tulevaisuustiedot), add at least these datasets:**
 - Zoning elements (Aluevaraustiedot) [(check out data requirements)](docs/dataset_requirements.md)
-- Target year
+- Target year (Note that the calculation will be created for every year and it might take a while)
 
 **7. Optional: add also central network information (keskusverkkotiedot) and public trafic stops (joukkoliikennepysäkit)** [(check out data requirements)](docs/dataset_requirements.md).
 
