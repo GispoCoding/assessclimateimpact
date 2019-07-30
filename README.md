@@ -88,7 +88,7 @@ Using the plugin is fairly straightforward:
 ## Documentation
 
 - [Database and database model](docs/database.md)
-- [Descriptions for visualizations](docs/visualization.md)
+- [Descriptions for visualizations](docs/visualizations.md)
 - [Dataset requirements](docs/dataset_requirements.md)
 - [Data lisences](data/lisence.md)
 
