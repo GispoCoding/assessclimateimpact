@@ -48,7 +48,7 @@ Using the plugin is fairly straightforward:
 1. The tool can be found after installation under Plugins > Ilmastovaikutusten arviointityökalu
 2. Check the database connection from Setup / Asetukset (in the bottom of the plugin dialogue). If you do not have the access, contact info@ubigu.fi).
 
-![alt text](climate_tool_UI_v2.PNG)
+![Plugin UI](climate_tool_UI_v2.PNG)
 
 3. Select the study area / Tarkastelualueen rajaus
 - Area / Geometrinen alue (at the moment only City of Tampere is possible)
@@ -66,9 +66,14 @@ Using the plugin is fairly straightforward:
 7. Optional: add also central network information (keskusverkkotiedot) and public trafic stops (joukkoliikennepysäkit) [(check ot data requirements)](docs/dataset_requirements.md).
 
 8. Optional: choose suitable methods for calculation
-- Advanced: add PITKO scenario (heating and electricity scenarios) or use default parameters
-- Advanced: add emission allocation methods
-- Advanced: add used electricity emission sources
+
+- Advanced: add PITKO scenario (heating and electricity scenarios) or use default parameters. Options are different scenarios accoriding of a Long term emission developement study [PITKO](https://tietokayttoon.fi/hankkeet/hanke-esittely/-/asset_publisher/pitkan-aikavalin-kokonaispaastokehitys-pitko-). Possible values are: ‘eu80’, ‘kasvu’, ‘muutos’, ‘saasto’, ‘wem’.
+
+- Advanced: add emission allocation methods. Possible values are ‘em’=[energiamenetelmä](http://www.ym.fi/download/noname/%7BA6ABCFF7-55FA-412C-A0C7-FEE5CC0A2F24%7D/30744) (energy method) and ‘hjm’=[hyödynjakomentelmä](https://www.motiva.fi/files/6820/Kuvaus_hyodynjakomenetelmasta.pdf) (method for calculating emissions).
+
+- Advanced: add used electricity emission types. Possible values are 'hankinta'=purchase and 'tuotanto'=provision. 
+
+![PITKO](Pitko_ui.PNG)
 
 ## End results:
 
