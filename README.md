@@ -53,14 +53,14 @@ Using the plugin is fairly straightforward:
 3. Select the study area / Tarkastelualueen rajaus
 - Area / Geometrinen alue (at the moment only City of Tampere is possible)
 - Select governmental area / Hallinnollinen alue (at the moment only region of Pirkanmaa)
-4.  Add at least these datasets from your own files (e.g. in shp. -format) in order to calculate current situation of the climate assessment [(check ot data requirements)](dataset_requirements.md). You can add them from your files or from the layer list: 
+4.  Add at least these datasets from your own files (e.g. in shp. -format) in order to calculate current situation of the climate assessment [(check ot data requirements)](data/dataset_requirements.md). You can add them from your files or from the layer list: 
 - YKR rakennukset (Urban grid buildings)
 - YKR väestö (Urban grid population)
 - YKR työpaikat (Urban grid jobs)
 5. Run the calculation.
 
 6. If you want to calculate future scenarios (Laske tulevaisuustiedot), add at least
-- Zoning elements (Aluevaraustiedot) [(check ot data requirements)](dataset_requirements.md)
+- Zoning elements (Aluevaraustiedot) [(check ot data requirements)](data/dataset_requirements.md)
 - Target year
 
 7. Optional: add also central network information (keskusverkkotiedot) and public trafic stops (joukkoliikennepysäkit) [(check ot data requirements)](dataset_requirements.md).
