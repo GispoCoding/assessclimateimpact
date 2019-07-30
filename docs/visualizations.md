@@ -2,14 +2,17 @@
 
 Automatic visualisation is created automatically from QGIS plugin. It uses Natural Breaks divison with ready defined colorscheme. QML-files for the visualisation:
 
-- [CO2_t_grid](CO2_t_grid.qml)
+- [CO2_t_grid](CO2_t_grid.qml) NOTA BENE! Maximum value can vary between different calculations, check the results before proceeding with the analysis!
 
-- [CO2_sources](CO2_sources.qml)
+- [CO2_sources](CO2_sources.qml) NOTA BENE! Different emission sources may vary in different situations, in this we have visualizes traffic, electricity, heating and renovation as the main sources of emissions.
+
+If you want to add visualization for the population grids, you can use this file:
 
 - [Population](Population.qml)
 
-
 [Examples](CO2_visualisoinnit.pdf) of possible end results.
+
+### SLD for GeoServer
 
 [SLD's](visualizations_SLD) have been also created, they can be used e.g. with GeoServer.
 
