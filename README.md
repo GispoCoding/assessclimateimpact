@@ -63,7 +63,7 @@ Using the plugin is fairly straightforward:
 - PostGIS 2.1.8 (tested on 2.2+)
 
 ## Description
-![alt text](Climate_tool_UI_v1.png)
+![alt text](climate_tool_UI_v2.png)
 
 The tool can be used by city developers (land use planners) for
 - Understanding the current situation of CO2 emissions in the community
