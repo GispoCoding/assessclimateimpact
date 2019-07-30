@@ -1,6 +1,12 @@
 ## Visualization information for the tool
 
-Automatic visualisation is created automatically from QGIS plugin. It uses Natural Breaks divison with ready defined colorscheme. [Examples](CO2_visualisoinnit.pdf) of possible end results.
+Automatic visualisation is created automatically from QGIS plugin. It uses Natural Breaks divison with ready defined colorscheme. QML-file for the visualisation:
+[CO2_t_grid](CO2_t_grid.qml)
+[CO2_sources](CO2_sources.qml)
+[Population](Population.qml)
+
+
+[Examples](CO2_visualisoinnit.pdf) of possible end results.
 
 [SLD's](visualizations_SLD) have been also created, they can be used e.g. with GeoServer.
 
