@@ -45,7 +45,37 @@ Python-requests may be replaced by the QGIS built-in [QgsFileDownloader](https:/
 
 Using the plugin is fairly straightforward:
 
-1. Coming up
+1. The tool can be found after installation under Plugins > Ilmastovaikutusten arviointityökalu
+2. Check the database connection from Setup / Asetukset (in the bottom of the plugin dialogue). If you do not have the access, contact info@ubigu.fi).
+
+![alt text](climate_tool_UI_v2.PNG)
+
+3. Select the study area / Tarkastelualueen rajaus
+- Area / Geometrinen alue (at the moment only City of Tampere is possible)
+- Select governmental area / Hallinnollinen alue (at the moment only region of Pirkanmaa)
+4.  Add at least these datasets from your own files (e.g. in shp. -format) in order to calculate current situation of the climate assessment [(check ot data requirements)](dataset_requirements.md). You can add them from your files or from the layer list: 
+- YKR rakennukset (Urban grid buildings)
+- YKR väestö (Urban grid population)
+- YKR työpaikat (Urban grid jobs)
+5. Run the calculation.
+
+6. If you want to calculate future scenarios (Laske tulevaisuustiedot), add at least
+- Zoning elements (Aluevaraustiedot) [(check ot data requirements)](dataset_requirements.md)
+- Target year
+
+7. Optional: add also central network information (keskusverkkotiedot) and public trafic stops (joukkoliikennepysäkit) [(check ot data requirements)](dataset_requirements.md).
+
+8. Optional: choose suitable methods for calculation
+- Advanced: add PITKO scenario (heating and electricity scenarios) or use default parameters
+- Advanced: add emission allocation methods
+- Advanced: add used electricity emission sources
+
+## End results:
+
+- 250*250 m grid, vector layers in PostGIS database
+- CO2 emissions of different emission sources in the cities. Current situation as map layer.
+- Predictions of CO2 emissions in the future (using scenarios from land use planning). Target year as map layer, yearly scenarios as tables
+- Ready made visualizations for the map layers including grids and top emission source/grid cell
 
 ## Documentation
 
@@ -54,8 +84,6 @@ Using the plugin is fairly straightforward:
 - [Dataset requirements](docs/dataset_requirements.md)
 - [Data lisences](data/lisence.md)
 
-- Plugin documentation (coming up)
-
 ## Software requirements
 
 - QGIS 3.4.6
@@ -63,7 +91,6 @@ Using the plugin is fairly straightforward:
 - PostGIS 2.1.8 (tested on 2.2+)
 
 ## Description
-![alt text](climate_tool_UI_v2.PNG)
 
 The tool can be used by city developers (land use planners) for
 - Understanding the current situation of CO2 emissions in the community
@@ -81,29 +108,7 @@ Climate Tool takes into account several data sources from the cities:
 - Land use plans
 - Scenario information for the future
 
-## Process
-- Open QGIS
-- Install QGIS Climate Tool plugin
-- Check the PostGIS database connection (hosted at the moment by Ubigu Ltd)
-- Open QGIS Climate Tool plugin
-- Choose the area for your calculations (in this stage only City of Tampere)
-- Choose a governmental area (it provides certain parameters to the calculations)
-- Add information about the current situation (Population, Jobs, Buildings) in requested format
-- Choose if you want to calculate also future scenarios 
-- Add land use planning zoning elements
-- Set target Year
-- Optional: add Keskusverkkotiedot (centers in the city by network information)
-- Optional: add intensive public transportation stations (train, metro, tram)
-- Advanced: add PITKO scenario (heating and electricity scenarios) or use default parameters
-- Advanced: add emission allocation methods
-- Advanced: add used electricity emission sources
 
-## End results:
-
-- 250*250 m grid, vector layers in PostGIS database
-- CO2 emissions of different emission sources in the cities. Current situation as map layer.
-- Predictions of CO2 emissions in the future (using scenarios from land use planning). Target year as map layer, yearly scenarios as tables
-- Ready made visualizations for the map layers including grids and top emission source/grid cell
 
 
 
