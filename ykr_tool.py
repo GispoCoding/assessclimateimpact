@@ -597,8 +597,10 @@ class YKRTool:
                 str(e), Qgis.Warning, duration=0)
             self.conn.rollback()
         try:
-            self.addResultAsLayer()
+            self.calculateSums()
         except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe laskettaessa summia', str(e), Qgis.Warning, duration=0)
+            self.conn.rollback()
             self.iface.messageBar().pushMessage('Virhe lisättäessä tulostasoa:', str(e), Qgis.Warning, duration=0)
         try:
             self.cleanUpSession()
@@ -622,7 +624,23 @@ class YKRTool:
             pitkoScenario, emissionsAllocation, elecEmissionType, geomArea))
         self.conn.commit()
 
-    def addResultAsLayer(self):
+    def calculateSums(self):
+        '''Adds sum fields to result table'''
+        uid = self.sessionParams['uuid']
+        queries = []
+        queries.append('''ALTER TABLE user_output."output_{}"
+        ADD COLUMN "sahko_yht" real'''.format(uid))
+        queries.append('''ALTER TABLE user_output."output_{}"
+        ADD COLUMN "liikenne_yht" real'''.format(uid))
+        queries.append('''UPDATE user_output."output_{}"
+        SET "sahko_yht" = "kiinteistosahko_tco2" + "sahko_kotitaloudet_tco2" +
+        "sahko_palv_tco2" + "sahko_tv_tco2"'''.format(uid))
+        queries.append('''UPDATE user_output."output_{}"
+        SET "liikenne_yht" = "hloliikenne_tco2" + "tvliikenne_tco2" +
+        "palvliikenne_tco2"'''.format(uid))
+        for query in queries:
+            self.cur.execute(query)
+        self.conn.commit()
         uri = QgsDataSourceUri()
         uri.setConnection(self.connParams['host'], self.connParams['port'],\
             self.connParams['database'], self.connParams['user'], self.connParams['password'])
