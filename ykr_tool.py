@@ -601,6 +601,9 @@ class YKRTool:
         except Exception as e:
             self.iface.messageBar().pushMessage('Virhe laskettaessa summia', str(e), Qgis.Warning, duration=0)
             self.conn.rollback()
+        try:
+            self.addResultAsLayers()
+        except Exception as e:
             self.iface.messageBar().pushMessage('Virhe lisättäessä tulostasoa:', str(e), Qgis.Warning, duration=0)
         try:
             self.cleanUpSession()
@@ -641,12 +644,28 @@ class YKRTool:
         for query in queries:
             self.cur.execute(query)
         self.conn.commit()
+
+    def addResultAsLayers(self):
+        layers, layerNames = [], []
+        uid = self.sessionParams['uuid']
+        layerNames.append(('CO2 sources {}'.format(uid),
+        os.path.join(self.plugin_dir, 'docs/CO2_sources.qml')))
+        layerNames.append(('CO2 grid {}'.format(uid),
+        os.path.join(self.plugin_dir, 'docs/CO2_t_grid.qml')))
+
         uri = QgsDataSourceUri()
         uri.setConnection(self.connParams['host'], self.connParams['port'],\
             self.connParams['database'], self.connParams['user'], self.connParams['password'])
         uri.setDataSource('user_output', 'output_' + self.sessionParams['uuid'], 'geom')
-        layer = QgsVectorLayer(uri.uri(False), 'Output ' + self.sessionParams['uuid'], 'postgres')
-        QgsProject.instance().addMapLayer(layer)
+
+        for name in layerNames:
+            layer = QgsVectorLayer(uri.uri(False), name[0], 'postgres')
+            layer.loadNamedStyle(name[1])
+            renderer = layer.renderer()
+            if renderer.type() == 'graduatedSymbol':
+                renderer.updateClasses(layer, renderer.mode(), len(renderer.ranges()))
+            layers.append(layer)
+        QgsProject.instance().addMapLayers(layers)
 
     def cleanUpSession(self):
         '''Delete temporary data and close db connection'''
