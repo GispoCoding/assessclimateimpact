@@ -6,13 +6,17 @@ Automatic visualisation is created automatically from QGIS plugin. It uses Natur
 
 - [CO2_sources](CO2_sources.qml) NOTA BENE! Different emission sources may vary in different situations, in this we have visualizes traffic, electricity, heating and renovation as the main sources of emissions.
 
-If you want to add visualization for the population grids, you can use this file:
+### Additional visualizations
+
+If you want to add visualization for the population grids, you can join the population information to the grid, you can use this file (population field is called 'v_yht'):
 
 - [Population](Population.qml)
 
+### Example
+
 [Examples](CO2_visualisoinnit.pdf) of possible end results.
 
-### SLD for GeoServer
+## SLD for GeoServer
 
 [SLD's](visualizations_SLD) have been also created, they can be used e.g. with GeoServer.
 
