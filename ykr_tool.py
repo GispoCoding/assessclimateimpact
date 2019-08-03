@@ -648,8 +648,14 @@ class YKRTool:
         '''Delete temporary data and close db connection'''
         for table in list(self.tableNames.values()):
             if not table: continue
-            self.cur.execute('DROP TABLE user_input."' + table + '"')
-        self.conn.commit()
+            try:
+                self.cur.execute('DROP TABLE user_input."{}"'.format(table))
+                self.conn.commit()
+            except Exception as e:
+                self.iface.messageBar().pushMessage(
+                    'Virhe poistettaessa taulua {}'.format(table),
+                    str(e), Qgis.Warning, duration=0)
+                self.conn.rollback()
         self.conn.close()
 
     def postError(self):
