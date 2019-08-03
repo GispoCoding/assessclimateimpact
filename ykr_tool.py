@@ -26,9 +26,11 @@ from PyQt5.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 
-from qgis.core import (Qgis, QgsMessageLog, QgsVectorLayer,
-QgsCoordinateReferenceSystem, QgsApplication, QgsDataSourceUri, QgsProject)
+from qgis.core import (Qgis, QgsVectorLayer, QgsCoordinateReferenceSystem,
+    QgsApplication, QgsDataSourceUri, QgsProject, QgsTaskManager,
+    QgsProcessingAlgRunnerTask, QgsProcessingContext, QgsProcessingFeedback)
 from qgis.gui import QgsFileWidget
+from functools import partial
 
 # Initialize Qt resources from file resources.py
 from .resources import *
@@ -224,31 +226,25 @@ class YKRTool:
         # See if OK was pressed
         if result:
             try:
-                if not self.connParams:
-                    configFilePath = QSettings().value("/YKRTool/configFilePath",\
-                        "", type=str)
-                    self.connParams = self.parseConfigFile(configFilePath)
-                self.conn = createDbConnection(self.connParams)
-                self.cur = self.conn.cursor()
-                self.sessionParams = self.generateSessionParameters()
-                self.readProcessingInput()
-                self.checkLayerValidity()
-                self.uploadData()
-
-                queries = self.getCalculationQueries()
-                queryTask = QueryTask(self.connParams, queries)
-                queryTask.taskCompleted.connect(self.postCalculation)
-                queryTask.taskTerminated.connect(self.postError)
-                QgsApplication.taskManager().addTask(queryTask)
-                self.iface.messageBar().pushMessage('Lasketaan', 'Laskenta käynnissä', Qgis.Info, duration=15)
-
+                self.preProcess()
             except Exception as e:
-                self.iface.messageBar().pushMessage('Virhe', str(e), Qgis.Critical, duration=0)
-                try:
-                    self.cleanUpSession()
-                except Exception as e:
-                    self.iface.messageBar().pushMessage('Virhe', str(e), Qgis.Warning, duration=0)
+                self.iface.messageBar().pushMessage('Virhe esikäsittelyssä',
+                    str(e), Qgis.Critical, duration=0)
+                self.cleanUpSession()
                 return False
+
+    def preProcess(self):
+        '''Starts calculation'''
+        if not self.connParams:
+            configFilePath = QSettings().value("/YKRTool/configFilePath",\
+                "", type=str)
+            self.connParams = self.parseConfigFile(configFilePath)
+        self.conn = createDbConnection(self.connParams)
+        self.cur = self.conn.cursor()
+        self.sessionParams = self.generateSessionParameters()
+        self.readProcessingInput()
+        self.checkLayerValidity()
+        self.uploadInputLayers()
 
     def setupMainDialog(self):
         '''Sets up the main dialog'''
@@ -491,12 +487,16 @@ class YKRTool:
             if not self.futureStopsLayer.isValid():
                 raise Exception("Virhe ladattaessa joukkoliikennepysäkkitietoja")
 
-    def uploadData(self):
+    def uploadInputLayers(self):
         '''Write layers to database'''
+        self.layerUploadIndex = 0
+        self.uploadSingleLayer()
+
+    def uploadSingleLayer(self):
+        '''Uploads a single input layer to database'''
+        alg = QgsApplication.processingRegistry().algorithmById(
+            'gdal:importvectorintopostgisdatabasenewconnection')
         params = {
-            'INPUT': '',
-            'SHAPE_ENCODING': '',
-            'GTYPE': 5, # 3 for point, 5 for polygon
             'A_SRS': QgsCoordinateReferenceSystem('EPSG:3067'),
             'T_SRS': None,
             'S_SRS': None,
@@ -506,34 +506,59 @@ class YKRTool:
             'DBNAME': self.connParams['database'],
             'PASSWORD': self.connParams['password'],
             'SCHEMA': 'user_input',
-            'TABLE': '',
             'PK': 'fid',
             'PRIMARY_KEY': None,
-            'GEOCOLUMN': 'geom',
-            'DIM': 0,
-            'FIELDS': [],
-            'LAUNDER': False,
-            'INDEX': False,
-            'SKIPFAILURES': False,
-            'PROMOTETOMULTI': False,
-            'PRECISION': True
+            'PROMOTETOMULTI': False
         }
-        for layer in self.inputLayers:
-            if not layer:
-                self.tableNames[layer] = False
-                continue
-            params['INPUT'] = layer
-            tableName = self.sessionParams['uuid'] + '_' + layer.name()
-            tableName = tableName.replace('-', '_')
-            params['TABLE'] = tableName [:49] # truncate tablename to under 63c
-            if layer.geometryType() == 0: # point
-                params['GTYPE'] = 3
-            elif layer.geometryType() == 2: # polygon
-                params['GTYPE'] = 8
-            processing.run("gdal:importvectorintopostgisdatabasenewconnection",
-                params)
-            self.tableNames[layer] = params['TABLE']
-        return True
+        context = QgsProcessingContext()
+        feedback = QgsProcessingFeedback()
+        layer = self.inputLayers[self.layerUploadIndex]
+        if not layer:
+            self.tableNames[layer] = False
+            self.uploadNextLayer()
+        params['INPUT'] = layer
+        tableName = self.sessionParams['uuid'] + '_' + layer.name()
+        tableName = tableName.replace('-', '_')
+        params['TABLE'] = tableName [:49] # truncate tablename to under 63c
+        self.tableNames[layer] = params['TABLE']
+        if layer.geometryType() == 0: # point
+            params['GTYPE'] = 3
+        elif layer.geometryType() == 2: # polygon
+            params['GTYPE'] = 8
+        task = QgsProcessingAlgRunnerTask(alg, params, context, feedback)
+        task.executed.connect(partial(self.uploadFinished, context))
+        QgsApplication.taskManager().addTask(task)
+        self.iface.messageBar().pushMessage('Ladataan tasoa tietokantaan',
+            layer.name(), Qgis.Info, duration=3)
+
+    def uploadFinished(self, context, successful, results):
+        if not successful:
+            self.iface.messageBar().pushMessage('Virhe',
+            'Virhe ladattaessa tasoa tietokantaan', Qgis.Warning, duration=0)
+        self.uploadNextLayer()
+
+    def uploadNextLayer(self):
+        '''Uploads the next layer in the input layer list'''
+        self.layerUploadIndex += 1
+        if self.layerUploadIndex < len(self.inputLayers):
+            self.uploadSingleLayer()
+        else:
+            self.runCalculation()
+
+    def runCalculation(self):
+        '''Runs the main calculation'''
+        try:
+            queries = self.getCalculationQueries()
+            queryTask = QueryTask(self.connParams, queries)
+            queryTask.taskCompleted.connect(self.postCalculation)
+            queryTask.taskTerminated.connect(self.postError)
+            QgsApplication.taskManager().addTask(queryTask)
+            self.iface.messageBar().pushMessage('Lasketaan',
+                'Laskenta käynnissä', Qgis.Info, duration=15)
+        except Exception as e:
+            self.iface.messageBar().pushMessage('Virhe laskennassa', str(e), Qgis.Critical, duration=0)
+            self.cleanUpSession()
+            return False
 
     def getCalculationQueries(self):
         '''Generate queries to call processing functions in database'''
