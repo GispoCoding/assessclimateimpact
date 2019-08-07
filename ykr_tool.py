@@ -566,9 +566,9 @@ class YKRTool:
             'uuid': self.sessionParams['uuid'],
             'aoi': 'tutkimusalue_uuid',
             'geomArea': self.geomArea,
-            'popTable': self.tableNames[self.ykrPopLayer],
-            'jobTable': self.tableNames[self.ykrJobsLayer],
-            'buildingTable': self.tableNames[self.ykrBuildingsLayer],
+            'popTable': (self.tableNames[self.ykrPopLayer]).lower(),
+            'jobTable': (self.tableNames[self.ykrJobsLayer]).lower(),
+            'buildingTable': (self.tableNames[self.ykrBuildingsLayer]).lower(),
             'calcYear': self.sessionParams['baseYear'],
             'baseYear': self.sessionParams['baseYear'],
             'pitkoScenario': self.pitkoScenario,
@@ -590,7 +590,7 @@ class YKRTool:
     def generateFutureQuery(self, vals):
         '''Constructs a query for future calculation'''
         futureVals = {
-            'fAreas': self.tableNames[self.futureAreasLayer],
+            'fAreas': (self.tableNames[self.futureAreasLayer]).lower(),
             'targetYear': self.targetYear
         }
         vals.update(futureVals)
@@ -600,12 +600,12 @@ class YKRTool:
         '{emissionsAllocation}', '{elecEmissionType}', '{geomArea}',
         '{baseYear}', '{targetYear}', '{fAreas}'""".format(**vals)
 
-        futureNetworkTableName = self.tableNames[self.futureNetworkLayer]
+        futureNetworkTableName = (self.tableNames[self.futureNetworkLayer]).lower()
         if futureNetworkTableName:
             query += ", '{}'".format(futureNetworkTableName)
         else:
             query += ", NULL"
-        futureStopsTableName = self.tableNames[self.futureStopsLayer]
+        futureStopsTableName = (self.tableNames[self.futureStopsLayer]).lower()
         if futureStopsTableName:
             query += ", '{}'".format(futureStopsTableName)
         query += ')'
@@ -674,7 +674,7 @@ class YKRTool:
         for table in list(self.tableNames.values()):
             if not table: continue
             try:
-                self.cur.execute('DROP TABLE user_input."{}"'.format(table))
+                self.cur.execute('DROP TABLE user_input."{}"'.format(table.lower()))
                 self.conn.commit()
             except Exception as e:
                 self.iface.messageBar().pushMessage(
