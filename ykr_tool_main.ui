@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>468</width>
-    <height>637</height>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_8">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="mainLayout">
      <item>
-      <widget class="QgsCollapsibleGroupBox" name="mGroupBox_4">
+      <widget class="QgsCollapsibleGroupBox" name="areaBox">
        <property name="minimumSize">
         <size>
          <width>400</width>
@@ -34,7 +34,7 @@
         <item>
          <layout class="QFormLayout" name="formLayout_3">
           <item row="0" column="0">
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="geomAreaLabel">
             <property name="text">
              <string>Geometrinen alue:</string>
             </property>
@@ -60,7 +60,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_8">
+           <widget class="QLabel" name="adminAreaLabel">
             <property name="text">
              <string>Hallinnollinen alue:</string>
             </property>
@@ -115,14 +115,14 @@
         <item>
          <layout class="QFormLayout" name="formLayout">
           <item row="0" column="0">
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="ykrPopsLabel">
             <property name="text">
              <string>YKR-Väestö:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout">
+           <layout class="QHBoxLayout" name="ykrPopLayout">
             <item>
              <widget class="QgsFileWidget" name="ykrPopFile">
               <property name="enabled">
@@ -171,21 +171,21 @@
            </layout>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_10">
+           <widget class="QLabel" name="ykrJobsLabel">
             <property name="text">
              <string>YKR-Työpaikat:</string>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="label_11">
+           <widget class="QLabel" name="ykrBuildingsLabel">
             <property name="text">
              <string>YKR-Rakennukset:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="ykrJobsLayout">
             <item>
              <widget class="QgsFileWidget" name="ykrJobsFile">
               <property name="enabled">
@@ -234,7 +234,7 @@
            </layout>
           </item>
           <item row="2" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <layout class="QHBoxLayout" name="ykrBuildingsLayout">
             <item>
              <widget class="QgsFileWidget" name="ykrBuildingsFile">
               <property name="enabled">
@@ -316,7 +316,10 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QgsCollapsibleGroupBox" name="mGroupBox_6">
+         <widget class="QgsCollapsibleGroupBox" name="futureRequired">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="title">
            <string>Pakolliset</string>
           </property>
@@ -324,14 +327,14 @@
            <item>
             <layout class="QFormLayout" name="formLayout_5">
              <item row="0" column="0">
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="futureAreasLabel">
                <property name="text">
                 <string>Aluevaraustiedot:</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_7">
+              <widget class="QLabel" name="targetYearLabel">
                <property name="text">
                 <string>Tavoitevuosi:</string>
                </property>
@@ -346,7 +349,7 @@
                 <number>2050</number>
                </property>
                <property name="value">
-                <number>2050</number>
+                <number>2030</number>
                </property>
                <property name="showClearButton">
                 <bool>false</bool>
@@ -357,7 +360,7 @@
               </widget>
              </item>
              <item row="0" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <layout class="QHBoxLayout" name="futureAreasLayout">
                <item>
                 <widget class="QgsFileWidget" name="futureAreasFile">
                  <property name="enabled">
@@ -402,7 +405,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QgsCollapsibleGroupBox" name="mGroupBox_5">
+         <widget class="QgsCollapsibleGroupBox" name="futureOptional">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -413,21 +416,21 @@
            <item>
             <layout class="QFormLayout" name="formLayout_4">
              <item row="0" column="0">
-              <widget class="QLabel" name="label_3">
+              <widget class="QLabel" name="futureNetworkLabel">
                <property name="text">
                 <string>Keskusverkkotiedot:</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="futureStopsLabel">
                <property name="text">
                 <string>Joukkoliikennepysäkit:</string>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <layout class="QHBoxLayout" name="futureNetworkLayout">
                <item>
                 <widget class="QgsFileWidget" name="futureNetworkFile">
                  <property name="enabled">
@@ -467,7 +470,7 @@
               </layout>
              </item>
              <item row="1" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <layout class="QHBoxLayout" name="futureStopsLayout">
                <item>
                 <widget class="QgsFileWidget" name="futureStopsFile">
                  <property name="enabled">
@@ -517,7 +520,7 @@
      <item>
       <widget class="QgsCollapsibleGroupBox" name="advancedBox">
        <property name="title">
-        <string>Advanced (valinnainen)</string>
+        <string>Lisäasetukset (valinnainen)</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -607,7 +610,7 @@
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="menuLayout">
        <item>
         <widget class="QPushButton" name="settingsButton">
          <property name="text">
