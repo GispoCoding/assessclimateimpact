@@ -88,7 +88,15 @@ Using the plugin is fairly straightforward:
 
 - Add emission allocation methods. Possible values are ‘em’=[energiamenetelmä](http://www.ym.fi/download/noname/%7BA6ABCFF7-55FA-412C-A0C7-FEE5CC0A2F24%7D/30744) (energy method) and ‘hjm’=[hyödynjakomentelmä](https://www.motiva.fi/files/6820/Kuvaus_hyodynjakomenetelmasta.pdf) (method for calculating emissions).
 
+**em:** Energy factor
+
+**hjm:** (default) Emissions and fuels form electricity production and production of heating are divided by alternative production methods.
+
 - Add used electricity emission types. Possible values are 'hankinta'=purchase and 'tuotanto'=provision. 
+
+**Hankinta:** Imported electricity and transfer loss
+
+**Tuotanto:** Only Finnish electricity production (used more often)
 
 ## End results:
 
