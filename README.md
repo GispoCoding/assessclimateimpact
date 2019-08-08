@@ -72,7 +72,19 @@ Using the plugin is fairly straightforward:
 
 ![PITKO](Pitko_ui.PNG)
 
-- Add PITKO scenario (heating and electricity scenarios) or use default parameters. Options are different scenarios accoriding of a Long term emission developement study [PITKO](https://tietokayttoon.fi/hankkeet/hanke-esittely/-/asset_publisher/pitkan-aikavalin-kokonaispaastokehitys-pitko-). Possible values are: ‘eu80’, ‘kasvu’, ‘muutos’, ‘saasto’, ‘wem’.
+- Add PITKO scenario (heating and electricity scenarios) or use default parameters. Options are different scenarios accoriding of a Long term emission developement study [PITKO](https://tietokayttoon.fi/hankkeet/hanke-esittely/-/asset_publisher/pitkan-aikavalin-kokonaispaastokehitys-pitko-). Possible values are: ‘wem’, ‘eu80’, ‘kasvu’, ‘muutos’, ‘saasto’, ‘static’.
+
+**WEM:** (default) Finland acchieves the national energy and climate political goals for year 2020 and they stay static after 2020. Economy is growing 2-3% a year and renewable energy share in end consumption is at minimum 38% in years 2030-2050.
+
+**EU80:** Low emission scenario full fills the energy and climate political goals for 2030 and tightens the emission for greenhouse gases up to 80 % until 2050. Base for this are the EU policies for Finland. 
+
+**kasvu (growth):** Low emission goals are acchieved by accelerated use of new technology: strong electrification, digitalization and renewal of industries. Economic growth in Finland is due to exceleration of imports.
+
+**muutos (change):** Human values and growing environmental awareness enable radical changes. The society will become more service orientated, takes new technologies in use, dietary habits change and structural changes occur in the industry.
+
+**saasto (saving):** Sharing and recycling economy and significant efficiency in energy consumption act as main elements for gaining low emission goals. Agriculture and forstery economies are promoting recycling economy and mineral oil based products are being replaced by new bio products.
+
+**static**: Global unstability prevents and slows down the development. Social inequality and economic growth are weak in Finland and  globally. Present model for EU disintegrates and Asia becomes stronger. Finland full fills its goals for low emission goals, but only in the last possible moment.
 
 - Add emission allocation methods. Possible values are ‘em’=[energiamenetelmä](http://www.ym.fi/download/noname/%7BA6ABCFF7-55FA-412C-A0C7-FEE5CC0A2F24%7D/30744) (energy method) and ‘hjm’=[hyödynjakomentelmä](https://www.motiva.fi/files/6820/Kuvaus_hyodynjakomenetelmasta.pdf) (method for calculating emissions).
 
