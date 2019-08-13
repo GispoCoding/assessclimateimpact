@@ -1,31 +1,31 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis simplifyLocal="1" simplifyMaxScale="1" styleCategories="AllStyleCategories" version="3.8.1-Zanzibar" minScale="1e+8" simplifyDrawingHints="0" hasScaleBasedVisibilityFlag="0" maxScale="0" labelsEnabled="0" simplifyDrawingTol="1" simplifyAlgorithm="0" readOnly="0">
+<qgis minScale="1e+8" hasScaleBasedVisibilityFlag="0" simplifyAlgorithm="0" version="3.8.1-Zanzibar" labelsEnabled="0" simplifyDrawingTol="1" readOnly="0" simplifyDrawingHints="0" simplifyLocal="1" styleCategories="AllStyleCategories" simplifyMaxScale="1" maxScale="0">
   <flags>
     <Identifiable>1</Identifiable>
     <Removable>1</Removable>
     <Searchable>1</Searchable>
   </flags>
-  <renderer-v2 type="RuleRenderer" forceraster="0" enableorderby="0" symbollevels="1">
+  <renderer-v2 type="RuleRenderer" symbollevels="1" forceraster="0" enableorderby="0">
     <rules key="{4137ce98-8dc0-4a23-ac5a-a4b6ac06232e}">
-      <rule key="{81e482bf-6bad-4a8d-abf5-f43f0c63eb35}" symbol="0" label="Tilojen lämmitys" filter=" &quot;tilat_lammitys_tco2&quot; > &quot;tilat_vesi_tco2&quot; AND   &quot;tilat_lammitys_tco2&quot;  >  &quot;tilat_jaahdytys_tco2&quot;  AND   &quot;tilat_lammitys_tco2&quot;  >  &quot;sum_sahko_tco2&quot; AND   &quot;tilat_lammitys_tco2&quot;  >  &quot;sum_liikenne_tco2&quot;  AND  &quot;tilat_lammitys_tco2&quot;  >    &quot;rak_korjaussaneeraus_tco2&quot; "/>
-      <rule key="{f782f537-4068-4299-a776-3c26986e0399}" symbol="1" label="Sähkö yhteensä" filter="&quot;sum_sahko_tco2&quot; > &quot;tilat_vesi_tco2&quot; AND   &quot;sum_sahko_tco2&quot; > &quot;tilat_lammitys_tco2&quot;  AND   &quot;sum_sahko_tco2&quot;  >  &quot;tilat_jaahdytys_tco2&quot; AND   &quot;sum_sahko_tco2&quot; >   &quot;sum_liikenne_tco2&quot;  AND    &quot;sum_sahko_tco2&quot; >  &#xd;&#xa;&quot;rak_korjaussaneeraus_tco2&quot; "/>
-      <rule key="{6a0cb3ef-bd69-426b-ae31-3971fac9fb3f}" symbol="2" label="Liikenne yhteensä" filter=" &quot;sum_liikenne_tco2&quot;> &quot;tilat_vesi_tco2&quot; AND     &quot;sum_liikenne_tco2&quot;> &quot;tilat_lammitys_tco2&quot;  AND     &quot;sum_liikenne_tco2&quot; >  &quot;tilat_jaahdytys_tco2&quot; AND &quot;sum_liikenne_tco2&quot;>  &quot;sum_sahko_tco2&quot;  AND   &quot;sum_liikenne_tco2&quot;>   &quot;rak_korjaussaneeraus_tco2&quot; "/>
-      <rule key="{c0f03c0e-9982-4ba6-9847-444a65bed735}" symbol="3" label="Korjaussaneeraus" filter="&quot;rak_korjaussaneeraus_tco2&quot; > &quot;tilat_vesi_tco2&quot; AND &quot;rak_korjaussaneeraus_tco2&quot; > &quot;tilat_lammitys_tco2&quot;  AND &quot;rak_korjaussaneeraus_tco2&quot; > &quot;tilat_jaahdytys_tco2&quot; AND &quot;rak_korjaussaneeraus_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;rak_korjaussaneeraus_tco2&quot; > &quot;sum_liikenne_tco2&quot;"/>
+      <rule label="Tilojen lämmitys" symbol="0" key="{81e482bf-6bad-4a8d-abf5-f43f0c63eb35}" filter="&quot;sum_lammonsaato_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;sum_lammonsaato_tco2&quot; > &quot;sum_liikenne_tco2&quot;  AND &quot;sum_lammonsaato_tco2&quot; >  &quot;sum_rakentaminen_tco2&quot; "/>
+      <rule label="Sähkö yhteensä" symbol="1" key="{f782f537-4068-4299-a776-3c26986e0399}" filter="&quot;sum_sahko_tco2&quot; > &quot;sum_lammonsaato_tco2&quot; AND &quot;sum_sahko_tco2&quot; > &quot;sum_liikenne_tco2&quot; AND    &quot;sum_sahko_tco2&quot; > &quot;sum_rakentaminen_tco2&quot; "/>
+      <rule label="Liikenne yhteensä" symbol="2" key="{6a0cb3ef-bd69-426b-ae31-3971fac9fb3f}" filter="&quot;sum_liikenne_tco2&quot; > &quot;sum_lammonsaato_tco2&quot;  AND  &quot;sum_liikenne_tco2&quot; >  &quot;sum_sahko_tco2&quot;  AND   &quot;sum_liikenne_tco2&quot; >   &quot;sum_rakentaminen_tco2&quot; "/>
+      <rule label="Korjaussaneeraus" symbol="3" key="{c0f03c0e-9982-4ba6-9847-444a65bed735}" filter="&quot;sum_rakentaminen_tco2&quot; > &quot;sum_lammonsaato_tco2&quot;  AND &quot;sum_rakentaminen_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;sum_rakentaminen_tco2&quot; > &quot;sum_liikenne_tco2&quot;"/>
     </rules>
     <symbols>
-      <symbol type="fill" clip_to_extent="1" alpha="1" force_rhr="0" name="0">
-        <layer class="CentroidFill" enabled="1" locked="0" pass="1">
+      <symbol type="fill" name="0" alpha="1" force_rhr="0" clip_to_extent="1">
+        <layer pass="1" class="CentroidFill" enabled="1" locked="0">
           <prop v="0" k="point_on_all_parts"/>
           <prop v="1" k="point_on_surface"/>
           <data_defined_properties>
             <Option type="Map">
-              <Option type="QString" value="" name="name"/>
+              <Option type="QString" name="name" value=""/>
               <Option name="properties"/>
-              <Option type="QString" value="collection" name="type"/>
+              <Option type="QString" name="type" value="collection"/>
             </Option>
           </data_defined_properties>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="@0@0">
-            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+          <symbol type="marker" name="@0@0" alpha="1" force_rhr="0" clip_to_extent="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
               <prop v="0" k="angle"/>
               <prop v="255,78,0,0" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
@@ -46,28 +46,28 @@
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option type="QString" value="" name="name"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option type="QString" value="collection" name="type"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
         </layer>
       </symbol>
-      <symbol type="fill" clip_to_extent="1" alpha="1" force_rhr="0" name="1">
-        <layer class="CentroidFill" enabled="1" locked="0" pass="1">
+      <symbol type="fill" name="1" alpha="1" force_rhr="0" clip_to_extent="1">
+        <layer pass="1" class="CentroidFill" enabled="1" locked="0">
           <prop v="1" k="point_on_all_parts"/>
           <prop v="0" k="point_on_surface"/>
           <data_defined_properties>
             <Option type="Map">
-              <Option type="QString" value="" name="name"/>
+              <Option type="QString" name="name" value=""/>
               <Option name="properties"/>
-              <Option type="QString" value="collection" name="type"/>
+              <Option type="QString" name="type" value="collection"/>
             </Option>
           </data_defined_properties>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="@1@0">
-            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+          <symbol type="marker" name="@1@0" alpha="1" force_rhr="0" clip_to_extent="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
               <prop v="0" k="angle"/>
               <prop v="43,43,43,255" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
@@ -88,28 +88,28 @@
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option type="QString" value="" name="name"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option type="QString" value="collection" name="type"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
         </layer>
       </symbol>
-      <symbol type="fill" clip_to_extent="1" alpha="1" force_rhr="0" name="2">
-        <layer class="CentroidFill" enabled="1" locked="0" pass="1">
+      <symbol type="fill" name="2" alpha="1" force_rhr="0" clip_to_extent="1">
+        <layer pass="1" class="CentroidFill" enabled="1" locked="0">
           <prop v="1" k="point_on_all_parts"/>
           <prop v="0" k="point_on_surface"/>
           <data_defined_properties>
             <Option type="Map">
-              <Option type="QString" value="" name="name"/>
+              <Option type="QString" name="name" value=""/>
               <Option name="properties"/>
-              <Option type="QString" value="collection" name="type"/>
+              <Option type="QString" name="type" value="collection"/>
             </Option>
           </data_defined_properties>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="@2@0">
-            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+          <symbol type="marker" name="@2@0" alpha="1" force_rhr="0" clip_to_extent="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
               <prop v="0" k="angle"/>
               <prop v="170,0,255,0" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
@@ -130,28 +130,28 @@
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option type="QString" value="" name="name"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option type="QString" value="collection" name="type"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
           </symbol>
         </layer>
       </symbol>
-      <symbol type="fill" clip_to_extent="1" alpha="1" force_rhr="0" name="3">
-        <layer class="CentroidFill" enabled="1" locked="0" pass="1">
+      <symbol type="fill" name="3" alpha="1" force_rhr="0" clip_to_extent="1">
+        <layer pass="1" class="CentroidFill" enabled="1" locked="0">
           <prop v="1" k="point_on_all_parts"/>
           <prop v="0" k="point_on_surface"/>
           <data_defined_properties>
             <Option type="Map">
-              <Option type="QString" value="" name="name"/>
+              <Option type="QString" name="name" value=""/>
               <Option name="properties"/>
-              <Option type="QString" value="collection" name="type"/>
+              <Option type="QString" name="type" value="collection"/>
             </Option>
           </data_defined_properties>
-          <symbol type="marker" clip_to_extent="1" alpha="1" force_rhr="0" name="@3@0">
-            <layer class="SimpleMarker" enabled="1" locked="0" pass="0">
+          <symbol type="marker" name="@3@0" alpha="1" force_rhr="0" clip_to_extent="1">
+            <layer pass="0" class="SimpleMarker" enabled="1" locked="0">
               <prop v="0" k="angle"/>
               <prop v="9,30,16,255" k="color"/>
               <prop v="1" k="horizontal_anchor_point"/>
@@ -172,9 +172,9 @@
               <prop v="1" k="vertical_anchor_point"/>
               <data_defined_properties>
                 <Option type="Map">
-                  <Option type="QString" value="" name="name"/>
+                  <Option type="QString" name="name" value=""/>
                   <Option name="properties"/>
-                  <Option type="QString" value="collection" name="type"/>
+                  <Option type="QString" name="type" value="collection"/>
                 </Option>
               </data_defined_properties>
             </layer>
@@ -185,20 +185,20 @@
   </renderer-v2>
   <labeling type="simple">
     <settings>
-      <text-style fieldName="summa" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontItalic="0" fontCapitals="0" previewBkgrdColor="#ffffff" fontSize="5" blendMode="0" fontStrikeout="0" useSubstitutions="0" fontWeight="50" isExpression="0" fontUnderline="0" fontLetterSpacing="0" fontSizeUnit="Point" namedStyle="Normal" fontWordSpacing="0" textOpacity="1" multilineHeight="1" textColor="31,30,29,255" fontFamily="Sans Serif">
-        <text-buffer bufferOpacity="1" bufferColor="255,255,255,255" bufferNoFill="1" bufferDraw="0" bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferBlendMode="0" bufferSize="1" bufferJoinStyle="128" bufferSizeUnits="MM"/>
-        <background shapeRadiiUnit="MM" shapeBlendMode="0" shapeType="0" shapeOffsetUnit="MM" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeSVGFile="" shapeFillColor="255,255,255,255" shapeJoinStyle="64" shapeBorderWidth="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetY="0" shapeSizeX="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeOffsetX="0" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeBorderColor="128,128,128,255" shapeRadiiX="0" shapeRadiiY="0" shapeSizeUnit="MM" shapeRotationType="0" shapeSizeY="0" shapeOpacity="1" shapeRotation="0" shapeDraw="0" shapeBorderWidthUnit="MM" shapeSizeType="0"/>
-        <shadow shadowBlendMode="6" shadowOffsetDist="1" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowOffsetUnit="MM" shadowOffsetGlobal="1" shadowOffsetAngle="135" shadowUnder="0" shadowScale="100" shadowRadius="0" shadowRadiusAlphaOnly="0" shadowDraw="0" shadowColor="0,0,0,255" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowOpacity="0" shadowRadiusUnit="MM"/>
+      <text-style fontFamily="Sans Serif" fieldName="summa" useSubstitutions="0" fontSize="5" namedStyle="Normal" fontUnderline="0" fontCapitals="0" fontItalic="0" multilineHeight="1" fontSizeUnit="Point" textOpacity="1" blendMode="0" fontWeight="50" fontStrikeout="0" textColor="31,30,29,255" isExpression="0" previewBkgrdColor="#ffffff" fontWordSpacing="0" fontSizeMapUnitScale="3x:0,0,0,0,0,0" fontLetterSpacing="0">
+        <text-buffer bufferSizeMapUnitScale="3x:0,0,0,0,0,0" bufferJoinStyle="128" bufferOpacity="1" bufferColor="255,255,255,255" bufferDraw="0" bufferNoFill="1" bufferSize="1" bufferBlendMode="0" bufferSizeUnits="MM"/>
+        <background shapeBorderWidthUnit="MM" shapeJoinStyle="64" shapeFillColor="255,255,255,255" shapeBlendMode="0" shapeSizeX="0" shapeRadiiY="0" shapeSizeMapUnitScale="3x:0,0,0,0,0,0" shapeType="0" shapeBorderColor="128,128,128,255" shapeSVGFile="" shapeOffsetUnit="MM" shapeOffsetMapUnitScale="3x:0,0,0,0,0,0" shapeOpacity="1" shapeSizeUnit="MM" shapeOffsetX="0" shapeRadiiX="0" shapeRadiiMapUnitScale="3x:0,0,0,0,0,0" shapeDraw="0" shapeSizeType="0" shapeOffsetY="0" shapeRadiiUnit="MM" shapeRotation="0" shapeBorderWidth="0" shapeSizeY="0" shapeBorderWidthMapUnitScale="3x:0,0,0,0,0,0" shapeRotationType="0"/>
+        <shadow shadowColor="0,0,0,255" shadowOpacity="0" shadowOffsetUnit="MM" shadowUnder="0" shadowRadius="0" shadowOffsetGlobal="1" shadowOffsetAngle="135" shadowOffsetMapUnitScale="3x:0,0,0,0,0,0" shadowRadiusMapUnitScale="3x:0,0,0,0,0,0" shadowScale="100" shadowRadiusUnit="MM" shadowRadiusAlphaOnly="0" shadowDraw="0" shadowOffsetDist="1" shadowBlendMode="6"/>
         <substitutions/>
       </text-style>
-      <text-format useMaxLineLengthForAutoWrap="1" rightDirectionSymbol=">" decimals="1" reverseDirectionSymbol="0" multilineAlign="4294967295" addDirectionSymbol="0" formatNumbers="1" placeDirectionSymbol="0" leftDirectionSymbol="&lt;" wrapChar="" autoWrapLength="3" plussign="0"/>
-      <placement yOffset="60" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" repeatDistanceUnits="MM" maxCurvedCharAngleIn="25" fitInPolygonOnly="0" preserveRotation="1" offsetType="0" dist="0" priority="10" distUnits="MM" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" placementFlags="10" centroidInside="1" geometryGenerator="" centroidWhole="1" distMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" xOffset="0" repeatDistance="0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" maxCurvedCharAngleOut="-25" geometryGeneratorEnabled="0" quadOffset="7" geometryGeneratorType="PointGeometry" placement="1" offsetUnits="MapUnit"/>
-      <rendering labelPerPart="0" mergeLines="0" displayAll="1" fontLimitPixelSize="0" scaleVisibility="1" maxNumLabels="2000" zIndex="0" fontMinPixelSize="3" fontMaxPixelSize="10000" scaleMax="25000" obstacleFactor="1" minFeatureSize="0" obstacle="1" upsidedownLabels="0" obstacleType="0" limitNumLabels="0" scaleMin="1000" drawLabels="1"/>
+      <text-format formatNumbers="1" decimals="1" wrapChar="" addDirectionSymbol="0" rightDirectionSymbol=">" reverseDirectionSymbol="0" autoWrapLength="3" leftDirectionSymbol="&lt;" useMaxLineLengthForAutoWrap="1" plussign="0" multilineAlign="4294967295" placeDirectionSymbol="0"/>
+      <placement distUnits="MM" offsetUnits="MapUnit" maxCurvedCharAngleIn="25" quadOffset="7" preserveRotation="1" dist="0" geometryGenerator="" maxCurvedCharAngleOut="-25" repeatDistanceUnits="MM" geometryGeneratorType="PointGeometry" distMapUnitScale="3x:0,0,0,0,0,0" centroidInside="1" placementFlags="10" xOffset="0" repeatDistance="0" repeatDistanceMapUnitScale="3x:0,0,0,0,0,0" labelOffsetMapUnitScale="3x:0,0,0,0,0,0" rotationAngle="0" fitInPolygonOnly="0" priority="10" geometryGeneratorEnabled="0" placement="1" predefinedPositionOrder="TR,TL,BR,BL,R,L,TSR,BSR" yOffset="60" offsetType="0" centroidWhole="1"/>
+      <rendering fontLimitPixelSize="0" drawLabels="1" obstacleType="0" mergeLines="0" obstacleFactor="1" scaleMax="25000" displayAll="1" obstacle="1" labelPerPart="0" minFeatureSize="0" maxNumLabels="2000" fontMaxPixelSize="10000" scaleMin="1000" fontMinPixelSize="3" upsidedownLabels="0" zIndex="0" limitNumLabels="0" scaleVisibility="1"/>
       <dd_properties>
         <Option type="Map">
-          <Option type="QString" value="" name="name"/>
+          <Option type="QString" name="name" value=""/>
           <Option name="properties"/>
-          <Option type="QString" value="collection" name="type"/>
+          <Option type="QString" name="type" value="collection"/>
         </Option>
       </dd_properties>
     </settings>
@@ -212,8 +212,8 @@
   <blendMode>0</blendMode>
   <featureBlendMode>0</featureBlendMode>
   <layerOpacity>1</layerOpacity>
-  <LinearlyInterpolatedDiagramRenderer lowerWidth="0" diagramType="Pie" lowerHeight="0" upperWidth="10" upperHeight="10" classificationAttributeExpression=" &quot;vesi_tco2&quot; + &quot;lammitys_tco2&quot; + &quot;jaahdytys_tco2&quot; + &quot;kiinteistosahko_tco2&quot; + &quot;sahko_kotitaloudet_tco2&quot; + &quot;sahko_palv_tco2&quot; + &quot;sahko_tv_tco2&quot; + &quot;hloliikenne_ap_tco2&quot; + &quot;hloliikenne_tp_tco2&quot; + &quot;tvliikenne_tco2&quot; + &quot;palvliikenne_tco2&quot; + &quot;korjaussaneeraus_tco2&quot; " upperValue="12138.6" attributeLegend="1" lowerValue="0">
-    <DiagramCategory penColor="#ffffff" scaleBasedVisibility="1" width="15" enabled="0" backgroundAlpha="255" rotationOffset="270" minScaleDenominator="1000" minimumSize="3" scaleDependency="Area" lineSizeScale="3x:0,0,0,0,0,0" backgroundColor="#ffffff" penAlpha="255" labelPlacementMethod="XHeight" height="15" lineSizeType="MM" sizeScale="3x:0,0,0,0,0,0" sizeType="MM" diagramOrientation="Up" penWidth="0.1" opacity="1" maxScaleDenominator="50000" barWidth="5">
+  <LinearlyInterpolatedDiagramRenderer upperHeight="10" lowerValue="0" lowerWidth="0" lowerHeight="0" diagramType="Pie" upperValue="12138.6" upperWidth="10" attributeLegend="1" classificationAttributeExpression=" &quot;vesi_tco2&quot; + &quot;lammitys_tco2&quot; + &quot;jaahdytys_tco2&quot; + &quot;kiinteistosahko_tco2&quot; + &quot;sahko_kotitaloudet_tco2&quot; + &quot;sahko_palv_tco2&quot; + &quot;sahko_tv_tco2&quot; + &quot;hloliikenne_ap_tco2&quot; + &quot;hloliikenne_tp_tco2&quot; + &quot;tvliikenne_tco2&quot; + &quot;palvliikenne_tco2&quot; + &quot;korjaussaneeraus_tco2&quot; ">
+    <DiagramCategory width="15" minimumSize="3" backgroundColor="#ffffff" opacity="1" penWidth="0.1" minScaleDenominator="1000" sizeType="MM" barWidth="5" sizeScale="3x:0,0,0,0,0,0" enabled="0" scaleDependency="Area" lineSizeType="MM" penColor="#ffffff" penAlpha="255" maxScaleDenominator="50000" rotationOffset="270" lineSizeScale="3x:0,0,0,0,0,0" labelPlacementMethod="XHeight" diagramOrientation="Up" height="15" scaleBasedVisibility="1" backgroundAlpha="255">
       <fontProperties description="MS Shell Dlg 2,7.8,-1,5,50,0,0,0,0,0" style=""/>
       <attribute label="Lämmitys" field="lammitys_tco2" color="#ca4d41"/>
       <attribute label="Vesi" field="vesi_tco2" color="#418aca"/>
@@ -229,16 +229,16 @@
       <attribute label="Jäähdytys" field="jaahdytys_tco2" color="#51c7bc"/>
     </DiagramCategory>
   </LinearlyInterpolatedDiagramRenderer>
-  <DiagramLayerSettings placement="4" dist="0" showAll="1" obstacle="0" priority="10" linePlacementFlags="18" zIndex="0">
+  <DiagramLayerSettings showAll="1" dist="0" zIndex="0" linePlacementFlags="18" placement="4" priority="10" obstacle="0">
     <properties>
       <Option type="Map">
-        <Option type="QString" value="" name="name"/>
+        <Option type="QString" name="name" value=""/>
         <Option name="properties"/>
-        <Option type="QString" value="collection" name="type"/>
+        <Option type="QString" name="type" value="collection"/>
       </Option>
     </properties>
   </DiagramLayerSettings>
-  <geometryOptions geometryPrecision="0" removeDuplicateNodes="0">
+  <geometryOptions removeDuplicateNodes="0" geometryPrecision="0">
     <activeChecks/>
     <checkConfiguration/>
   </geometryOptions>
@@ -376,6 +376,13 @@
         </config>
       </editWidget>
     </field>
+    <field name="asukkaat">
+      <editWidget type="Range">
+        <config>
+          <Option/>
+        </config>
+      </editWidget>
+    </field>
     <field name="vuosi">
       <editWidget type="Range">
         <config>
@@ -404,103 +411,108 @@
     <alias index="16" field="sum_liikenne_tco2" name=""/>
     <alias index="17" field="sum_sahko_tco2" name=""/>
     <alias index="18" field="sum_rakentaminen_tco2" name=""/>
-    <alias index="19" field="vuosi" name=""/>
+    <alias index="19" field="asukkaat" name=""/>
+    <alias index="20" field="vuosi" name=""/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
   <defaults>
-    <default applyOnUpdate="0" field="xyind" expression=""/>
-    <default applyOnUpdate="0" field="tilat_vesi_tco2" expression=""/>
-    <default applyOnUpdate="0" field="tilat_lammitys_tco2" expression=""/>
-    <default applyOnUpdate="0" field="tilat_jaahdytys_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sahko_kiinteistot_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sahko_kotitaloudet_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sahko_palv_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sahko_tv_tco2" expression=""/>
-    <default applyOnUpdate="0" field="liikenne_hlo_tco2" expression=""/>
-    <default applyOnUpdate="0" field="liikenne_tv_tco2" expression=""/>
-    <default applyOnUpdate="0" field="liikenne_palv_tco2" expression=""/>
-    <default applyOnUpdate="0" field="rak_korjaussaneeraus_tco2" expression=""/>
-    <default applyOnUpdate="0" field="rak_purku_tco2" expression=""/>
-    <default applyOnUpdate="0" field="rak_uudis_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sum_yhteensa_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sum_lammonsaato_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sum_liikenne_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sum_sahko_tco2" expression=""/>
-    <default applyOnUpdate="0" field="sum_rakentaminen_tco2" expression=""/>
-    <default applyOnUpdate="0" field="vuosi" expression=""/>
+    <default field="xyind" expression="" applyOnUpdate="0"/>
+    <default field="tilat_vesi_tco2" expression="" applyOnUpdate="0"/>
+    <default field="tilat_lammitys_tco2" expression="" applyOnUpdate="0"/>
+    <default field="tilat_jaahdytys_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sahko_kiinteistot_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sahko_kotitaloudet_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sahko_palv_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sahko_tv_tco2" expression="" applyOnUpdate="0"/>
+    <default field="liikenne_hlo_tco2" expression="" applyOnUpdate="0"/>
+    <default field="liikenne_tv_tco2" expression="" applyOnUpdate="0"/>
+    <default field="liikenne_palv_tco2" expression="" applyOnUpdate="0"/>
+    <default field="rak_korjaussaneeraus_tco2" expression="" applyOnUpdate="0"/>
+    <default field="rak_purku_tco2" expression="" applyOnUpdate="0"/>
+    <default field="rak_uudis_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sum_yhteensa_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sum_lammonsaato_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sum_liikenne_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sum_sahko_tco2" expression="" applyOnUpdate="0"/>
+    <default field="sum_rakentaminen_tco2" expression="" applyOnUpdate="0"/>
+    <default field="asukkaat" expression="" applyOnUpdate="0"/>
+    <default field="vuosi" expression="" applyOnUpdate="0"/>
   </defaults>
   <constraints>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="xyind" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="tilat_vesi_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="tilat_lammitys_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="tilat_jaahdytys_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sahko_kiinteistot_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sahko_kotitaloudet_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sahko_palv_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sahko_tv_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="liikenne_hlo_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="liikenne_tv_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="liikenne_palv_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="rak_korjaussaneeraus_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="rak_purku_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="rak_uudis_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sum_yhteensa_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sum_lammonsaato_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sum_liikenne_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sum_sahko_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="sum_rakentaminen_tco2" notnull_strength="0"/>
-    <constraint exp_strength="0" unique_strength="0" constraints="0" field="vuosi" notnull_strength="0"/>
+    <constraint field="xyind" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="tilat_vesi_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="tilat_lammitys_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="tilat_jaahdytys_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sahko_kiinteistot_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sahko_kotitaloudet_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sahko_palv_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sahko_tv_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="liikenne_hlo_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="liikenne_tv_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="liikenne_palv_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="rak_korjaussaneeraus_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="rak_purku_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="rak_uudis_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sum_yhteensa_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sum_lammonsaato_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sum_liikenne_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sum_sahko_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="sum_rakentaminen_tco2" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="asukkaat" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
+    <constraint field="vuosi" notnull_strength="0" constraints="0" unique_strength="0" exp_strength="0"/>
   </constraints>
   <constraintExpressions>
-    <constraint desc="" exp="" field="xyind"/>
-    <constraint desc="" exp="" field="tilat_vesi_tco2"/>
-    <constraint desc="" exp="" field="tilat_lammitys_tco2"/>
-    <constraint desc="" exp="" field="tilat_jaahdytys_tco2"/>
-    <constraint desc="" exp="" field="sahko_kiinteistot_tco2"/>
-    <constraint desc="" exp="" field="sahko_kotitaloudet_tco2"/>
-    <constraint desc="" exp="" field="sahko_palv_tco2"/>
-    <constraint desc="" exp="" field="sahko_tv_tco2"/>
-    <constraint desc="" exp="" field="liikenne_hlo_tco2"/>
-    <constraint desc="" exp="" field="liikenne_tv_tco2"/>
-    <constraint desc="" exp="" field="liikenne_palv_tco2"/>
-    <constraint desc="" exp="" field="rak_korjaussaneeraus_tco2"/>
-    <constraint desc="" exp="" field="rak_purku_tco2"/>
-    <constraint desc="" exp="" field="rak_uudis_tco2"/>
-    <constraint desc="" exp="" field="sum_yhteensa_tco2"/>
-    <constraint desc="" exp="" field="sum_lammonsaato_tco2"/>
-    <constraint desc="" exp="" field="sum_liikenne_tco2"/>
-    <constraint desc="" exp="" field="sum_sahko_tco2"/>
-    <constraint desc="" exp="" field="sum_rakentaminen_tco2"/>
-    <constraint desc="" exp="" field="vuosi"/>
+    <constraint field="xyind" desc="" exp=""/>
+    <constraint field="tilat_vesi_tco2" desc="" exp=""/>
+    <constraint field="tilat_lammitys_tco2" desc="" exp=""/>
+    <constraint field="tilat_jaahdytys_tco2" desc="" exp=""/>
+    <constraint field="sahko_kiinteistot_tco2" desc="" exp=""/>
+    <constraint field="sahko_kotitaloudet_tco2" desc="" exp=""/>
+    <constraint field="sahko_palv_tco2" desc="" exp=""/>
+    <constraint field="sahko_tv_tco2" desc="" exp=""/>
+    <constraint field="liikenne_hlo_tco2" desc="" exp=""/>
+    <constraint field="liikenne_tv_tco2" desc="" exp=""/>
+    <constraint field="liikenne_palv_tco2" desc="" exp=""/>
+    <constraint field="rak_korjaussaneeraus_tco2" desc="" exp=""/>
+    <constraint field="rak_purku_tco2" desc="" exp=""/>
+    <constraint field="rak_uudis_tco2" desc="" exp=""/>
+    <constraint field="sum_yhteensa_tco2" desc="" exp=""/>
+    <constraint field="sum_lammonsaato_tco2" desc="" exp=""/>
+    <constraint field="sum_liikenne_tco2" desc="" exp=""/>
+    <constraint field="sum_sahko_tco2" desc="" exp=""/>
+    <constraint field="sum_rakentaminen_tco2" desc="" exp=""/>
+    <constraint field="asukkaat" desc="" exp=""/>
+    <constraint field="vuosi" desc="" exp=""/>
   </constraintExpressions>
   <expressionfields/>
   <attributeactions>
     <defaultAction key="Canvas" value="{00000000-0000-0000-0000-000000000000}"/>
   </attributeactions>
-  <attributetableconfig actionWidgetStyle="dropDown" sortExpression="&quot;liikenne_tv_tco2&quot;" sortOrder="0">
+  <attributetableconfig sortOrder="0" actionWidgetStyle="dropDown" sortExpression="&quot;liikenne_tv_tco2&quot;">
     <columns>
-      <column type="field" width="-1" hidden="0" name="xyind"/>
-      <column type="field" width="81" hidden="0" name="vuosi"/>
-      <column type="field" width="151" hidden="0" name="sahko_kotitaloudet_tco2"/>
-      <column type="field" width="117" hidden="0" name="sahko_palv_tco2"/>
-      <column type="field" width="-1" hidden="0" name="sahko_tv_tco2"/>
-      <column type="actions" width="-1" hidden="1"/>
-      <column type="field" width="-1" hidden="0" name="tilat_vesi_tco2"/>
-      <column type="field" width="132" hidden="0" name="tilat_lammitys_tco2"/>
-      <column type="field" width="130" hidden="0" name="tilat_jaahdytys_tco2"/>
-      <column type="field" width="147" hidden="0" name="sahko_kiinteistot_tco2"/>
-      <column type="field" width="121" hidden="0" name="liikenne_hlo_tco2"/>
-      <column type="field" width="119" hidden="0" name="liikenne_tv_tco2"/>
-      <column type="field" width="129" hidden="0" name="liikenne_palv_tco2"/>
-      <column type="field" width="195" hidden="0" name="rak_korjaussaneeraus_tco2"/>
-      <column type="field" width="-1" hidden="0" name="rak_purku_tco2"/>
-      <column type="field" width="141" hidden="0" name="rak_uudis_tco2"/>
-      <column type="field" width="176" hidden="0" name="sum_yhteensa_tco2"/>
-      <column type="field" width="177" hidden="0" name="sum_lammonsaato_tco2"/>
-      <column type="field" width="140" hidden="0" name="sum_liikenne_tco2"/>
-      <column type="field" width="130" hidden="0" name="sum_sahko_tco2"/>
-      <column type="field" width="204" hidden="0" name="sum_rakentaminen_tco2"/>
+      <column hidden="0" type="field" name="xyind" width="-1"/>
+      <column hidden="0" type="field" name="vuosi" width="81"/>
+      <column hidden="0" type="field" name="sahko_kotitaloudet_tco2" width="151"/>
+      <column hidden="0" type="field" name="sahko_palv_tco2" width="117"/>
+      <column hidden="0" type="field" name="sahko_tv_tco2" width="-1"/>
+      <column hidden="1" type="actions" width="-1"/>
+      <column hidden="0" type="field" name="tilat_vesi_tco2" width="-1"/>
+      <column hidden="0" type="field" name="tilat_lammitys_tco2" width="132"/>
+      <column hidden="0" type="field" name="tilat_jaahdytys_tco2" width="130"/>
+      <column hidden="0" type="field" name="sahko_kiinteistot_tco2" width="147"/>
+      <column hidden="0" type="field" name="liikenne_hlo_tco2" width="121"/>
+      <column hidden="0" type="field" name="liikenne_tv_tco2" width="119"/>
+      <column hidden="0" type="field" name="liikenne_palv_tco2" width="129"/>
+      <column hidden="0" type="field" name="rak_korjaussaneeraus_tco2" width="195"/>
+      <column hidden="0" type="field" name="rak_purku_tco2" width="-1"/>
+      <column hidden="0" type="field" name="rak_uudis_tco2" width="141"/>
+      <column hidden="0" type="field" name="sum_yhteensa_tco2" width="176"/>
+      <column hidden="0" type="field" name="sum_lammonsaato_tco2" width="177"/>
+      <column hidden="0" type="field" name="sum_liikenne_tco2" width="140"/>
+      <column hidden="0" type="field" name="sum_sahko_tco2" width="130"/>
+      <column hidden="0" type="field" name="sum_rakentaminen_tco2" width="204"/>
+      <column hidden="0" type="field" name="asukkaat" width="-1"/>
     </columns>
   </attributetableconfig>
   <conditionalstyles>
@@ -531,78 +543,80 @@ def my_form_open(dialog, layer, feature):
   <featformsuppress>0</featformsuppress>
   <editorlayout>generatedlayout</editorlayout>
   <editable>
-    <field editable="1" name="fid"/>
-    <field editable="1" name="hloliikenne_ap_tco2"/>
-    <field editable="1" name="hloliikenne_tp_tco2"/>
-    <field editable="1" name="id"/>
-    <field editable="1" name="id_0"/>
-    <field editable="1" name="jaahdytys_tco2"/>
-    <field editable="1" name="kiinteistosahko_tco2"/>
-    <field editable="1" name="korjaussaneeraus_tco2"/>
-    <field editable="1" name="lammitys_tco2"/>
-    <field editable="1" name="liikenne_hlo_tco2"/>
-    <field editable="1" name="liikenne_palv_tco2"/>
-    <field editable="1" name="liikenne_tv_tco2"/>
-    <field editable="1" name="liikenne_yht"/>
-    <field editable="1" name="palvliikenne_tco2"/>
-    <field editable="1" name="rak_korjaussaneeraus_tco2"/>
-    <field editable="1" name="rak_purku_tco2"/>
-    <field editable="1" name="rak_uudis_tco2"/>
-    <field editable="1" name="sahko_kiinteistot_tco2"/>
-    <field editable="1" name="sahko_kotitaloudet_tco2"/>
-    <field editable="1" name="sahko_palv_tco2"/>
-    <field editable="1" name="sahko_tv_tco2"/>
-    <field editable="1" name="sahko_yht"/>
-    <field editable="1" name="sum_lammonsaato_tco2"/>
-    <field editable="1" name="sum_liikenne_tco2"/>
-    <field editable="1" name="sum_rakentaminen_tco2"/>
-    <field editable="1" name="sum_sahko_tco2"/>
-    <field editable="1" name="sum_yhteensa_tco2"/>
-    <field editable="1" name="summa"/>
-    <field editable="1" name="tilat_jaahdytys_tco2"/>
-    <field editable="1" name="tilat_lammitys_tco2"/>
-    <field editable="1" name="tilat_vesi_tco2"/>
-    <field editable="1" name="tvliikenne_tco2"/>
-    <field editable="1" name="vesi_tco2"/>
-    <field editable="1" name="vuosi"/>
-    <field editable="1" name="xyind"/>
+    <field name="asukkaat" editable="1"/>
+    <field name="fid" editable="1"/>
+    <field name="hloliikenne_ap_tco2" editable="1"/>
+    <field name="hloliikenne_tp_tco2" editable="1"/>
+    <field name="id" editable="1"/>
+    <field name="id_0" editable="1"/>
+    <field name="jaahdytys_tco2" editable="1"/>
+    <field name="kiinteistosahko_tco2" editable="1"/>
+    <field name="korjaussaneeraus_tco2" editable="1"/>
+    <field name="lammitys_tco2" editable="1"/>
+    <field name="liikenne_hlo_tco2" editable="1"/>
+    <field name="liikenne_palv_tco2" editable="1"/>
+    <field name="liikenne_tv_tco2" editable="1"/>
+    <field name="liikenne_yht" editable="1"/>
+    <field name="palvliikenne_tco2" editable="1"/>
+    <field name="rak_korjaussaneeraus_tco2" editable="1"/>
+    <field name="rak_purku_tco2" editable="1"/>
+    <field name="rak_uudis_tco2" editable="1"/>
+    <field name="sahko_kiinteistot_tco2" editable="1"/>
+    <field name="sahko_kotitaloudet_tco2" editable="1"/>
+    <field name="sahko_palv_tco2" editable="1"/>
+    <field name="sahko_tv_tco2" editable="1"/>
+    <field name="sahko_yht" editable="1"/>
+    <field name="sum_lammonsaato_tco2" editable="1"/>
+    <field name="sum_liikenne_tco2" editable="1"/>
+    <field name="sum_rakentaminen_tco2" editable="1"/>
+    <field name="sum_sahko_tco2" editable="1"/>
+    <field name="sum_yhteensa_tco2" editable="1"/>
+    <field name="summa" editable="1"/>
+    <field name="tilat_jaahdytys_tco2" editable="1"/>
+    <field name="tilat_lammitys_tco2" editable="1"/>
+    <field name="tilat_vesi_tco2" editable="1"/>
+    <field name="tvliikenne_tco2" editable="1"/>
+    <field name="vesi_tco2" editable="1"/>
+    <field name="vuosi" editable="1"/>
+    <field name="xyind" editable="1"/>
   </editable>
   <labelOnTop>
-    <field labelOnTop="0" name="fid"/>
-    <field labelOnTop="0" name="hloliikenne_ap_tco2"/>
-    <field labelOnTop="0" name="hloliikenne_tp_tco2"/>
-    <field labelOnTop="0" name="id"/>
-    <field labelOnTop="0" name="id_0"/>
-    <field labelOnTop="0" name="jaahdytys_tco2"/>
-    <field labelOnTop="0" name="kiinteistosahko_tco2"/>
-    <field labelOnTop="0" name="korjaussaneeraus_tco2"/>
-    <field labelOnTop="0" name="lammitys_tco2"/>
-    <field labelOnTop="0" name="liikenne_hlo_tco2"/>
-    <field labelOnTop="0" name="liikenne_palv_tco2"/>
-    <field labelOnTop="0" name="liikenne_tv_tco2"/>
-    <field labelOnTop="0" name="liikenne_yht"/>
-    <field labelOnTop="0" name="palvliikenne_tco2"/>
-    <field labelOnTop="0" name="rak_korjaussaneeraus_tco2"/>
-    <field labelOnTop="0" name="rak_purku_tco2"/>
-    <field labelOnTop="0" name="rak_uudis_tco2"/>
-    <field labelOnTop="0" name="sahko_kiinteistot_tco2"/>
-    <field labelOnTop="0" name="sahko_kotitaloudet_tco2"/>
-    <field labelOnTop="0" name="sahko_palv_tco2"/>
-    <field labelOnTop="0" name="sahko_tv_tco2"/>
-    <field labelOnTop="0" name="sahko_yht"/>
-    <field labelOnTop="0" name="sum_lammonsaato_tco2"/>
-    <field labelOnTop="0" name="sum_liikenne_tco2"/>
-    <field labelOnTop="0" name="sum_rakentaminen_tco2"/>
-    <field labelOnTop="0" name="sum_sahko_tco2"/>
-    <field labelOnTop="0" name="sum_yhteensa_tco2"/>
-    <field labelOnTop="0" name="summa"/>
-    <field labelOnTop="0" name="tilat_jaahdytys_tco2"/>
-    <field labelOnTop="0" name="tilat_lammitys_tco2"/>
-    <field labelOnTop="0" name="tilat_vesi_tco2"/>
-    <field labelOnTop="0" name="tvliikenne_tco2"/>
-    <field labelOnTop="0" name="vesi_tco2"/>
-    <field labelOnTop="0" name="vuosi"/>
-    <field labelOnTop="0" name="xyind"/>
+    <field name="asukkaat" labelOnTop="0"/>
+    <field name="fid" labelOnTop="0"/>
+    <field name="hloliikenne_ap_tco2" labelOnTop="0"/>
+    <field name="hloliikenne_tp_tco2" labelOnTop="0"/>
+    <field name="id" labelOnTop="0"/>
+    <field name="id_0" labelOnTop="0"/>
+    <field name="jaahdytys_tco2" labelOnTop="0"/>
+    <field name="kiinteistosahko_tco2" labelOnTop="0"/>
+    <field name="korjaussaneeraus_tco2" labelOnTop="0"/>
+    <field name="lammitys_tco2" labelOnTop="0"/>
+    <field name="liikenne_hlo_tco2" labelOnTop="0"/>
+    <field name="liikenne_palv_tco2" labelOnTop="0"/>
+    <field name="liikenne_tv_tco2" labelOnTop="0"/>
+    <field name="liikenne_yht" labelOnTop="0"/>
+    <field name="palvliikenne_tco2" labelOnTop="0"/>
+    <field name="rak_korjaussaneeraus_tco2" labelOnTop="0"/>
+    <field name="rak_purku_tco2" labelOnTop="0"/>
+    <field name="rak_uudis_tco2" labelOnTop="0"/>
+    <field name="sahko_kiinteistot_tco2" labelOnTop="0"/>
+    <field name="sahko_kotitaloudet_tco2" labelOnTop="0"/>
+    <field name="sahko_palv_tco2" labelOnTop="0"/>
+    <field name="sahko_tv_tco2" labelOnTop="0"/>
+    <field name="sahko_yht" labelOnTop="0"/>
+    <field name="sum_lammonsaato_tco2" labelOnTop="0"/>
+    <field name="sum_liikenne_tco2" labelOnTop="0"/>
+    <field name="sum_rakentaminen_tco2" labelOnTop="0"/>
+    <field name="sum_sahko_tco2" labelOnTop="0"/>
+    <field name="sum_yhteensa_tco2" labelOnTop="0"/>
+    <field name="summa" labelOnTop="0"/>
+    <field name="tilat_jaahdytys_tco2" labelOnTop="0"/>
+    <field name="tilat_lammitys_tco2" labelOnTop="0"/>
+    <field name="tilat_vesi_tco2" labelOnTop="0"/>
+    <field name="tvliikenne_tco2" labelOnTop="0"/>
+    <field name="vesi_tco2" labelOnTop="0"/>
+    <field name="vuosi" labelOnTop="0"/>
+    <field name="xyind" labelOnTop="0"/>
   </labelOnTop>
   <widgets/>
   <previewExpression>fid</previewExpression>
