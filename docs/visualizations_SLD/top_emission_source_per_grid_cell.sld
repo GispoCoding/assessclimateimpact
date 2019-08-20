@@ -6,9 +6,9 @@
       <se:Name>Suurin_CO2_lahde</se:Name>
       <se:FeatureTypeStyle>
         <se:Rule>
-          <se:Name>Tilojen lämmitys</se:Name>
+          <se:Name>Lämmönsäätö yhteensä</se:Name>
           <se:Description>
-            <se:Title>Tilojen lämmitys</se:Title>
+            <se:Title>Lämmönsäätö yhteensä</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
@@ -158,9 +158,9 @@
           </se:PointSymbolizer>
         </se:Rule>
         <se:Rule>
-          <se:Name>Korjaussaneeraus</se:Name>
+          <se:Name>Rakentaminen yhteensä</se:Name>
           <se:Description>
-            <se:Title>Korjaussaneeraus</se:Title>
+            <se:Title>Rakentaminen yhteensä</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
