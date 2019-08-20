@@ -7,10 +7,10 @@
   </flags>
   <renderer-v2 type="RuleRenderer" symbollevels="1" forceraster="0" enableorderby="0">
     <rules key="{4137ce98-8dc0-4a23-ac5a-a4b6ac06232e}">
-      <rule label="Lämmönsäätö" symbol="0" key="{81e482bf-6bad-4a8d-abf5-f43f0c63eb35}" filter="&quot;sum_lammonsaato_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;sum_lammonsaato_tco2&quot; > &quot;sum_liikenne_tco2&quot;  AND &quot;sum_lammonsaato_tco2&quot; >  &quot;sum_rakentaminen_tco2&quot; "/>
+      <rule label="Lämmönsäätö yhteensä" symbol="0" key="{81e482bf-6bad-4a8d-abf5-f43f0c63eb35}" filter="&quot;sum_lammonsaato_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;sum_lammonsaato_tco2&quot; > &quot;sum_liikenne_tco2&quot;  AND &quot;sum_lammonsaato_tco2&quot; >  &quot;sum_rakentaminen_tco2&quot; "/>
       <rule label="Sähkö yhteensä" symbol="1" key="{f782f537-4068-4299-a776-3c26986e0399}" filter="&quot;sum_sahko_tco2&quot; > &quot;sum_lammonsaato_tco2&quot; AND &quot;sum_sahko_tco2&quot; > &quot;sum_liikenne_tco2&quot; AND    &quot;sum_sahko_tco2&quot; > &quot;sum_rakentaminen_tco2&quot; "/>
       <rule label="Liikenne yhteensä" symbol="2" key="{6a0cb3ef-bd69-426b-ae31-3971fac9fb3f}" filter="&quot;sum_liikenne_tco2&quot; > &quot;sum_lammonsaato_tco2&quot;  AND  &quot;sum_liikenne_tco2&quot; >  &quot;sum_sahko_tco2&quot;  AND   &quot;sum_liikenne_tco2&quot; >   &quot;sum_rakentaminen_tco2&quot; "/>
-      <rule label="Rakentaminen" symbol="3" key="{c0f03c0e-9982-4ba6-9847-444a65bed735}" filter="&quot;sum_rakentaminen_tco2&quot; > &quot;sum_lammonsaato_tco2&quot;  AND &quot;sum_rakentaminen_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;sum_rakentaminen_tco2&quot; > &quot;sum_liikenne_tco2&quot;"/>
+      <rule label="Rakentaminen yhteensä" symbol="3" key="{c0f03c0e-9982-4ba6-9847-444a65bed735}" filter="&quot;sum_rakentaminen_tco2&quot; > &quot;sum_lammonsaato_tco2&quot;  AND &quot;sum_rakentaminen_tco2&quot; > &quot;sum_sahko_tco2&quot; AND &quot;sum_rakentaminen_tco2&quot; > &quot;sum_liikenne_tco2&quot;"/>
     </rules>
     <symbols>
       <symbol type="fill" name="0" alpha="1" force_rhr="0" clip_to_extent="1">
