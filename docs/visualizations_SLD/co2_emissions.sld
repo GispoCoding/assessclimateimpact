@@ -13,11 +13,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>0.98999999999999999</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>600</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -41,11 +41,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>600</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>1200</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -69,11 +69,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>1200</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>2000</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -97,11 +97,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>2000</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>4000</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -125,11 +125,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>4000</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>8000</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -153,11 +153,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>8000</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>summa</ogc:PropertyName>
+                <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
                 <ogc:Literal>12138.58357400000022608</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -178,7 +178,7 @@
           <se:MaxScaleDenominator>25000</se:MaxScaleDenominator>
           <se:TextSymbolizer>
             <se:Label>
-              <ogc:PropertyName>summa</ogc:PropertyName>
+              <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
             </se:Label>
             <se:Font>
               <se:SvgParameter name="font-family">Arial</se:SvgParameter>

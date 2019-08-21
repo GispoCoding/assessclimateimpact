@@ -13,30 +13,18 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:And>
-                <ogc:And>
-                  <ogc:And>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                      <ogc:PropertyName>vesi_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                      <ogc:PropertyName>jaahdytys_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                  </ogc:And>
-                  <ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                    <ogc:PropertyName>sahko_yht</ogc:PropertyName>
-                  </ogc:PropertyIsGreaterThan>
-                </ogc:And>
                 <ogc:PropertyIsGreaterThan>
-                  <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                  <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
+                  <ogc:PropertyName>sum_lammonsaato_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_sahko_tco2</ogc:PropertyName>
+                </ogc:PropertyIsGreaterThan>
+                <ogc:PropertyIsGreaterThan>
+                  <ogc:PropertyName>sum_lammonsaato_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_liikenne_tco2</ogc:PropertyName>
                 </ogc:PropertyIsGreaterThan>
               </ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_lammonsaato_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_rakentaminen_tco2</ogc:PropertyName>
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
@@ -65,30 +53,18 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:And>
-                <ogc:And>
-                  <ogc:And>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>sahko_yht</ogc:PropertyName>
-                      <ogc:PropertyName>vesi_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>sahko_yht</ogc:PropertyName>
-                      <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                  </ogc:And>
-                  <ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyName>sahko_yht</ogc:PropertyName>
-                    <ogc:PropertyName>jaahdytys_tco2</ogc:PropertyName>
-                  </ogc:PropertyIsGreaterThan>
-                </ogc:And>
                 <ogc:PropertyIsGreaterThan>
-                  <ogc:PropertyName>sahko_yht</ogc:PropertyName>
-                  <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
+                  <ogc:PropertyName>sum_sahko_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_lammonsaato_tco2</ogc:PropertyName>
+                </ogc:PropertyIsGreaterThan>
+                <ogc:PropertyIsGreaterThan>
+                  <ogc:PropertyName>sum_sahko_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_liikenne_tco2</ogc:PropertyName>
                 </ogc:PropertyIsGreaterThan>
               </ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>sahko_yht</ogc:PropertyName>
-                <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_sahko_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_rakentaminen_tco2</ogc:PropertyName>
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
@@ -113,30 +89,18 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:And>
-                <ogc:And>
-                  <ogc:And>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
-                      <ogc:PropertyName>vesi_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
-                      <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                  </ogc:And>
-                  <ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
-                    <ogc:PropertyName>jaahdytys_tco2</ogc:PropertyName>
-                  </ogc:PropertyIsGreaterThan>
-                </ogc:And>
                 <ogc:PropertyIsGreaterThan>
-                  <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
-                  <ogc:PropertyName>sahko_yht</ogc:PropertyName>
+                  <ogc:PropertyName>sum_liikenne_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_lammonsaato_tco2</ogc:PropertyName>
+                </ogc:PropertyIsGreaterThan>
+                <ogc:PropertyIsGreaterThan>
+                  <ogc:PropertyName>sum_liikenne_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_sahko_tco2</ogc:PropertyName>
                 </ogc:PropertyIsGreaterThan>
               </ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
-                <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_liikenne_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_rakentaminen_tco2</ogc:PropertyName>
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
@@ -165,30 +129,18 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:And>
-                <ogc:And>
-                  <ogc:And>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
-                      <ogc:PropertyName>vesi_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyIsGreaterThan>
-                      <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
-                      <ogc:PropertyName>lammitys_tco2</ogc:PropertyName>
-                    </ogc:PropertyIsGreaterThan>
-                  </ogc:And>
-                  <ogc:PropertyIsGreaterThan>
-                    <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
-                    <ogc:PropertyName>jaahdytys_tco2</ogc:PropertyName>
-                  </ogc:PropertyIsGreaterThan>
-                </ogc:And>
                 <ogc:PropertyIsGreaterThan>
-                  <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
-                  <ogc:PropertyName>sahko_yht</ogc:PropertyName>
+                  <ogc:PropertyName>sum_rakentaminen_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_lammonsaato_tco2</ogc:PropertyName>
+                </ogc:PropertyIsGreaterThan>
+                <ogc:PropertyIsGreaterThan>
+                  <ogc:PropertyName>sum_rakentaminen_tco2</ogc:PropertyName>
+                  <ogc:PropertyName>sum_sahko_tco2</ogc:PropertyName>
                 </ogc:PropertyIsGreaterThan>
               </ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>korjaussaneeraus_tco2</ogc:PropertyName>
-                <ogc:PropertyName>liikenne_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_rakentaminen_tco2</ogc:PropertyName>
+                <ogc:PropertyName>sum_liikenne_tco2</ogc:PropertyName>
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
