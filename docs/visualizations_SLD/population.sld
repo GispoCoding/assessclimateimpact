@@ -13,11 +13,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThanOrEqualTo>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>1</ogc:Literal>
               </ogc:PropertyIsGreaterThanOrEqualTo>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>10</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -48,11 +48,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>10</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>50</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -87,11 +87,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>50</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>100</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -122,11 +122,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>100</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>500</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
@@ -157,11 +157,11 @@
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
               <ogc:PropertyIsGreaterThan>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>500</ogc:Literal>
               </ogc:PropertyIsGreaterThan>
               <ogc:PropertyIsLessThanOrEqualTo>
-                <ogc:PropertyName>v_yht</ogc:PropertyName>
+                <ogc:PropertyName>sum_vaesto</ogc:PropertyName>
                 <ogc:Literal>1366</ogc:Literal>
               </ogc:PropertyIsLessThanOrEqualTo>
             </ogc:And>
