@@ -564,7 +564,7 @@ class YKRTool:
         '''Generate queries to call processing functions in database'''
         vals = {
             'uuid': self.sessionParams['uuid'],
-            'aoi': 'tutkimusalue_uuid',
+            'aoi': self.adminArea,
             'geomArea': self.geomArea,
             'popTable': (self.tableNames[self.ykrPopLayer]).lower(),
             'jobTable': (self.tableNames[self.ykrJobsLayer]).lower(),
