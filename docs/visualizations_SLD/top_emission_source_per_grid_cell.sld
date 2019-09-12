@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd" version="1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogc="http://www.opengis.net/ogc" xmlns:se="http://www.opengis.net/se" xmlns:xlink="http://www.w3.org/1999/xlink">
+<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" version="1.1.0" xmlns:se="http://www.opengis.net/se" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
   <NamedLayer>
-    <se:Name>Suurin_CO2_lahde</se:Name>
+    <se:Name>Suurin CO2 lahde</se:Name>
     <UserStyle>
-      <se:Name>Suurin_CO2_lahde</se:Name>
+      <se:Name>Suurin CO2 lahde</se:Name>
       <se:FeatureTypeStyle>
         <se:Rule>
-          <se:Name>Lämmönsäätö yhteensä</se:Name>
+          <se:Name>Lämmönsäätö</se:Name>
           <se:Description>
-            <se:Title>Lämmönsäätö yhteensä</se:Title>
+            <se:Title>Lämmönsäätö</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
@@ -28,7 +28,7 @@
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
-          <se:PointSymbolizer>
+          <se:PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Graphic>
               <se:Mark>
                 <se:WellKnownName>square</se:WellKnownName>
@@ -38,17 +38,17 @@
                 </se:Fill>
                 <se:Stroke>
                   <se:SvgParameter name="stroke">#4f4f4f</se:SvgParameter>
-                  <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                  <se:SvgParameter name="stroke-width">18</se:SvgParameter>
                 </se:Stroke>
               </se:Mark>
-              <se:Size>5</se:Size>
+              <se:Size>80</se:Size>
             </se:Graphic>
           </se:PointSymbolizer>
         </se:Rule>
         <se:Rule>
-          <se:Name>Sähkö yhteensä</se:Name>
+          <se:Name>Sähkö</se:Name>
           <se:Description>
-            <se:Title>Sähkö yhteensä</se:Title>
+            <se:Title>Sähkö</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
@@ -68,7 +68,7 @@
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
-          <se:PointSymbolizer>
+          <se:PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Graphic>
               <se:Mark>
                 <se:WellKnownName>triangle</se:WellKnownName>
@@ -77,14 +77,14 @@
                 </se:Fill>
                 <se:Stroke/>
               </se:Mark>
-              <se:Size>5</se:Size>
+              <se:Size>100</se:Size>
             </se:Graphic>
           </se:PointSymbolizer>
         </se:Rule>
         <se:Rule>
-          <se:Name>Liikenne yhteensä</se:Name>
+          <se:Name>Liikenne</se:Name>
           <se:Description>
-            <se:Title>Liikenne yhteensä</se:Title>
+            <se:Title>Liikenne</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
@@ -104,7 +104,7 @@
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
-          <se:PointSymbolizer>
+          <se:PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Graphic>
               <se:Mark>
                 <se:WellKnownName>circle</se:WellKnownName>
@@ -114,17 +114,17 @@
                 </se:Fill>
                 <se:Stroke>
                   <se:SvgParameter name="stroke">#aa00ff</se:SvgParameter>
-                  <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                  <se:SvgParameter name="stroke-width">18</se:SvgParameter>
                 </se:Stroke>
               </se:Mark>
-              <se:Size>5</se:Size>
+              <se:Size>80</se:Size>
             </se:Graphic>
           </se:PointSymbolizer>
         </se:Rule>
         <se:Rule>
-          <se:Name>Rakentaminen yhteensä</se:Name>
+          <se:Name>Rakentaminen</se:Name>
           <se:Description>
-            <se:Title>Rakentaminen yhteensä</se:Title>
+            <se:Title>Rakentaminen</se:Title>
           </se:Description>
           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
             <ogc:And>
@@ -144,7 +144,7 @@
               </ogc:PropertyIsGreaterThan>
             </ogc:And>
           </ogc:Filter>
-          <se:PointSymbolizer>
+          <se:PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <se:Graphic>
               <se:Mark>
                 <se:WellKnownName>diamond</se:WellKnownName>
@@ -153,7 +153,7 @@
                 </se:Fill>
                 <se:Stroke/>
               </se:Mark>
-              <se:Size>5</se:Size>
+              <se:Size>80</se:Size>
             </se:Graphic>
           </se:PointSymbolizer>
         </se:Rule>
