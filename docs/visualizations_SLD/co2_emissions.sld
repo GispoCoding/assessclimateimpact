@@ -173,26 +173,27 @@
             </se:Stroke>
           </se:PolygonSymbolizer>
         </se:Rule>
+		
         <se:Rule>
           <se:MinScaleDenominator>1000</se:MinScaleDenominator>
-          <se:MaxScaleDenominator>25000</se:MaxScaleDenominator>
+          <se:MaxScaleDenominator>15000</se:MaxScaleDenominator>
           <se:TextSymbolizer>
             <se:Label>
               <ogc:PropertyName>sum_yhteensa_tco2</ogc:PropertyName>
             </se:Label>
             <se:Font>
               <se:SvgParameter name="font-family">Arial</se:SvgParameter>
-              <se:SvgParameter name="font-size">7</se:SvgParameter>
+              <se:SvgParameter name="font-size">28</se:SvgParameter>
             </se:Font>
             <se:LabelPlacement>
               <se:PointPlacement>
                 <se:AnchorPoint>
                   <se:AnchorPointX>0.5</se:AnchorPointX>
-                  <se:AnchorPointY>18</se:AnchorPointY>
+                  <se:AnchorPointY>0</se:AnchorPointY>
                 </se:AnchorPoint>
                 <se:Displacement>
                   <se:DisplacementX>0</se:DisplacementX>
-                  <se:DisplacementY>90</se:DisplacementY>
+                  <se:DisplacementY>0.5</se:DisplacementY>
                 </se:Displacement>
               </se:PointPlacement>
             </se:LabelPlacement>
