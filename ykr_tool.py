@@ -251,7 +251,8 @@ class YKRTool:
         md = self.mainDialog
         md.geomArea.addItem("Tampere")
         md.adminArea.addItem("Pirkanmaa")
-        md.pitkoScenario.addItems(["wem", "eu80", "kasvu", "muutos", "saasto", "static"])
+        md.pitkoScenario.addItems(["wem", "eu80", "kasvu", "muutos", "saasto",
+            "pysahdys", "static"])
         md.emissionsAllocation.addItems(["hjm", "em"])
         md.elecEmissionType.addItems(["hankinta", "tuotanto"])
 
